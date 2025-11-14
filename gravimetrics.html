@@ -1,0 +1,1278 @@
+<!doctype html>
+<html lang="da">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gravimetriske Undersøgelser - Bargheer Geophysics</title>
+  <meta name="description" content="Gravimetriske undersøgelser til kortlægning af tæthedskontraster i undergrunden for mineralefterforskning, forkastningsdetektering og hulrumsanalyse.">
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Language Toggle */
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 5px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(13, 79, 60, 0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: #0d4f3c;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .lang-btn.active {
+            background: #0d4f3c;
+            color: white;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(13, 79, 60, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0d4f3c;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: "⚡";
+            font-size: 1.5rem;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 5px #0d4f3c; }
+            to { text-shadow: 0 0 20px #0d4f3c, 0 0 30px #0d4f3c; }
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: #1a1a1a;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(13, 79, 60, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(13, 79, 60, 0.1);
+            color: #0d4f3c;
+            transform: translateY(-2px);
+        }
+
+        /* Dropdown Styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dropdown-arrow {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(13, 79, 60, 0.1);
+            border-radius: 12px;
+            padding: 0.5rem 0;
+            min-width: 280px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            list-style: none;
+            margin: 0;
+            z-index: 1001;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-link {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: #1a1a1a;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            margin: 0 0.5rem;
+        }
+
+        .dropdown-link:hover {
+            background: rgba(13, 79, 60, 0.1);
+            color: #0d4f3c;
+            transform: translateX(5px);
+        }
+
+        .dropdown-link.active {
+            background: rgba(13, 79, 60, 0.15);
+            color: #0d4f3c;
+            font-weight: 600;
+        }
+
+        /* Mobile Navigation */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #0d4f3c;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-toggle:hover {
+            background: rgba(13, 79, 60, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 50%, #0d4f3c 100%);
+            color: white;
+            padding: 8rem 2rem 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-icon {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            display: block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: white;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .hero-button.primary {
+            background: white;
+            color: #0d4f3c;
+            border-color: white;
+        }
+
+        .hero-button.primary:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(13, 79, 60, 0.1);
+        }
+
+        .breadcrumb-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .breadcrumb-nav a {
+            color: #0d4f3c;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb-nav a:hover {
+            color: #1a5f4a;
+        }
+
+        .breadcrumb-separator {
+            color: #9ca3af;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .content-main h2 {
+            color: #0d4f3c;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #0d4f3c;
+            padding-bottom: 0.5rem;
+        }
+
+        .content-main h3 {
+            color: #0d4f3c;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .content-main p {
+            color: #4b5563;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-main ul {
+            color: #4b5563;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .content-main li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Gravity Diagram */
+        .gravity-diagram {
+            background: #f8f9fa;
+            border: 2px solid rgba(13, 79, 60, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .gravity-diagram svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .diagram-caption {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+
+        .sidebar h3 {
+            color: #0d4f3c;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .quick-facts {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .quick-facts li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background: white;
+            border-radius: 10px;
+            border-left: 4px solid #0d4f3c;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .fact-label {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .fact-value {
+            color: #0d4f3c;
+            font-weight: 700;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .contact-card h4 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .contact-card p {
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .contact-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            margin: 0.25rem;
+        }
+
+        .contact-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .contact-button.primary {
+            background: white;
+            color: #0d4f3c;
+            border-color: white;
+        }
+
+        .contact-button.primary:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Applications Grid */
+        .applications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .application-card {
+            background: white;
+            border: 2px solid rgba(13, 79, 60, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .application-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(13, 79, 60, 0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .application-card:hover::before {
+            opacity: 1;
+        }
+
+        .application-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(13, 79, 60, 0.15);
+            border-color: rgba(13, 79, 60, 0.3);
+        }
+
+        .application-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .application-card h4 {
+            color: #0d4f3c;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .application-card p {
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        /* Process Steps */
+        .process-steps {
+            background: #f8f9fa;
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+            border-radius: 20px;
+        }
+
+        .process-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .process-title {
+            text-align: center;
+            color: #0d4f3c;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .step-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            border: 2px solid rgba(13, 79, 60, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(13, 79, 60, 0.1);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0d4f3c;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .step-icon {
+            font-size: 2.5rem;
+            margin: 1rem 0;
+            display: block;
+        }
+
+        .step-title {
+            color: #0d4f3c;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .step-description {
+            color: #4b5563;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: #e5e7eb;
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid rgba(13, 79, 60, 0.2);
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h4 {
+            color: #0d4f3c;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #9ca3af;
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #0d4f3c;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(13, 79, 60, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0d4f3c;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: #0d4f3c;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(13, 79, 60, 0.1);
+            color: #6b7280;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                padding: 2rem;
+                gap: 0;
+                border-top: 1px solid rgba(13, 79, 60, 0.1);
+                backdrop-filter: blur(20px);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                background: transparent;
+                padding: 0;
+                margin: 0;
+                min-width: auto;
+                display: none;
+            }
+
+            .dropdown.mobile-active .dropdown-menu {
+                display: block;
+            }
+
+            .hero {
+                padding: 6rem 2rem 4rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .language-toggle {
+                top: 80px;
+                right: 10px;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .applications-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f8f9fa;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #1a5f4a 0%, #0d4f3c 100%);
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body><!-- Language Toggle -->
+  <div class="language-toggle"><button class="lang-btn active" onclick="setLanguage('da')" id="lang-da">DA</button> <button class="lang-btn" onclick="setLanguage('en')" id="lang-en">EN</button>
+  </div><!-- Navigation -->
+  <nav class="navbar" id="navbar">
+   <div class="nav-container"><a href="index.html" class="logo" id="company-name">Bargheer Geophysics</a> <button class="mobile-toggle" onclick="toggleMobileMenu()">☰</button>
+    <ul class="nav-menu" id="nav-menu">
+     <li class="nav-item"><a href="index.html" class="nav-link" data-da="Hjem" data-en="Home">Hjem</a></li>
+     <li class="nav-item"><a href="about.html" class="nav-link" data-da="Om Os" data-en="About">Om Os</a></li>
+     <li class="nav-item dropdown">
+      <div class="nav-link dropdown-toggle" data-da="Geofysiske Undersøgelser" data-en="Geophysical Surveys"><span>Geofysiske Undersøgelser</span> <span class="dropdown-arrow">▼</span>
+      </div>
+      <ul class="dropdown-menu">
+       <li><a href="dcip.html" class="dropdown-link" data-da="DC/IP Undersøgelser" data-en="DC/IP Surveys">DC/IP Undersøgelser</a></li>
+       <li><a href="tem.html" class="dropdown-link" data-da="TEM Undersøgelser" data-en="TEM Surveys">TEM Undersøgelser</a></li>
+       <li><a href="mrs.html" class="dropdown-link" data-da="MRS Undersøgelser" data-en="MRS Surveys">MRS Undersøgelser</a></li>
+       <li><a href="seismics.html" class="dropdown-link" data-da="Seismiske Undersøgelser" data-en="Seismic Surveys">Seismiske Undersøgelser</a></li>
+       <li><a href="gravimetrics.html" class="dropdown-link active" data-da="Gravimetriske Undersøgelser" data-en="Gravimetric Surveys">Gravimetriske Undersøgelser</a></li>
+       <li><a href="magnetics.html" class="dropdown-link" data-da="Magnetiske Undersøgelser" data-en="Magnetic Surveys">Magnetiske Undersøgelser</a></li>
+       <li><a href="radiometrics.html" class="dropdown-link" data-da="Radiometriske Undersøgelser" data-en="Radiometric Surveys">Radiometriske Undersøgelser</a></li>
+      </ul></li>
+     <li class="nav-item"><a href="software.html" class="nav-link" data-da="Geofysik Software" data-en="Geophysics Software">Geofysik Software</a></li>
+     <li class="nav-item"><a href="contact.html" class="nav-link" data-da="Kontakt" data-en="Contact">Kontakt</a></li>
+    </ul>
+   </div>
+  </nav><!-- Hero Section -->
+  <section class="hero">
+   <div class="hero-content" data-aos="fade-up" data-aos-duration="1000"><span class="hero-icon">⚖️</span>
+    <h1 id="page-title" data-da="Gravimetriske Undersøgelser" data-en="Gravimetric Surveys">Gravimetriske Undersøgelser</h1>
+    <p id="hero-subtitle" data-da="Måling af tæthedskontraster i undergrunden gennem præcise gravitationsmålinger til kortlægning af geologiske strukturer og hulrum." data-en="Measuring density contrasts in the subsurface through precise gravitational measurements for mapping geological structures and voids.">Måling af tæthedskontraster i undergrunden gennem præcise gravitationsmålinger til kortlægning af geologiske strukturer og hulrum.</p>
+    <div class="hero-buttons"><a href="contact.html" class="hero-button primary" data-da="Få et Tilbud" data-en="Get a Quote"> <span>Få et Tilbud</span> <span>→</span> </a> <a href="#overview" class="hero-button" data-da="Læs Mere" data-en="Learn More"> <span>Læs Mere</span> <span>📖</span> </a>
+    </div>
+   </div>
+  </section><!-- Breadcrumb -->
+  <section class="breadcrumb">
+   <div class="breadcrumb-container">
+    <nav class="breadcrumb-nav"><a href="index.html" data-da="Hjem" data-en="Home">Hjem</a> <span class="breadcrumb-separator">›</span> <a href="index.html#services" data-da="Tjenester" data-en="Services">Tjenester</a> <span class="breadcrumb-separator">›</span> <span data-da="Gravimetriske Undersøgelser" data-en="Gravimetric Surveys">Gravimetriske Undersøgelser</span>
+    </nav>
+   </div>
+  </section><!-- Main Content -->
+  <main class="main-content">
+   <div class="content-grid">
+    <div class="content-main">
+     <section id="overview">
+      <h2 id="overview-title" data-da="Gravimetriske Undersøgelser" data-en="Gravimetric Surveys">Gravimetriske Undersøgelser</h2>
+      <p id="overview-description" data-da="Strukturen af den underliggende geologi samt tilstedeværelsen af hulrum skaber små lokaliserede variationer i Jordens magnetfelt, hvilket giver information om underjordiske variationer i tæthed. Kontrasterne i tæthed kan måles ved hjælp af specialistinstrumenter, som måler gradienten af de magnetiske variationer, hvorved dybden og placeringen af objektet under jorden kan estimeres." data-en="The structure of the underlying geology as well as the presence of voids create small localized variations in the Earth's magnetic field, providing information about subsurface variations in density. The contrasts in density can be measured using specialist instruments which measure the gradient of the magnetic variations, thereby allowing the depth and location of the object underground to be estimated.">Strukturen af den underliggende geologi samt tilstedeværelsen af hulrum skaber små lokaliserede variationer i Jordens magnetfelt, hvilket giver information om underjordiske variationer i tæthed. Kontrasterne i tæthed kan måles ved hjælp af specialistinstrumenter, som måler gradienten af de magnetiske variationer, hvorved dybden og placeringen af objektet under jorden kan estimeres.</p>
+      <p data-da="Geologiske strukturer (f.eks. forkastninger, frakturzoner) og deres egenskaber (konsolidering, absorption) samt tilstedeværelsen af eventuelle hulrum - naturlige eller antropogene - skaber forskelle i tæthed. De observerede variationer afhænger af størrelsen, formen og dybden af anomalien. Følsomme instrumenter måler tæthedskontrasterne. Metoden bruges ofte til mineralefterforskning, da grundfjeld naturligt er mere tæt end sedimentære aflejringer." data-en="Geological structures (e.g. faults, fracture zones) and their properties (consolidation, absorption) as well as the presence of any voids – natural or anthropogenic – create differences in density. The variations observed depend on the size, shape and depth of the anomaly. Sensitive instruments measure the density contrasts. The method is often used for mineral prospection, as bedrock is naturally more denser than sedimentary deposits.">Geologiske strukturer (f.eks. forkastninger, frakturzoner) og deres egenskaber (konsolidering, absorption) samt tilstedeværelsen af eventuelle hulrum - naturlige eller antropogene - skaber forskelle i tæthed. De observerede variationer afhænger af størrelsen, formen og dybden af anomalien. Følsomme instrumenter måler tæthedskontrasterne. Metoden bruges ofte til mineralefterforskning, da grundfjeld naturligt er mere tæt end sedimentære aflejringer.</p>
+      <p data-da="Bargheer Geophysics er i stand til at udføre en række undersøgelser ved hjælp af vores eget eller lejede udstyr, efter behov." data-en="Bargheer Geophysics is able to conduct a range of surveys using our own or hired in equipment, as required.">Bargheer Geophysics er i stand til at udføre en række undersøgelser ved hjælp af vores eget eller lejede udstyr, efter behov.</p>
+     </section>
+     <section>
+      <h3 data-da="Hvordan Gravimetri Fungerer" data-en="How Gravimetry Works">Hvordan Gravimetri Fungerer</h3>
+      <p data-da="Gravimetriske undersøgelser måler små variationer i Jordens gravitationsfelt forårsaget af tæthedsforskelle i undergrunden. Disse målinger udføres med højpræcisionsgravimetre, der kan detektere ekstrem små ændringer i gravitationsaccelerationen." data-en="Gravimetric surveys measure small variations in Earth's gravitational field caused by density differences in the subsurface. These measurements are performed with high-precision gravimeters that can detect extremely small changes in gravitational acceleration.">Gravimetriske undersøgelser måler små variationer i Jordens gravitationsfelt forårsaget af tæthedsforskelle i undergrunden. Disse målinger udføres med højpræcisionsgravimetre, der kan detektere ekstrem små ændringer i gravitationsaccelerationen.</p>
+      <div class="gravity-diagram">
+       <svg width="500" height="300" viewbox="0 0 500 300"><!-- Ground surface --> <line x1="0" y1="100" x2="500" y2="100" stroke="#8B4513" stroke-width="3" /> <text x="10" y="95" font-size="12" fill="#0d4f3c">
+         Jordoverflade
+        </text> <!-- Subsurface layers with different densities --> <rect x="0" y="100" width="150" height="80" fill="#D2B48C" opacity="0.7" /> <text x="10" y="130" font-size="10" fill="#0d4f3c">
+         Lav tæthed
+        </text> <text x="10" y="145" font-size="8" fill="#666">
+         2.2 g/cm³
+        </text> <rect x="150" y="100" width="200" height="80" fill="#8B4513" opacity="0.8" /> <text x="160" y="130" font-size="10" fill="#0d4f3c">
+         Høj tæthed
+        </text> <text x="160" y="145" font-size="8" fill="#666">
+         2.7 g/cm³
+        </text> <rect x="350" y="100" width="150" height="80" fill="#D2B48C" opacity="0.7" /> <text x="360" y="130" font-size="10" fill="#0d4f3c">
+         Lav tæthed
+        </text> <text x="360" y="145" font-size="8" fill="#666">
+         2.2 g/cm³
+        </text> <!-- Void/cavity --> <ellipse cx="250" cy="220" rx="40" ry="20" fill="white" stroke="#ff4444" stroke-width="2" /> <text x="220" y="225" font-size="8" fill="#ff4444">
+         Hulrum
+        </text> <!-- Gravimeter positions --> <rect x="70" y="85" width="10" height="15" fill="#0d4f3c" /> <rect x="170" y="85" width="10" height="15" fill="#0d4f3c" /> <rect x="245" y="85" width="10" height="15" fill="#0d4f3c" /> <rect x="320" y="85" width="10" height="15" fill="#0d4f3c" /> <rect x="420" y="85" width="10" height="15" fill="#0d4f3c" /> <text x="40" y="75" font-size="10" fill="#0d4f3c">
+         Gravimetre
+        </text> <!-- Gravity field lines --> <path d="M 75 85 Q 75 50 75 20" stroke="#00aa00" stroke-width="2" fill="none" marker-end="url(#arrowgreen)" /> <path d="M 175 85 Q 175 40 175 10" stroke="#00aa00" stroke-width="3" fill="none" marker-end="url(#arrowgreen)" /> <path d="M 250 85 Q 250 60 250 30" stroke="#ff6600" stroke-width="2" fill="none" marker-end="url(#arroworange)" stroke-dasharray="3,3" /> <path d="M 325 85 Q 325 40 325 10" stroke="#00aa00" stroke-width="3" fill="none" marker-end="url(#arrowgreen)" /> <path d="M 425 85 Q 425 50 425 20" stroke="#00aa00" stroke-width="2" fill="none" marker-end="url(#arrowgreen)" /> <!-- Arrow markers --> <defs>
+         <marker id="arrowgreen" markerwidth="10" markerheight="7" refx="9" refy="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#00aa00" />
+         </marker>
+         <marker id="arroworange" markerwidth="10" markerheight="7" refx="9" refy="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#ff6600" />
+         </marker>
+        </defs> <text x="10" y="280" font-size="8" fill="#00aa00">
+         Stærk gravitation (høj tæthed)
+        </text> <text x="200" y="280" font-size="8" fill="#ff6600">
+         Svag gravitation (hulrum)
+        </text>
+       </svg>
+       <div class="diagram-caption" data-da="Gravimetriske målinger: Tæthedskontraster skaber variationer i gravitationsfeltet" data-en="Gravimetric measurements: Density contrasts create variations in the gravitational field">
+        Gravimetriske målinger: Tæthedskontraster skaber variationer i gravitationsfeltet
+       </div>
+      </div>
+     </section>
+     <section>
+      <h3 data-da="Instrumenter og Teknikker" data-en="Instruments and Techniques">Instrumenter og Teknikker</h3>
+      <p data-da="Vi anvender forskellige typer gravimetre afhængigt af undersøgelsens krav:" data-en="We use different types of gravimeters depending on the survey requirements:">Vi anvender forskellige typer gravimetre afhængigt af undersøgelsens krav:</p>
+      <ul>
+       <li data-da="<strong>Relative gravimetre:</strong> Måler gravitationsforskelle mellem punkter med høj præcision" data-en="<strong>Relative gravimeters:</strong> Measure gravitational differences between points with high precision"><strong>Relative gravimetre:</strong> Måler gravitationsforskelle mellem punkter med høj præcision</li>
+       <li data-da="<strong>Absolute gravimetre:</strong> Måler den absolutte gravitationsværdi på et punkt" data-en="<strong>Absolute gravimeters:</strong> Measure the absolute gravitational value at a point"><strong>Absolute gravimetre:</strong> Måler den absolutte gravitationsværdi på et punkt</li>
+       <li data-da="<strong>Gradiometre:</strong> Måler gravitationsgradienter for højere opløsning" data-en="<strong>Gradiometers:</strong> Measure gravitational gradients for higher resolution"><strong>Gradiometre:</strong> Måler gravitationsgradienter for højere opløsning</li>
+       <li data-da="<strong>Mikrogravimetre:</strong> Ultrafølsomme instrumenter til detaljerede undersøgelser" data-en="<strong>Microgravimeters:</strong> Ultra-sensitive instruments for detailed surveys"><strong>Mikrogravimetre:</strong> Ultrafølsomme instrumenter til detaljerede undersøgelser</li>
+      </ul>
+     </section>
+     <section>
+      <h3 data-da="Vil du høre mere?" data-en="Want to hear more?">Vil du høre mere?</h3>
+      <p data-da="Udfyld kontaktformularen, så ringer vi til dig så hurtigt som muligt." data-en="Fill out the contact form, and we will call you up as soon as possible.">Udfyld kontaktformularen, så ringer vi til dig så hurtigt som muligt.</p>
+      <div style="background: #f8f9fa; padding: 2rem; border-radius: 15px; margin: 2rem 0; border-left: 4px solid #0d4f3c;">
+       <form id="contact-form" style="display: grid; gap: 1rem; max-width: 400px;" onsubmit="handleFormSubmit(event)">
+        <div><label for="contact-name" style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #0d4f3c;" data-da="Navn" data-en="Name">Navn</label> <input type="text" id="contact-name" style="width: 100%; padding: 0.75rem; border: 2px solid rgba(13, 79, 60, 0.2); border-radius: 8px; font-size: 1rem;" required>
+        </div>
+        <div><label for="contact-phone-form" style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #0d4f3c;" data-da="Telefon" data-en="Phone">Telefon</label> <input type="tel" id="contact-phone-form" style="width: 100%; padding: 0.75rem; border: 2px solid rgba(13, 79, 60, 0.2); border-radius: 8px; font-size: 1rem;" required>
+        </div><button type="submit" id="submit-btn" style="background: #0d4f3c; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='#1a5f4a'" onmouseout="this.style.background='#0d4f3c'" data-da="Ring mig op" data-en="Call me up">Ring mig op</button>
+        <div id="form-message" style="display: none; padding: 1rem; border-radius: 8px; text-align: center; font-weight: 600;"></div>
+       </form>
+      </div>
+     </section>
+    </div>
+    <div class="sidebar">
+     <h3 data-da="Hurtige Fakta" data-en="Quick Facts">Hurtige Fakta</h3>
+     <ul class="quick-facts">
+      <li><span class="fact-label" data-da="Præcision" data-en="Precision">Præcision</span> <span class="fact-value">±0.01 mGal</span></li>
+      <li><span class="fact-label" data-da="Dybdeområde" data-en="Depth Range">Dybdeområde</span> <span class="fact-value">0-1000m+</span></li>
+      <li><span class="fact-label" data-da="Opløsning" data-en="Resolution">Opløsning</span> <span class="fact-value" data-da="Meget Høj" data-en="Very High">Meget Høj</span></li>
+      <li><span class="fact-label" data-da="Anvendelse" data-en="Application">Anvendelse</span> <span class="fact-value" data-da="Land &amp; Hav" data-en="Land &amp; Sea">Land &amp; Hav</span></li>
+      <li><span class="fact-label" data-da="Måleparameter" data-en="Measurement">Måleparameter</span> <span class="fact-value" data-da="Tæthed" data-en="Density">Tæthed</span></li>
+     </ul>
+     <div class="contact-card">
+      <h4 data-da="Har du brug for gravimetriske undersøgelser?" data-en="Need Gravimetric Surveys?">Har du brug for gravimetriske undersøgelser?</h4>
+      <p data-da="Præcis kortlægning af tæthedskontraster til mineralefterforskning og hulrumsdetektering. Kontakt os for en gratis konsultation." data-en="Precise mapping of density contrasts for mineral exploration and void detection. Contact us for a free consultation.">Præcis kortlægning af tæthedskontraster til mineralefterforskning og hulrumsdetektering. Kontakt os for en gratis konsultation.</p><a href="contact.html" class="contact-button primary" data-da="Få Tilbud" data-en="Get Quote">Få Tilbud</a> <a href="tel:+4527136222" class="contact-button" id="contact-phone-link">Ring Nu</a>
+     </div>
+    </div>
+   </div><!-- Applications -->
+   <section data-aos="fade-up">
+    <h2 data-da="Anvendelser af Gravimetriske Undersøgelser" data-en="Applications of Gravimetric Surveys">Anvendelser af Gravimetriske Undersøgelser</h2>
+    <div class="applications-grid">
+     <div class="application-card"><span class="application-icon">💎</span>
+      <h4 data-da="Mineralefterforskning" data-en="Mineral Exploration">Mineralefterforskning</h4>
+      <p data-da="Identifikation af tætte malmforekomster og geologiske strukturer, der kan indeholde værdifulde mineraler gennem tæthedskontraster." data-en="Identification of dense ore deposits and geological structures that may contain valuable minerals through density contrasts.">Identifikation af tætte malmforekomster og geologiske strukturer, der kan indeholde værdifulde mineraler gennem tæthedskontraster.</p>
+     </div>
+     <div class="application-card"><span class="application-icon">⚡</span>
+      <h4 data-da="Forkastningslokalisering" data-en="Fault Localization">Forkastningslokalisering</h4>
+      <p data-da="Præcis kortlægning af forkastninger og strukturelle diskontinuiteter gennem detektering af tæthedsændringer langs geologiske grænser." data-en="Precise mapping of faults and structural discontinuities through detection of density changes along geological boundaries.">Præcis kortlægning af forkastninger og strukturelle diskontinuiteter gennem detektering af tæthedsændringer langs geologiske grænser.</p>
+     </div>
+     <div class="application-card"><span class="application-icon">⚠️</span>
+      <h4 data-da="Risikovurdering for Mineområder" data-en="Mining Risk Assessment">Risikovurdering for Mineområder</h4>
+      <p data-da="Vurdering af risiko for overfladedeformationer som følge af minedrift gennem detektering af undergrundshulrum og ustabile zoner." data-en="Assessment of risk for surface deformations resulting from mining through detection of subsurface voids and unstable zones.">Vurdering af risiko for overfladedeformationer som følge af minedrift gennem detektering af undergrundshulrum og ustabile zoner.</p>
+     </div>
+     <div class="application-card"><span class="application-icon">🕳️</span>
+      <h4 data-da="Hulrumsdetektering" data-en="Void Detection">Hulrumsdetektering</h4>
+      <p data-da="Detektering af stationære og dynamiske naturlige og antropogene hulrum som huler, tunneler, underjordiske rum og udokumenterede minearbejder." data-en="Detection of stationary and dynamic natural and anthropogenic voids such as caves, tunnels, underground rooms, and undocumented mine workings.">Detektering af stationære og dynamiske naturlige og antropogene hulrum som huler, tunneler, underjordiske rum og udokumenterede minearbejder.</p>
+     </div>
+     <div class="application-card"><span class="application-icon">🔬</span>
+      <h4 data-da="Supplerende Metode" data-en="Supplementary Method">Supplerende Metode</h4>
+      <p data-da="Anvendelse som supplement til og forstærkning af andre geofysiske metoder for at give et mere komplet billede af undergrunden." data-en="Use as supplement to and augmentation of other geophysical methods to provide a more complete picture of the subsurface.">Anvendelse som supplement til og forstærkning af andre geofysiske metoder for at give et mere komplet billede af undergrunden.</p>
+     </div>
+    </div>
+   </section><!-- Process Steps -->
+   <div class="process-steps" data-aos="fade-up">
+    <div class="process-container">
+     <h2 class="process-title" data-da="Vores Gravimetriske Proces" data-en="Our Gravimetric Process">Vores Gravimetriske Proces</h2>
+     <div class="steps-grid">
+      <div class="step-card">
+       <div class="step-number">
+        1
+       </div><span class="step-icon">📋</span>
+       <h4 class="step-title" data-da="Planlægning" data-en="Planning">Planlægning</h4>
+       <p class="step-description" data-da="Detaljeret planlægning af undersøgelsesdesign, valg af gravimeter og optimering af målepunkter baseret på geologiske mål." data-en="Detailed planning of survey design, gravimeter selection and optimization of measurement points based on geological objectives.">Detaljeret planlægning af undersøgelsesdesign, valg af gravimeter og optimering af målepunkter baseret på geologiske mål.</p>
+      </div>
+      <div class="step-card">
+       <div class="step-number">
+        2
+       </div><span class="step-icon">📍</span>
+       <h4 class="step-title" data-da="Positionering" data-en="Positioning">Positionering</h4>
+       <p class="step-description" data-da="Præcis positionering og højdemåling af målepunkter med GPS og nivellering for nøjagtige gravitationskorrektioner." data-en="Precise positioning and elevation measurement of measurement points with GPS and leveling for accurate gravitational corrections.">Præcis positionering og højdemåling af målepunkter med GPS og nivellering for nøjagtige gravitationskorrektioner.</p>
+      </div>
+      <div class="step-card">
+       <div class="step-number">
+        3
+       </div><span class="step-icon">⚖️</span>
+       <h4 class="step-title" data-da="Gravitationsmålinger" data-en="Gravity Measurements">Gravitationsmålinger</h4>
+       <p class="step-description" data-da="Systematiske gravitationsmålinger med højpræcisionsgravimetre og kontinuerlig kvalitetskontrol og kalibrering." data-en="Systematic gravity measurements with high-precision gravimeters and continuous quality control and calibration.">Systematiske gravitationsmålinger med højpræcisionsgravimetre og kontinuerlig kvalitetskontrol og kalibrering.</p>
+      </div>
+      <div class="step-card">
+       <div class="step-number">
+        4
+       </div><span class="step-icon">🔧</span>
+       <h4 class="step-title" data-da="Datakorrektion" data-en="Data Correction">Datakorrektion</h4>
+       <p class="step-description" data-da="Anvendelse af standardkorrektioner for højde, breddegrad, topografi og instrumentdrift for at isolere geologiske signaler." data-en="Application of standard corrections for elevation, latitude, topography and instrument drift to isolate geological signals.">Anvendelse af standardkorrektioner for højde, breddegrad, topografi og instrumentdrift for at isolere geologiske signaler.</p>
+      </div>
+      <div class="step-card">
+       <div class="step-number">
+        5
+       </div><span class="step-icon">📊</span>
+       <h4 class="step-title" data-da="Modellering" data-en="Modeling">Modellering</h4>
+       <p class="step-description" data-da="Inversion og modellering af gravitationsdata til tæthedsfordelinger og geologiske strukturer med 2D/3D-visualisering." data-en="Inversion and modeling of gravity data to density distributions and geological structures with 2D/3D visualization.">Inversion og modellering af gravitationsdata til tæthedsfordelinger og geologiske strukturer med 2D/3D-visualisering.</p>
+      </div>
+      <div class="step-card">
+       <div class="step-number">
+        6
+       </div><span class="step-icon">📄</span>
+       <h4 class="step-title" data-da="Rapportering" data-en="Reporting">Rapportering</h4>
+       <p class="step-description" data-da="Omfattende rapport med geologisk tolkning, tæthedsmodeller og anbefalinger til videre undersøgelser eller projekter." data-en="Comprehensive report with geological interpretation, density models and recommendations for further investigations or projects.">Omfattende rapport med geologisk tolkning, tæthedsmodeller og anbefalinger til videre undersøgelser eller projekter.</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </main><!-- Footer -->
+  <footer class="footer">
+   <div class="footer-container">
+    <div class="footer-section">
+     <h4 data-da="Kontakt Information" data-en="Contact Information">Kontakt Information</h4>
+     <p><strong data-da="Telefon" data-en="Phone">Telefon:</strong> <span id="contact-phone">(+45) 27 13 62 22</span></p>
+     <p><strong data-da="Email" data-en="Email">Email:</strong> <span id="contact-email">ab@bgeo.dk</span></p>
+     <p><strong data-da="Adresse" data-en="Address">Adresse:</strong><br>
+      Klemstrupvej 5<br>
+      8550 Ryomgård<br>
+      Danmark</p><a href="https://maps.app.goo.gl/W54qM8MDPJqyr2Xw8?g_st=awb" target="_blank" rel="noopener noreferrer" data-da="Se på kort" data-en="View on map">Se på kort →</a>
+    </div>
+    <div class="footer-section">
+     <h4 data-da="Gravimetriske Tjenester" data-en="Gravimetric Services">Gravimetriske Tjenester</h4>
+     <p><a href="#overview" data-da="Gravimetrisk Oversigt" data-en="Gravimetric Overview">Gravimetrisk Oversigt</a></p>
+     <p><a href="contact.html" data-da="Få Tilbud" data-en="Get Quote">Få Tilbud</a></p>
+     <p><a href="index.html" data-da="Andre Tjenester" data-en="Other Services">Andre Tjenester</a></p>
+    </div>
+    <div class="footer-section">
+     <h4 data-da="Virksomhed" data-en="Company">Virksomhed</h4>
+     <p><a href="about.html" data-da="Om Os" data-en="About Us">Om Os</a></p>
+     <p><a href="software.html" data-da="Software" data-en="Software">Software</a></p>
+     <p><a href="contact.html" data-da="Kontakt" data-en="Contact">Kontakt</a></p>
+    </div>
+    <div class="footer-section">
+     <h4 data-da="Følg Os" data-en="Follow Us">Følg Os</h4>
+     <div class="social-links"><a href="https://www.instagram.com/arne_bargheer?igsh=MW0wcmc2dWZudDhhNQ==" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram">📷</a> <a href="mailto:ab@bgeo.dk" class="social-link" title="Email">✉️</a> <a href="tel:+4527136222" class="social-link" title="Telefon">📞</a>
+     </div>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>© 2024 <span id="footer-company">Bargheer Geophysics</span>. <span data-da="Alle rettigheder forbeholdes" data-en="All rights reserved">Alle rettigheder forbeholdes</span>.</p>
+   </div>
+  </footer><!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+        // Configuration
+        const defaultConfig = {
+            company_name: "Bargheer Geophysics",
+            page_title: "Gravimetriske Undersøgelser",
+            hero_subtitle: "Måling af tæthedskontraster i undergrunden gennem præcise gravitationsmålinger til kortlægning af geologiske strukturer og hulrum.",
+            overview_title: "Gravimetriske Undersøgelser",
+            overview_description: "Strukturen af den underliggende geologi samt tilstedeværelsen af hulrum skaber små lokaliserede variationer i Jordens magnetfelt, hvilket giver information om underjordiske variationer i tæthed. Kontrasterne i tæthed kan måles ved hjælp af specialistinstrumenter, som måler gradienten af de magnetiske variationer, hvorved dybden og placeringen af objektet under jorden kan estimeres.",
+            contact_email: "ab@bgeo.dk",
+            contact_phone: "(+45) 27 13 62 22"
+        };
+
+        let currentLanguage = 'da';
+
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Language switching
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`lang-${lang}`).classList.add('active');
+            
+            // Update all elements with language attributes
+            document.querySelectorAll('[data-da][data-en]').forEach(element => {
+                element.textContent = element.getAttribute(`data-${lang}`);
+            });
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+        }
+
+        // Element SDK implementation
+        async function onConfigChange(config) {
+            // Update company name
+            const companyElements = document.querySelectorAll('#company-name, #footer-company');
+            companyElements.forEach(el => {
+                el.textContent = config.company_name || defaultConfig.company_name;
+            });
+
+            // Update page content
+            const pageTitle = document.getElementById('page-title');
+            const heroSubtitle = document.getElementById('hero-subtitle');
+            const overviewTitle = document.getElementById('overview-title');
+            const overviewDescription = document.getElementById('overview-description');
+            
+            if (pageTitle) {
+                pageTitle.textContent = config.page_title || defaultConfig.page_title;
+            }
+            if (heroSubtitle) {
+                heroSubtitle.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+            }
+            if (overviewTitle) {
+                overviewTitle.textContent = config.overview_title || defaultConfig.overview_title;
+            }
+            if (overviewDescription) {
+                overviewDescription.textContent = config.overview_description || defaultConfig.overview_description;
+            }
+
+            // Update contact information
+            const contactEmail = document.getElementById('contact-email');
+            const contactPhone = document.getElementById('contact-phone');
+            const contactPhoneLink = document.getElementById('contact-phone-link');
+            
+            if (contactEmail) {
+                contactEmail.textContent = config.contact_email || defaultConfig.contact_email;
+            }
+            if (contactPhone) {
+                contactPhone.textContent = config.contact_phone || defaultConfig.contact_phone;
+            }
+            if (contactPhoneLink) {
+                contactPhoneLink.href = `tel:${(config.contact_phone || defaultConfig.contact_phone).replace(/[^\d+]/g, '')}`;
+            }
+        }
+
+        // Form handling
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('contact-name').value;
+            const phone = document.getElementById('contact-phone-form').value;
+            const submitBtn = document.getElementById('submit-btn');
+            const messageDiv = document.getElementById('form-message');
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = currentLanguage === 'da' ? 'Sender...' : 'Sending...';
+            
+            // Simulate form submission
+            setTimeout(() => {
+                // Show success message
+                messageDiv.style.display = 'block';
+                messageDiv.style.background = 'rgba(34, 197, 94, 0.1)';
+                messageDiv.style.color = '#16a34a';
+                messageDiv.style.border = '2px solid rgba(34, 197, 94, 0.2)';
+                messageDiv.textContent = currentLanguage === 'da' 
+                    ? `Tak ${name}! Vi ringer til dig på ${phone} så snart som muligt.`
+                    : `Thank you ${name}! We will call you at ${phone} as soon as possible.`;
+                
+                // Reset form
+                document.getElementById('contact-form').reset();
+                
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.textContent = currentLanguage === 'da' ? 'Ring mig op' : 'Call me up';
+                
+                // Hide message after 5 seconds
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                }, 5000);
+            }, 1500);
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Element SDK
+            if (window.elementSdk) {
+                window.elementSdk.init({
+                    defaultConfig: defaultConfig,
+                    onConfigChange: onConfigChange,
+                    mapToCapabilities: (config) => ({
+                        recolorables: [],
+                        borderables: [],
+                        fontEditable: undefined,
+                        fontSizeable: undefined
+                    }),
+                    mapToEditPanelValues: (config) => new Map([
+                        ["page_title", config.page_title || defaultConfig.page_title],
+                        ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+                        ["overview_title", config.overview_title || defaultConfig.overview_title],
+                        ["overview_description", config.overview_description || defaultConfig.overview_description],
+                        ["contact_email", config.contact_email || defaultConfig.contact_email],
+                        ["contact_phone", config.contact_phone || defaultConfig.contact_phone]
+                    ])
+                });
+            }
+
+            // Mobile dropdown functionality
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(event) {
+                    if (window.innerWidth <= 768) {
+                        event.preventDefault();
+                        const dropdown = event.target.closest('.dropdown');
+                        const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+                        const arrow = dropdown.querySelector('.dropdown-arrow');
+                        
+                        dropdown.classList.toggle('mobile-active');
+                        arrow.style.transform = dropdown.classList.contains('mobile-active') ? 'rotate(180deg)' : 'rotate(0deg)';
+                    }
+                });
+            });
+
+            // Close dropdowns when window is resized to desktop
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    document.querySelectorAll('.dropdown').forEach(dropdown => {
+                        dropdown.classList.remove('mobile-active');
+                        const arrow = dropdown.querySelector('.dropdown-arrow');
+                        if (arrow) arrow.style.transform = 'rotate(0deg)';
+                    });
+                }
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('nav-menu');
+            const mobileToggle = document.querySelector('.mobile-toggle');
+            
+            if (!navMenu.contains(event.target) && !mobileToggle.contains(event.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e6c957d3d68a6a',t:'MTc2MzEyNjIyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
