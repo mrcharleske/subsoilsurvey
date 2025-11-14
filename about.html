@@ -1,0 +1,1221 @@
+<!doctype html>
+<html lang="da">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Om Os - Bargheer Geophysics</title>
+  <meta name="description" content="Lær om Bargheer Geophysics' historie, ekspertise og innovative tilgang til geofysiske undersøgelser siden 2015.">
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Language Toggle */
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 5px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(13, 79, 60, 0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: #0d4f3c;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .lang-btn.active {
+            background: #0d4f3c;
+            color: white;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(13, 79, 60, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0d4f3c;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: "🌍";
+            font-size: 1.5rem;
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: #1a1a1a;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(13, 79, 60, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(13, 79, 60, 0.1);
+            color: #0d4f3c;
+            transform: translateY(-2px);
+        }
+
+        /* Dropdown Styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dropdown-arrow {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(13, 79, 60, 0.1);
+            border-radius: 12px;
+            padding: 0.5rem 0;
+            min-width: 280px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            list-style: none;
+            margin: 0;
+            z-index: 1001;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-link {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: #1a1a1a;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            margin: 0 0.5rem;
+        }
+
+        .dropdown-link:hover {
+            background: rgba(13, 79, 60, 0.1);
+            color: #0d4f3c;
+            transform: translateX(5px);
+        }
+
+        /* Mobile Navigation */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #0d4f3c;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-toggle:hover {
+            background: rgba(13, 79, 60, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 50%, #0d4f3c 100%);
+            color: white;
+            padding: 8rem 2rem 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="about-pattern" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="3" fill="rgba(255,255,255,0.1)"/><path d="M0,20 L40,20 M20,0 L20,40" stroke="rgba(255,255,255,0.05)" stroke-width="1"/><path d="M10,10 L30,30 M30,10 L10,30" stroke="rgba(255,255,255,0.03)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23about-pattern)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-icon {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            display: block;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: white;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .hero-stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            display: block;
+        }
+
+        .hero-stat-label {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 0.5rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            margin-bottom: 6rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #0d4f3c;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #6b7280;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #0d4f3c 0%, #1a5f4a 50%, #0d4f3c 100%);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: white;
+            border: 2px solid rgba(13, 79, 60, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 0 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(13, 79, 60, 0.15);
+            border-color: rgba(13, 79, 60, 0.3);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border: 2px solid rgba(13, 79, 60, 0.1);
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -12px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -12px;
+        }
+
+        .timeline-year {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(13, 79, 60, 0.3);
+            z-index: 10;
+        }
+
+        .timeline-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0d4f3c;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-description {
+            color: #4b5563;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        /* Team Section */
+        .team-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 30px;
+            padding: 4rem 2rem;
+            margin-bottom: 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="team-pattern" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="2" fill="rgba(13,79,60,0.05)"/><path d="M0,15 L30,15 M15,0 L15,30" stroke="rgba(13,79,60,0.03)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23team-pattern)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .team-member {
+            background: white;
+            border: 2px solid rgba(13, 79, 60, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-member::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(13, 79, 60, 0.02) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .team-member:hover::before {
+            opacity: 1;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(13, 79, 60, 0.15);
+            border-color: rgba(13, 79, 60, 0.3);
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            margin: 0 auto 2rem;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 10px 25px rgba(13, 79, 60, 0.3);
+        }
+
+        .team-name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0d4f3c;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .team-role {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            position: relative;
+            z-index: 2;
+        }
+
+        .team-description {
+            color: #4b5563;
+            font-size: 1rem;
+            line-height: 1.7;
+            text-align: left;
+            position: relative;
+            z-index: 2;
+        }
+
+        .team-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .skill-tag {
+            background: rgba(13, 79, 60, 0.1);
+            color: #0d4f3c;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(13, 79, 60, 0.2);
+        }
+
+        /* Values Section */
+        .values-section {
+            margin-bottom: 6rem;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .value-card {
+            background: white;
+            border: 2px solid rgba(13, 79, 60, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(13, 79, 60, 0.02) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .value-card:hover::before {
+            opacity: 1;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(13, 79, 60, 0.15);
+            border-color: rgba(13, 79, 60, 0.3);
+        }
+
+        .value-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            position: relative;
+            z-index: 2;
+        }
+
+        .value-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0d4f3c;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .value-description {
+            color: #4b5563;
+            font-size: 1rem;
+            line-height: 1.7;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
+            color: white;
+            border-radius: 30px;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="cta-pattern" width="25" height="25" patternUnits="userSpaceOnUse"><circle cx="12.5" cy="12.5" r="2" fill="rgba(255,255,255,0.1)"/><path d="M0,12.5 L25,12.5 M12.5,0 L12.5,25" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23cta-pattern)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 1.2rem 3rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: #e5e7eb;
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid rgba(13, 79, 60, 0.2);
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h4 {
+            color: #0d4f3c;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #9ca3af;
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #0d4f3c;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(13, 79, 60, 0.1);
+            color: #6b7280;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                padding: 2rem;
+                gap: 0;
+                border-top: 1px solid rgba(13, 79, 60, 0.1);
+                backdrop-filter: blur(20px);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                background: transparent;
+                padding: 0;
+                margin: 0;
+                min-width: auto;
+                display: none;
+            }
+
+            .dropdown.mobile-active .dropdown-menu {
+                display: block;
+            }
+
+            .hero {
+                padding: 6rem 2rem 4rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .timeline::before {
+                left: 2rem;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+                align-items: flex-start;
+            }
+
+            .timeline-content {
+                margin: 0 0 0 4rem;
+                width: calc(100% - 4rem);
+            }
+
+            .timeline-content::before {
+                left: -12px !important;
+                right: auto !important;
+            }
+
+            .timeline-year {
+                left: 2rem;
+                transform: translateX(-50%);
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .language-toggle {
+                top: 80px;
+                right: 10px;
+            }
+
+            .cta-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f8f9fa;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #1a5f4a 0%, #0d4f3c 100%);
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body><!-- Language Toggle -->
+  <div class="language-toggle"><button class="lang-btn active" onclick="setLanguage('da')" id="lang-da">DA</button> <button class="lang-btn" onclick="setLanguage('en')" id="lang-en">EN</button>
+  </div><!-- Navigation -->
+  <nav class="navbar" id="navbar">
+   <div class="nav-container"><a href="index.html" class="logo">Bargheer Geophysics</a> <button class="mobile-toggle" onclick="toggleMobileMenu()">☰</button>
+    <ul class="nav-menu" id="nav-menu">
+     <li class="nav-item"><a href="index.html" class="nav-link" data-da="Hjem" data-en="Home">Hjem</a></li>
+     <li class="nav-item"><a href="about.html" class="nav-link active" data-da="Om Os" data-en="About">Om Os</a></li>
+     <li class="nav-item dropdown">
+      <div class="nav-link dropdown-toggle" data-da="Geofysiske Undersøgelser" data-en="Geophysical Surveys"><span>Geofysiske Undersøgelser</span> <span class="dropdown-arrow">▼</span>
+      </div>
+      <ul class="dropdown-menu">
+       <li><a href="dcip.html" class="dropdown-link" data-da="DC/IP Undersøgelser" data-en="DC/IP Surveys">DC/IP Undersøgelser</a></li>
+       <li><a href="tem.html" class="dropdown-link" data-da="TEM Undersøgelser" data-en="TEM Surveys">TEM Undersøgelser</a></li>
+       <li><a href="mrs.html" class="dropdown-link" data-da="MRS Undersøgelser" data-en="MRS Surveys">MRS Undersøgelser</a></li>
+       <li><a href="seismics.html" class="dropdown-link" data-da="Seismiske Undersøgelser" data-en="Seismic Surveys">Seismiske Undersøgelser</a></li>
+       <li><a href="gravimetrics.html" class="dropdown-link" data-da="Gravimetriske Undersøgelser" data-en="Gravimetric Surveys">Gravimetriske Undersøgelser</a></li>
+       <li><a href="magnetics.html" class="dropdown-link" data-da="Ground Conductivity Meter" data-en="Ground Conductivity Meter">Ground Conductivity Meter</a></li>
+       <li><a href="radiometrics.html" class="dropdown-link" data-da="Radiometriske Undersøgelser" data-en="Radiometric Surveys">Radiometriske Undersøgelser</a></li>
+      </ul></li>
+     <li class="nav-item"><a href="ai.html" class="nav-link" data-da="Geophysics AI" data-en="Geophysics AI">Geophysics AI</a></li>
+     <li class="nav-item"><a href="ip-processing.html" class="nav-link" data-da="IP Processing" data-en="IP Processing">IP Processing</a></li>
+     <li class="nav-item"><a href="software.html" class="nav-link" data-da="Geofysik Software" data-en="Geophysics Software">Geofysik Software</a></li>
+     <li class="nav-item"><a href="contact.html" class="nav-link" data-da="Kontakt" data-en="Contact">Kontakt</a></li>
+    </ul>
+   </div>
+  </nav><!-- Hero Section -->
+  <section class="hero">
+   <div class="hero-content" data-aos="fade-up" data-aos-duration="1000"><span class="hero-icon">🏔️</span>
+    <h1 id="page-title" data-da="Om Bargheer Geophysics" data-en="About Bargheer Geophysics">Om Bargheer Geophysics</h1>
+    <p id="hero-subtitle" data-da="Innovative geofysiske løsninger fra erfarne udendørs specialister siden 2015. Vi leverer højeste kvalitet til konkurrencedygtige priser gennem vores unikke kombination af teknisk ekspertise og ekstreme feltfærdigheder." data-en="Innovative geophysical solutions from experienced outdoor specialists since 2015. We deliver the highest quality at competitive prices through our unique combination of technical expertise and extreme field skills.">Innovative geofysiske løsninger fra erfarne udendørs specialister siden 2015. Vi leverer højeste kvalitet til konkurrencedygtige priser gennem vores unikke kombination af teknisk ekspertise og ekstreme feltfærdigheder.</p>
+    <div class="hero-stats">
+     <div class="hero-stat" data-aos="fade-up" data-aos-delay="200"><span class="hero-stat-number" id="founding-year-display">2015</span> <span class="hero-stat-label" data-da="Grundlagt" data-en="Founded">Grundlagt</span>
+     </div>
+     <div class="hero-stat" data-aos="fade-up" data-aos-delay="400"><span class="hero-stat-number">15+</span> <span class="hero-stat-label" data-da="År Erfaring" data-en="Years Experience">År Erfaring</span>
+     </div>
+     <div class="hero-stat" data-aos="fade-up" data-aos-delay="600"><span class="hero-stat-number">100%</span> <span class="hero-stat-label" data-da="Kvalitet" data-en="Quality">Kvalitet</span>
+     </div>
+    </div>
+   </div>
+  </section><!-- Main Content -->
+  <main class="main-content"><!-- Timeline Section -->
+   <section class="timeline-section">
+    <div class="section-header" data-aos="fade-up">
+     <h2 class="section-title" data-da="Vores Historie" data-en="Our History">Vores Historie</h2>
+     <p class="section-subtitle" data-da="Fra Danmarks geofysiske guldalder til innovative løsninger i dag" data-en="From Denmark's geophysical golden age to innovative solutions today">Fra Danmarks geofysiske guldalder til innovative løsninger i dag</p>
+    </div>
+    <div class="timeline">
+     <div class="timeline-item" data-aos="fade-right" data-aos-duration="800">
+      <div class="timeline-year">
+       2000-2015
+      </div>
+      <div class="timeline-content">
+       <h3 class="timeline-title" data-da="Grundlaget Lægges" data-en="Foundation Laid">Grundlaget Lægges</h3>
+       <p class="timeline-description" data-da="Arne Bargheer arbejder i 15 år med geofysik inden for ingeniør- og konsulentbranchen i Danmark. I denne periode oplever geofysik i Danmark en enorm guldalder takket være en grundvandskortlægning udført af den danske stat, hvilket resulterer i mange ressourcer til kortlægning af Danmarks undergrund og gør den danske undergrund til en af de bedst undersøgte i verden." data-en="Arne Bargheer works for 15 years with geophysics within the engineering and consultancy industry in Denmark. During this period, geophysics in Denmark experiences a huge golden age thanks to groundwater mapping done by the Danish state, resulting in many resources being put into mapping Denmark's underground and making the Danish underground one of the best investigated in the world.">Arne Bargheer arbejder i 15 år med geofysik inden for ingeniør- og konsulentbranchen i Danmark. I denne periode oplever geofysik i Danmark en enorm guldalder takket være en grundvandskortlægning udført af den danske stat, hvilket resulterer i mange ressourcer til kortlægning af Danmarks undergrund og gør den danske undergrund til en af de bedst undersøgte i verden.</p>
+      </div>
+     </div>
+     <div class="timeline-item" data-aos="fade-left" data-aos-duration="800">
+      <div class="timeline-year" id="founding-year-timeline">
+       2015
+      </div>
+      <div class="timeline-content">
+       <h3 class="timeline-title" data-da="Bargheer Geophysics Grundlægges" data-en="Bargheer Geophysics Founded">Bargheer Geophysics Grundlægges</h3>
+       <p class="timeline-description" data-da="Efter 15 års erfaring grundlægger Arne Bargheer sit eget firma. Han har været involveret i en stor del af den danske grundvandskortlægning og har erfaring med alle de geofysiske metoder, der er blevet brugt til denne kortlægning samt en bred vifte af andre typer geofysik. Udover grundvandskortlægning har Arne blandt andet lavet projekter med mineralundersøgelser, olieprospektering, forureningskortlægning og geotekniske undersøgelser." data-en="After 15 years of experience, Arne Bargheer founds his own company. He has been involved in a big part of the Danish groundwater mapping and is experienced in all the geophysical methods that have been used for this mapping and a broad range of other types of geophysics. Apart from groundwater mapping, Arne has among other things been doing projects involving mineral investigations, oil prospecting, contamination mapping and geotechnical investigations.">Efter 15 års erfaring grundlægger Arne Bargheer sit eget firma. Han har været involveret i en stor del af den danske grundvandskortlægning og har erfaring med alle de geofysiske metoder, der er blevet brugt til denne kortlægning samt en bred vifte af andre typer geofysik. Udover grundvandskortlægning har Arne blandt andet lavet projekter med mineralundersøgelser, olieprospektering, forureningskortlægning og geotekniske undersøgelser.</p>
+      </div>
+     </div>
+     <div class="timeline-item" data-aos="fade-right" data-aos-duration="800">
+      <div class="timeline-year">
+       2016
+      </div>
+      <div class="timeline-content">
+       <h3 class="timeline-title" data-da="Tarje Tilslutter Sig Teamet" data-en="Tarje Joins the Team">Tarje Tilslutter Sig Teamet</h3>
+       <p class="timeline-description" data-da="Tarje Bargheer tilslutter sig Bargheer Geophysics, primært som programmør arbejdende fra Spanien. Tarje har været inden for akademia og studeret matematik på meget højt niveau i 15 år. Han har en Ph.D. i matematik og har haft flere postdoc-stillinger på forskellige universiteter rundt om i verden. Tarje er en meget innovativ programmør, der bruger unikke tilgange og har udviklet programmer, der gør Bargheer Geophysics i stand til at udføre arbejde i en kvalitet og hastighed, der er uovertruffen i branchen." data-en="Tarje Bargheer joins Bargheer Geophysics, primarily as a programmer working from Spain. Tarje has been within academia studying mathematics at a very high level for 15 years. He holds a Ph.D. in mathematics and has held several post-doc positions at different universities around the world. Tarje is a highly innovative programmer using unique approaches and has developed programs that make Bargheer Geophysics capable of doing work at a quality and speed unrivaled in the industry.">Tarje Bargheer tilslutter sig Bargheer Geophysics, primært som programmør arbejdende fra Spanien. Tarje har været inden for akademia og studeret matematik på meget højt niveau i 15 år. Han har en Ph.D. i matematik og har haft flere postdoc-stillinger på forskellige universiteter rundt om i verden. Tarje er en meget innovativ programmør, der bruger unikke tilgange og har udviklet programmer, der gør Bargheer Geophysics i stand til at udføre arbejde i en kvalitet og hastighed, der er uovertruffen i branchen.</p>
+      </div>
+     </div>
+     <div class="timeline-item" data-aos="fade-left" data-aos-duration="800">
+      <div class="timeline-year">
+       2015-2024
+      </div>
+      <div class="timeline-content">
+       <h3 class="timeline-title" data-da="Kontinuerlig Innovation" data-en="Continuous Innovation">Kontinuerlig Innovation</h3>
+       <p class="timeline-description" data-da="Siden grundlæggelsen har Bargheer Geophysics udviklet nye geofysiske metoder og forbedret eksisterende teknologier. Et program til automatiseret behandling af IP-data er blandt kronjuvelerne i de programmer, der er udviklet inden for Bargheer Geophysics' domæne af Tarje. Virksomheden fortsætter med at levere geofysik af højeste kvalitet til meget konkurrencedygtige priser." data-en="Since its founding, Bargheer Geophysics has been developing new geophysical methods and made improvements of existing technologies. A program for automated processing of IP data is among the crown jewels of the programs developed within the domain of Bargheer Geophysics by Tarje. The company continues to deliver geophysics of the highest quality at very competitive prices.">Siden grundlæggelsen har Bargheer Geophysics udviklet nye geofysiske metoder og forbedret eksisterende teknologier. Et program til automatiseret behandling af IP-data er blandt kronjuvelerne i de programmer, der er udviklet inden for Bargheer Geophysics' domæne af Tarje. Virksomheden fortsætter med at levere geofysik af højeste kvalitet til meget konkurrencedygtige priser.</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Team Section -->
+   <section class="team-section">
+    <div class="section-header" data-aos="fade-up">
+     <h2 class="section-title" data-da="Mød Teamet" data-en="Meet the Team">Mød Teamet</h2>
+     <p class="section-subtitle" data-da="Erfarne udendørs specialister med unikke færdigheder" data-en="Experienced outdoor specialists with unique skills">Erfarne udendørs specialister med unikke færdigheder</p>
+    </div>
+    <div class="team-grid">
+     <div class="team-member" data-aos="fade-up" data-aos-delay="200">
+      <div class="team-avatar">
+       🏔️
+      </div>
+      <h3 class="team-name">Arne Bargheer</h3>
+      <p class="team-role" data-da="Grundlægger &amp; Geofysiker" data-en="Founder &amp; Geophysicist">Grundlægger &amp; Geofysiker</p>
+      <p class="team-description" data-da="Arne er en erfaren geofysiker med over 15 års erfaring inden for ingeniør- og konsulentbranchen. Han har været involveret i en stor del af den danske grundvandskortlægning og har arbejdet i ekstreme miljøer som Grønland og Afrika. Arne har et ry for altid at indsamle data af højeste kvalitet, selv under de mest ekstreme forhold. Han er måske ikke altid den første person, der sendes for at erhverve et geofysisk datasæt, men han er altid den sidste person til at forlade et projektsted, efter dataene er indsamlet." data-en="Arne is an experienced geophysicist with over 15 years of experience within the engineering and consultancy industry. He has been involved in a big part of the Danish groundwater mapping and has worked in extreme environments like Greenland and Africa. Arne has a reputation for always collecting the highest quality data, even under the most extreme conditions. He may not always be the first person sent to acquire a geophysical dataset, but he is always the last person to leave a project site after the data has been collected.">Arne er en erfaren geofysiker med over 15 års erfaring inden for ingeniør- og konsulentbranchen. Han har været involveret i en stor del af den danske grundvandskortlægning og har arbejdet i ekstreme miljøer som Grønland og Afrika. Arne har et ry for altid at indsamle data af højeste kvalitet, selv under de mest ekstreme forhold. Han er måske ikke altid den første person, der sendes for at erhverve et geofysisk datasæt, men han er altid den sidste person til at forlade et projektsted, efter dataene er indsamlet.</p>
+      <div class="team-skills"><span class="skill-tag" data-da="Geofysik" data-en="Geophysics">Geofysik</span> <span class="skill-tag" data-da="Feltarbejde" data-en="Fieldwork">Feltarbejde</span> <span class="skill-tag" data-da="Ekstreme Miljøer" data-en="Extreme Environments">Ekstreme Miljøer</span> <span class="skill-tag" data-da="Grundvandskortlægning" data-en="Groundwater Mapping">Grundvandskortlægning</span>
+      </div>
+     </div>
+     <div class="team-member" data-aos="fade-up" data-aos-delay="400">
+      <div class="team-avatar">
+       🧗
+      </div>
+      <h3 class="team-name">Tarje Bargheer</h3>
+      <p class="team-role" data-da="Programmør &amp; Matematiker" data-en="Programmer &amp; Mathematician">Programmør &amp; Matematiker</p>
+      <p class="team-description" data-da="Tarje har en Ph.D. i matematik og har haft flere postdoc-stillinger på forskellige universiteter rundt om i verden. Han er en meget innovativ programmør, der bruger unikke tilgange og har udviklet programmer, der gør Bargheer Geophysics i stand til at udføre arbejde i en kvalitet og hastighed, der er uovertruffen i branchen. Tarje har i nogen tid levet delvist off-grid i Cantabriske bjerge i Spanien og er en dygtig klatrer. Hans automatiserede IP-databehandlingsprogram er blandt kronjuvelerne i virksomhedens teknologiske arsenal." data-en="Tarje has a Ph.D. in mathematics and has held several post-doc positions at different universities around the world. He is a highly innovative programmer using unique approaches and has developed programs that make Bargheer Geophysics capable of doing work at a quality and speed unrivaled in the industry. Tarje has for some time been living partially off-grid in the Cantabrian mountains in Spain and is a proficient rock climber. His automated IP data processing program is among the crown jewels of the company's technological arsenal.">Tarje har en Ph.D. i matematik og har haft flere postdoc-stillinger på forskellige universiteter rundt om i verden. Han er en meget innovativ programmør, der bruger unikke tilgange og har udviklet programmer, der gør Bargheer Geophysics i stand til at udføre arbejde i en kvalitet og hastighed, der er uovertruffen i branchen. Tarje har i nogen tid levet delvist off-grid i Cantabriske bjerge i Spanien og er en dygtig klatrer. Hans automatiserede IP-databehandlingsprogram er blandt kronjuvelerne i virksomhedens teknologiske arsenal.</p>
+      <div class="team-skills"><span class="skill-tag" data-da="Matematik" data-en="Mathematics">Matematik</span> <span class="skill-tag" data-da="Programmering" data-en="Programming">Programmering</span> <span class="skill-tag" data-da="IP Processing" data-en="IP Processing">IP Processing</span> <span class="skill-tag" data-da="Klatring" data-en="Rock Climbing">Klatring</span>
+      </div>
+     </div>
+    </div>
+   </section><!-- Values Section -->
+   <section class="values-section">
+    <div class="section-header" data-aos="fade-up">
+     <h2 class="section-title" data-da="Vores Værdier" data-en="Our Values">Vores Værdier</h2>
+     <p class="section-subtitle" data-da="Hvad der driver os til at levere exceptionelle resultater" data-en="What drives us to deliver exceptional results">Hvad der driver os til at levere exceptionelle resultater</p>
+    </div>
+    <div class="values-grid">
+     <div class="value-card" data-aos="fade-up" data-aos-delay="200"><span class="value-icon">🎯</span>
+      <h3 class="value-title" data-da="Højeste Kvalitet" data-en="Highest Quality">Højeste Kvalitet</h3>
+      <p class="value-description" data-da="Vi leverer altid geofysik af højeste kvalitet, selv under de mest ekstreme forhold. Vores ry er bygget på aldrig at gå på kompromis med datakvaliteten." data-en="We always deliver geophysics of the highest quality, even under the most extreme conditions. Our reputation is built on never compromising on data quality.">Vi leverer altid geofysik af højeste kvalitet, selv under de mest ekstreme forhold. Vores ry er bygget på aldrig at gå på kompromis med datakvaliteten.</p>
+     </div>
+     <div class="value-card" data-aos="fade-up" data-aos-delay="400"><span class="value-icon">💡</span>
+      <h3 class="value-title" data-da="Innovation" data-en="Innovation">Innovation</h3>
+      <p class="value-description" data-da="Vi udvikler kontinuerligt nye geofysiske metoder og forbedrer eksisterende teknologier. Vores innovative tilgang giver os en unik position i branchen." data-en="We continuously develop new geophysical methods and improve existing technologies. Our innovative approach gives us a unique position in the industry.">Vi udvikler kontinuerligt nye geofysiske metoder og forbedrer eksisterende teknologier. Vores innovative tilgang giver os en unik position i branchen.</p>
+     </div>
+     <div class="value-card" data-aos="fade-up" data-aos-delay="600"><span class="value-icon">🏔️</span>
+      <h3 class="value-title" data-da="Ekstreme Færdigheder" data-en="Extreme Skills">Ekstreme Færdigheder</h3>
+      <p class="value-description" data-da="Som erfarne udendørs specialister kan vi arbejde i de mest udfordrende miljøer. Fra Grønlands is til Afrikas ørkener - vi leverer altid." data-en="As experienced outdoor specialists, we can work in the most challenging environments. From Greenland's ice to Africa's deserts - we always deliver.">Som erfarne udendørs specialister kan vi arbejde i de mest udfordrende miljøer. Fra Grønlands is til Afrikas ørkener - vi leverer altid.</p>
+     </div>
+     <div class="value-card" data-aos="fade-up" data-aos-delay="800"><span class="value-icon">💰</span>
+      <h3 class="value-title" data-da="Konkurrencedygtige Priser" data-en="Competitive Prices">Konkurrencedygtige Priser</h3>
+      <p class="value-description" data-da="Vores fleksible teamstruktur med projektbaserede specialister gør det muligt at levere premium kvalitet til meget konkurrencedygtige priser." data-en="Our flexible team structure with project-based specialists makes it possible to deliver premium quality at very competitive prices.">Vores fleksible teamstruktur med projektbaserede specialister gør det muligt at levere premium kvalitet til meget konkurrencedygtige priser.</p>
+     </div>
+     <div class="value-card" data-aos="fade-up" data-aos-delay="1000"><span class="value-icon">🤝</span>
+      <h3 class="value-title" data-da="Ekspert Netværk" data-en="Expert Network">Ekspert Netværk</h3>
+      <p class="value-description" data-da="Vi arbejder med et netværk af dygtige geologer, geofysikere og feltspecialister på projektbasis, hvilket sikrer den rette ekspertise til hver opgave." data-en="We work with a network of skilled geologists, geophysicists and field specialists on a project basis, ensuring the right expertise for each task.">Vi arbejder med et netværk af dygtige geologer, geofysikere og feltspecialister på projektbasis, hvilket sikrer den rette ekspertise til hver opgave.</p>
+     </div>
+     <div class="value-card" data-aos="fade-up" data-aos-delay="1200"><span class="value-icon">⚡</span>
+      <h3 class="value-title" data-da="Uovertruffen Hastighed" data-en="Unrivaled Speed">Uovertruffen Hastighed</h3>
+      <p class="value-description" data-da="Vores avancerede programmer og automatiserede processer gør os i stand til at levere resultater i en hastighed, der er uovertruffen i branchen." data-en="Our advanced programs and automated processes enable us to deliver results at a speed that is unrivaled in the industry.">Vores avancerede programmer og automatiserede processer gør os i stand til at levere resultater i en hastighed, der er uovertruffen i branchen.</p>
+     </div>
+    </div>
+   </section><!-- CTA Section -->
+   <section class="cta-section" data-aos="fade-up">
+    <div class="cta-content">
+     <h2 class="cta-title" data-da="Klar til at Starte Dit Projekt?" data-en="Ready to Start Your Project?">Klar til at Starte Dit Projekt?</h2>
+     <p class="cta-description" data-da="Kontakt os i dag for at diskutere, hvordan vores unikke kombination af teknisk ekspertise og ekstreme feltfærdigheder kan hjælpe dit næste geofysiske projekt." data-en="Contact us today to discuss how our unique combination of technical expertise and extreme field skills can help your next geophysical project.">Kontakt os i dag for at diskutere, hvordan vores unikke kombination af teknisk ekspertise og ekstreme feltfærdigheder kan hjælpe dit næste geofysiske projekt.</p><a href="contact.html" class="cta-button"> <span data-da="Kontakt Os" data-en="Contact Us">Kontakt Os</span> <span>🚀</span> </a>
+    </div>
+   </section>
+  </main><!-- Footer -->
+  <footer class="footer">
+   <div class="footer-container">
+    <div class="footer-section">
+     <h4 data-da="Kontakt Information" data-en="Contact Information">Kontakt Information</h4>
+     <p><strong data-da="Telefon" data-en="Phone">Telefon:</strong> (+45) 27 13 62 22</p>
+     <p><strong data-da="Email" data-en="Email">Email:</strong> ab@bgeo.dk</p>
+     <p><strong data-da="Adresse" data-en="Address">Adresse:</strong><br>
+      Klemstrupvej 5<br>
+      8550 Ryomgård<br>
+      Danmark</p><a href="https://maps.app.goo.gl/W54qM8MDPJqyr2Xw8?g_st=awb" target="_blank" rel="noopener noreferrer" data-da="Se på kort" data-en="View on map">Se på kort →</a>
+    </div>
+    <div class="footer-section">
+     <h4 data-da="Tjenester" data-en="Services">Tjenester</h4>
+     <p><a href="dcip.html" data-da="DC/IP Undersøgelser" data-en="DC/IP Surveys">DC/IP Undersøgelser</a></p>
+     <p><a href="tem.html" data-da="TEM Undersøgelser" data-en="TEM Surveys">TEM Undersøgelser</a></p>
+     <p><a href="mrs.html" data-da="MRS Undersøgelser" data-en="MRS Surveys">MRS Undersøgelser</a></p>
+     <p><a href="ai.html" data-da="Geophysics AI" data-en="Geophysics AI">Geophysics AI</a></p>
+     <p><a href="ip-processing.html" data-da="IP Processing" data-en="IP Processing">IP Processing</a></p>
+    </div>
+    <div class="footer-section">
+     <h4 data-da="Virksomhed" data-en="Company">Virksomhed</h4>
+     <p><a href="about.html" data-da="Om Os" data-en="About Us">Om Os</a></p>
+     <p><a href="software.html" data-da="Software" data-en="Software">Software</a></p>
+     <p><a href="contact.html" data-da="Kontakt" data-en="Contact">Kontakt</a></p>
+     <p><strong data-da="CVR/VAT" data-en="CVR/VAT">CVR/VAT:</strong> DK36358459</p>
+    </div>
+    <div class="footer-section">
+     <h4 data-da="Åbningstider" data-en="Business Hours">Åbningstider</h4>
+     <p data-da="Mandag - Fredag: 8:00 - 17:00" data-en="Monday - Friday: 8:00 - 17:00">Mandag - Fredag: 8:00 - 17:00</p>
+     <p data-da="Weekend: Efter aftale" data-en="Weekend: By appointment">Weekend: Efter aftale</p>
+     <p data-da="Responstid: Inden for 24 timer" data-en="Response time: Within 24 hours">Responstid: Inden for 24 timer</p>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>© 2024 Bargheer Geophysics. <span data-da="Alle rettigheder forbeholdes" data-en="All rights reserved">Alle rettigheder forbeholdes</span>.</p>
+   </div>
+  </footer><!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+        // Configuration
+        const defaultConfig = {
+            page_title: "Om Bargheer Geophysics",
+            hero_subtitle: "Innovative geofysiske løsninger fra erfarne udendørs specialister siden 2015. Vi leverer højeste kvalitet til konkurrencedygtige priser gennem vores unikke kombination af teknisk ekspertise og ekstreme feltfærdigheder.",
+            company_tagline: "Højeste kvalitet til konkurrencedygtige priser",
+            founding_year: "2015"
+        };
+
+        let currentLanguage = 'da';
+
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Language switching
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`lang-${lang}`).classList.add('active');
+            
+            // Update all elements with language attributes
+            document.querySelectorAll('[data-da][data-en]').forEach(element => {
+                element.textContent = element.getAttribute(`data-${lang}`);
+            });
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+        }
+
+        // Element SDK implementation
+        async function onConfigChange(config) {
+            // Update page title
+            const pageTitle = document.getElementById('page-title');
+            if (pageTitle) {
+                pageTitle.textContent = config.page_title || defaultConfig.page_title;
+            }
+
+            // Update hero subtitle
+            const heroSubtitle = document.getElementById('hero-subtitle');
+            if (heroSubtitle) {
+                heroSubtitle.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+            }
+
+            // Update founding year displays
+            const foundingYearElements = document.querySelectorAll('#founding-year-display, #founding-year-timeline');
+            foundingYearElements.forEach(el => {
+                el.textContent = config.founding_year || defaultConfig.founding_year;
+            });
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Element SDK
+            if (window.elementSdk) {
+                window.elementSdk.init({
+                    defaultConfig: defaultConfig,
+                    onConfigChange: onConfigChange,
+                    mapToCapabilities: (config) => ({
+                        recolorables: [],
+                        borderables: [],
+                        fontEditable: undefined,
+                        fontSizeable: undefined
+                    }),
+                    mapToEditPanelValues: (config) => new Map([
+                        ["page_title", config.page_title || defaultConfig.page_title],
+                        ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+                        ["company_tagline", config.company_tagline || defaultConfig.company_tagline],
+                        ["founding_year", config.founding_year || defaultConfig.founding_year]
+                    ])
+                });
+            }
+
+            // Mobile dropdown functionality
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(event) {
+                    if (window.innerWidth <= 768) {
+                        event.preventDefault();
+                        const dropdown = event.target.closest('.dropdown');
+                        const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+                        const arrow = dropdown.querySelector('.dropdown-arrow');
+                        
+                        dropdown.classList.toggle('mobile-active');
+                        arrow.style.transform = dropdown.classList.contains('mobile-active') ? 'rotate(180deg)' : 'rotate(0deg)';
+                    }
+                });
+            });
+
+            // Close dropdowns when window is resized to desktop
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    document.querySelectorAll('.dropdown').forEach(dropdown => {
+                        dropdown.classList.remove('mobile-active');
+                        const arrow = dropdown.querySelector('.dropdown-arrow');
+                        if (arrow) arrow.style.transform = 'rotate(0deg)';
+                    });
+                }
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('nav-menu');
+            const mobileToggle = document.querySelector('.mobile-toggle');
+            
+            if (!navMenu.contains(event.target) && !mobileToggle.contains(event.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e79b7b1605b195',t:'MTc2MzEzNDgyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+        </html>
