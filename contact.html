@@ -1,0 +1,1257 @@
+<!doctype html>
+<html lang="da">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontakt - Bargheer Geophysics</title>
+  <meta name="description" content="Kontakt Bargheer Geophysics for professionelle geofysiske undersøgelser og konsultation. Vi er klar til at hjælpe med dit næste projekt.">
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Language Toggle */
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 5px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(13, 79, 60, 0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: #0d4f3c;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .lang-btn.active {
+            background: #0d4f3c;
+            color: white;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(13, 79, 60, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0d4f3c;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: "🌍";
+            font-size: 1.5rem;
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: #1a1a1a;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(13, 79, 60, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(13, 79, 60, 0.1);
+            color: #0d4f3c;
+            transform: translateY(-2px);
+        }
+
+        /* Dropdown Styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dropdown-arrow {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(13, 79, 60, 0.1);
+            border-radius: 12px;
+            padding: 0.5rem 0;
+            min-width: 280px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            list-style: none;
+            margin: 0;
+            z-index: 1001;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-link {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: #1a1a1a;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            margin: 0 0.5rem;
+        }
+
+        .dropdown-link:hover {
+            background: rgba(13, 79, 60, 0.1);
+            color: #0d4f3c;
+            transform: translateX(5px);
+        }
+
+        /* Mobile Navigation */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #0d4f3c;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-toggle:hover {
+            background: rgba(13, 79, 60, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 50%, #0d4f3c 100%);
+            color: white;
+            padding: 8rem 2rem 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="contact-pattern" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="2" fill="rgba(255,255,255,0.1)"/><path d="M0,15 L30,15 M15,0 L15,30" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23contact-pattern)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-icon {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            display: block;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: white;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        /* Contact Form */
+        .contact-form-section {
+            background: white;
+            border: 2px solid rgba(13, 79, 60, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-form-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(13, 79, 60, 0.02) 0%, transparent 100%);
+        }
+
+        .contact-form-section h2 {
+            color: #0d4f3c;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-form {
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: #1a1a1a;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid rgba(13, 79, 60, 0.2);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #0d4f3c;
+            box-shadow: 0 0 0 3px rgba(13, 79, 60, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
+            color: white;
+            border: none;
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(13, 79, 60, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Contact Information */
+        .contact-info-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-card {
+            background: white;
+            border: 2px solid rgba(13, 79, 60, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(13, 79, 60, 0.02) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-card:hover::before {
+            opacity: 1;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(13, 79, 60, 0.15);
+            border-color: rgba(13, 79, 60, 0.3);
+        }
+
+        .contact-card h3 {
+            color: #0d4f3c;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-card-icon {
+            font-size: 1.8rem;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(13, 79, 60, 0.05);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-detail:hover {
+            background: rgba(13, 79, 60, 0.1);
+            transform: translateX(5px);
+        }
+
+        .contact-detail-icon {
+            font-size: 1.3rem;
+            color: #0d4f3c;
+            min-width: 25px;
+        }
+
+        .contact-detail-text {
+            flex: 1;
+        }
+
+        .contact-detail-label {
+            font-weight: 600;
+            color: #1a1a1a;
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+
+        .contact-detail-value {
+            color: #0d4f3c;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .contact-detail a {
+            color: inherit;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-detail a:hover {
+            text-decoration: underline;
+        }
+
+        /* Map Section */
+        .map-section {
+            background: white;
+            border: 2px solid rgba(13, 79, 60, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(13, 79, 60, 0.02) 0%, transparent 100%);
+        }
+
+        .map-section h3 {
+            color: #0d4f3c;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px dashed rgba(13, 79, 60, 0.3);
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .map-placeholder:hover {
+            background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+            border-color: rgba(13, 79, 60, 0.5);
+        }
+
+        .map-placeholder-icon {
+            font-size: 4rem;
+            color: #0d4f3c;
+            margin-bottom: 1rem;
+        }
+
+        .map-placeholder-text {
+            color: #6b7280;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .map-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .map-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .map-button:hover::before {
+            left: 100%;
+        }
+
+        .map-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(13, 79, 60, 0.3);
+        }
+
+        /* Social Links */
+        .social-section {
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="social-pattern" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23social-pattern)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .social-section h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-link {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        /* Success Message */
+        .success-message {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: #e5e7eb;
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid rgba(13, 79, 60, 0.2);
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h4 {
+            color: #0d4f3c;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #9ca3af;
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #0d4f3c;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(13, 79, 60, 0.1);
+            color: #6b7280;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                padding: 2rem;
+                gap: 0;
+                border-top: 1px solid rgba(13, 79, 60, 0.1);
+                backdrop-filter: blur(20px);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                background: transparent;
+                padding: 0;
+                margin: 0;
+                min-width: auto;
+                display: none;
+            }
+
+            .dropdown.mobile-active .dropdown-menu {
+                display: block;
+            }
+
+            .hero {
+                padding: 6rem 2rem 4rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .language-toggle {
+                top: 80px;
+                right: 10px;
+            }
+
+            .social-links {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f8f9fa;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #1a5f4a 0%, #0d4f3c 100%);
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body><!-- Language Toggle -->
+  <div class="language-toggle"><button class="lang-btn active" onclick="setLanguage('da')" id="lang-da">DA</button> <button class="lang-btn" onclick="setLanguage('en')" id="lang-en">EN</button>
+  </div><!-- Navigation -->
+  <nav class="navbar" id="navbar">
+   <div class="nav-container"><a href="index.html" class="logo" id="company-name">Bargheer Geophysics</a> <button class="mobile-toggle" onclick="toggleMobileMenu()">☰</button>
+    <ul class="nav-menu" id="nav-menu">
+     <li class="nav-item"><a href="index.html" class="nav-link" data-da="Hjem" data-en="Home">Hjem</a></li>
+     <li class="nav-item"><a href="about.html" class="nav-link" data-da="Om Os" data-en="About">Om Os</a></li>
+     <li class="nav-item dropdown">
+      <div class="nav-link dropdown-toggle" data-da="Geofysiske Undersøgelser" data-en="Geophysical Surveys"><span>Geofysiske Undersøgelser</span> <span class="dropdown-arrow">▼</span>
+      </div>
+      <ul class="dropdown-menu">
+       <li><a href="dcip.html" class="dropdown-link" data-da="DC/IP Undersøgelser" data-en="DC/IP Surveys">DC/IP Undersøgelser</a></li>
+       <li><a href="tem.html" class="dropdown-link" data-da="TEM Undersøgelser" data-en="TEM Surveys">TEM Undersøgelser</a></li>
+       <li><a href="mrs.html" class="dropdown-link" data-da="MRS Undersøgelser" data-en="MRS Surveys">MRS Undersøgelser</a></li>
+       <li><a href="seismics.html" class="dropdown-link" data-da="Seismiske Undersøgelser" data-en="Seismic Surveys">Seismiske Undersøgelser</a></li>
+       <li><a href="gravimetrics.html" class="dropdown-link" data-da="Gravimetriske Undersøgelser" data-en="Gravimetric Surveys">Gravimetriske Undersøgelser</a></li>
+       <li><a href="magnetics.html" class="dropdown-link" data-da="Ground Conductivity Meter" data-en="Ground Conductivity Meter">Ground Conductivity Meter</a></li>
+       <li><a href="radiometrics.html" class="dropdown-link" data-da="Radiometriske Undersøgelser" data-en="Radiometric Surveys">Radiometriske Undersøgelser</a></li>
+      </ul></li>
+     <li class="nav-item"><a href="ai.html" class="nav-link" data-da="Geophysics AI" data-en="Geophysics AI">Geophysics AI</a></li>
+     <li class="nav-item"><a href="ip-processing.html" class="nav-link" data-da="IP Processing" data-en="IP Processing">IP Processing</a></li>
+     <li class="nav-item"><a href="software.html" class="nav-link" data-da="Geofysik Software" data-en="Geophysics Software">Geofysik Software</a></li>
+     <li class="nav-item"><a href="contact.html" class="nav-link active" data-da="Kontakt" data-en="Contact">Kontakt</a></li>
+    </ul>
+   </div>
+  </nav><!-- Hero Section -->
+  <section class="hero">
+   <div class="hero-content" data-aos="fade-up" data-aos-duration="1000"><span class="hero-icon">📞</span>
+    <h1 id="page-title" data-da="Kontakt Os" data-en="Contact Us">Kontakt Os</h1>
+    <p id="hero-subtitle" data-da="Klar til at starte dit næste geofysiske projekt? Vi er her for at hjælpe dig med professionel rådgivning og skræddersyede løsninger til dine specifikke behov." data-en="Ready to start your next geophysical project? We're here to help you with professional consultation and tailored solutions for your specific needs.">Klar til at starte dit næste geofysiske projekt? Vi er her for at hjælpe dig med professionel rådgivning og skræddersyede løsninger til dine specifikke behov.</p>
+   </div>
+  </section><!-- Main Content -->
+  <main class="main-content">
+   <div class="contact-grid"><!-- Contact Form -->
+    <div class="contact-form-section" data-aos="fade-right" data-aos-duration="800">
+     <h2 data-da="Send Os En Besked" data-en="Send Us a Message">Send Os En Besked</h2>
+     <div class="success-message" id="success-message"><span data-da="Tak for din besked! Vi vender tilbage til dig inden for 24 timer." data-en="Thank you for your message! We'll get back to you within 24 hours.">Tak for din besked! Vi vender tilbage til dig inden for 24 timer.</span>
+     </div>
+     <form class="contact-form" id="contact-form">
+      <div class="form-row">
+       <div class="form-group"><label for="first-name" data-da="Fornavn *" data-en="First Name *">Fornavn *</label> <input type="text" id="first-name" name="firstName" required>
+       </div>
+       <div class="form-group"><label for="last-name" data-da="Efternavn *" data-en="Last Name *">Efternavn *</label> <input type="text" id="last-name" name="lastName" required>
+       </div>
+      </div>
+      <div class="form-row">
+       <div class="form-group"><label for="email" data-da="Email *" data-en="Email *">Email *</label> <input type="email" id="email" name="email" required>
+       </div>
+       <div class="form-group"><label for="phone" data-da="Telefon" data-en="Phone">Telefon</label> <input type="tel" id="phone" name="phone">
+       </div>
+      </div>
+      <div class="form-group"><label for="company" data-da="Virksomhed" data-en="Company">Virksomhed</label> <input type="text" id="company" name="company">
+      </div>
+      <div class="form-group"><label for="service" data-da="Interesseret i *" data-en="Interested in *">Interesseret i *</label> <select id="service" name="service" required> <option value="" data-da="Vælg en tjeneste..." data-en="Select a service...">Vælg en tjeneste...</option> <option value="dcip" data-da="DC/IP Undersøgelser" data-en="DC/IP Surveys">DC/IP Undersøgelser</option> <option value="tem" data-da="TEM Undersøgelser" data-en="TEM Surveys">TEM Undersøgelser</option> <option value="mrs" data-da="MRS Undersøgelser" data-en="MRS Surveys">MRS Undersøgelser</option> <option value="seismic" data-da="Seismiske Undersøgelser" data-en="Seismic Surveys">Seismiske Undersøgelser</option> <option value="gravimetric" data-da="Gravimetriske Undersøgelser" data-en="Gravimetric Surveys">Gravimetriske Undersøgelser</option> <option value="magnetic" data-da="Ground Conductivity Meter" data-en="Ground Conductivity Meter">Ground Conductivity Meter</option> <option value="radiometric" data-da="Radiometriske Undersøgelser" data-en="Radiometric Surveys">Radiometriske Undersøgelser</option> <option value="ai" data-da="Geophysics AI" data-en="Geophysics AI">Geophysics AI</option> <option value="ip-processing" data-da="IP Processing" data-en="IP Processing">IP Processing</option> <option value="software" data-da="Geofysik Software" data-en="Geophysics Software">Geofysik Software</option> <option value="consultation" data-da="Generel Konsultation" data-en="General Consultation">Generel Konsultation</option> </select>
+      </div>
+      <div class="form-group"><label for="message" data-da="Besked *" data-en="Message *">Besked *</label> <textarea id="message" name="message" required placeholder="Beskriv dit projekt eller dine behov..."></textarea>
+      </div><button type="submit" class="submit-btn" id="submit-btn"> <span data-da="Send Besked" data-en="Send Message">Send Besked</span> <span>📤</span> </button>
+     </form>
+    </div><!-- Contact Information -->
+    <div class="contact-info-section" data-aos="fade-left" data-aos-duration="800"><!-- Business Information -->
+     <div class="contact-card">
+      <h3><span class="contact-card-icon">🏢</span> <span data-da="Virksomhedsoplysninger" data-en="Business Information">Virksomhedsoplysninger</span></h3>
+      <div class="contact-detail"><span class="contact-detail-icon">🏢</span>
+       <div class="contact-detail-text">
+        <div class="contact-detail-label" data-da="Virksomhed" data-en="Company">
+         Virksomhed
+        </div>
+        <div class="contact-detail-value" id="company-name-display">
+         Bargheer Geophysics
+        </div>
+       </div>
+      </div>
+      <div class="contact-detail"><span class="contact-detail-icon">📧</span>
+       <div class="contact-detail-text">
+        <div class="contact-detail-label" data-da="Email" data-en="Email">
+         Email
+        </div>
+        <div class="contact-detail-value"><a href="mailto:ab@bgeo.dk" id="contact-email-link">ab@bgeo.dk</a>
+        </div>
+       </div>
+      </div>
+      <div class="contact-detail"><span class="contact-detail-icon">📞</span>
+       <div class="contact-detail-text">
+        <div class="contact-detail-label" data-da="Telefon" data-en="Phone">
+         Telefon
+        </div>
+        <div class="contact-detail-value"><a href="tel:+4527136222" id="contact-phone-link">(+45) 27 13 62 22</a>
+        </div>
+       </div>
+      </div>
+      <div class="contact-detail"><span class="contact-detail-icon">📍</span>
+       <div class="contact-detail-text">
+        <div class="contact-detail-label" data-da="Adresse" data-en="Address">
+         Adresse
+        </div>
+        <div class="contact-detail-value" id="company-address-display">
+         Klemstrupvej 5<br>
+          8550 Ryomgård<br>
+          Danmark
+        </div>
+       </div>
+      </div>
+      <div class="contact-detail"><span class="contact-detail-icon">🏛️</span>
+       <div class="contact-detail-text">
+        <div class="contact-detail-label" data-da="CVR/VAT" data-en="CVR/VAT">
+         CVR/VAT
+        </div>
+        <div class="contact-detail-value" id="cvr-number-display">
+         DK36358459
+        </div>
+       </div>
+      </div>
+     </div><!-- Map Section -->
+     <div class="map-section">
+      <h3 data-da="Find Os" data-en="Find Us">Find Os</h3>
+      <div class="map-placeholder">
+       <div class="map-placeholder-icon">
+        🗺️
+       </div>
+       <div class="map-placeholder-text" data-da="Klemstrupvej 5, 8550 Ryomgård" data-en="Klemstrupvej 5, 8550 Ryomgård">
+        Klemstrupvej 5, 8550 Ryomgård
+       </div>
+      </div><a href="https://maps.app.goo.gl/W54qM8MDPJqyr2Xw8?g_st=awb" target="_blank" rel="noopener noreferrer" class="map-button"> <span data-da="Åbn i Google Maps" data-en="Open in Google Maps">Åbn i Google Maps</span> <span>🗺️</span> </a>
+     </div><!-- Social Links -->
+     <div class="social-section">
+      <h3 data-da="Følg Os" data-en="Follow Us">Følg Os</h3>
+      <div class="social-links"><a href="https://www.instagram.com/arne_bargheer?igsh=MW0wcmc2dWZudDhhNQ==" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram"> 📷 </a> <a href="mailto:ab@bgeo.dk" class="social-link" title="Email"> ✉️ </a> <a href="tel:+4527136222" class="social-link" title="Telefon"> 📞 </a>
+      </div>
+     </div>
+    </div>
+   </div>
+  </main><!-- Footer -->
+  <footer class="footer">
+   <div class="footer-container">
+    <div class="footer-section">
+     <h4 data-da="Kontakt Information" data-en="Contact Information">Kontakt Information</h4>
+     <p><strong data-da="Telefon" data-en="Phone">Telefon:</strong> <span id="footer-phone">(+45) 27 13 62 22</span></p>
+     <p><strong data-da="Email" data-en="Email">Email:</strong> <span id="footer-email">ab@bgeo.dk</span></p>
+     <p><strong data-da="Adresse" data-en="Address">Adresse:</strong><br><span id="footer-address">Klemstrupvej 5<br>
+       8550 Ryomgård<br>
+       Danmark</span></p><a href="https://maps.app.goo.gl/W54qM8MDPJqyr2Xw8?g_st=awb" target="_blank" rel="noopener noreferrer" data-da="Se på kort" data-en="View on map">Se på kort →</a>
+    </div>
+    <div class="footer-section">
+     <h4 data-da="Tjenester" data-en="Services">Tjenester</h4>
+     <p><a href="dcip.html" data-da="DC/IP Undersøgelser" data-en="DC/IP Surveys">DC/IP Undersøgelser</a></p>
+     <p><a href="tem.html" data-da="TEM Undersøgelser" data-en="TEM Surveys">TEM Undersøgelser</a></p>
+     <p><a href="mrs.html" data-da="MRS Undersøgelser" data-en="MRS Surveys">MRS Undersøgelser</a></p>
+     <p><a href="ai.html" data-da="Geophysics AI" data-en="Geophysics AI">Geophysics AI</a></p>
+     <p><a href="ip-processing.html" data-da="IP Processing" data-en="IP Processing">IP Processing</a></p>
+    </div>
+    <div class="footer-section">
+     <h4 data-da="Virksomhed" data-en="Company">Virksomhed</h4>
+     <p><a href="about.html" data-da="Om Os" data-en="About Us">Om Os</a></p>
+     <p><a href="software.html" data-da="Software" data-en="Software">Software</a></p>
+     <p><a href="contact.html" data-da="Kontakt" data-en="Contact">Kontakt</a></p>
+     <p><strong data-da="CVR/VAT" data-en="CVR/VAT">CVR/VAT:</strong> <span id="footer-cvr">DK36358459</span></p>
+    </div>
+    <div class="footer-section">
+     <h4 data-da="Åbningstider" data-en="Business Hours">Åbningstider</h4>
+     <p data-da="Mandag - Fredag: 8:00 - 17:00" data-en="Monday - Friday: 8:00 - 17:00">Mandag - Fredag: 8:00 - 17:00</p>
+     <p data-da="Weekend: Efter aftale" data-en="Weekend: By appointment">Weekend: Efter aftale</p>
+     <p data-da="Responstid: Inden for 24 timer" data-en="Response time: Within 24 hours">Responstid: Inden for 24 timer</p>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>© 2024 <span id="footer-company-name">Bargheer Geophysics</span>. <span data-da="Alle rettigheder forbeholdes" data-en="All rights reserved">Alle rettigheder forbeholdes</span>.</p>
+   </div>
+  </footer><!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+        // Configuration
+        const defaultConfig = {
+            page_title: "Kontakt Os",
+            hero_subtitle: "Klar til at starte dit næste geofysiske projekt? Vi er her for at hjælpe dig med professionel rådgivning og skræddersyede løsninger til dine specifikke behov.",
+            company_name: "Bargheer Geophysics",
+            contact_email: "ab@bgeo.dk",
+            contact_phone: "(+45) 27 13 62 22",
+            company_address: "Klemstrupvej 5\n8550 Ryomgård\nDanmark",
+            cvr_number: "DK36358459"
+        };
+
+        let currentLanguage = 'da';
+
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Language switching
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`lang-${lang}`).classList.add('active');
+            
+            // Update all elements with language attributes
+            document.querySelectorAll('[data-da][data-en]').forEach(element => {
+                element.textContent = element.getAttribute(`data-${lang}`);
+            });
+            
+            // Update form placeholders
+            const messageTextarea = document.getElementById('message');
+            if (messageTextarea) {
+                messageTextarea.placeholder = lang === 'da' ? 'Beskriv dit projekt eller dine behov...' : 'Describe your project or needs...';
+            }
+            
+            // Update select options
+            const serviceSelect = document.getElementById('service');
+            if (serviceSelect) {
+                const options = serviceSelect.querySelectorAll('option');
+                options.forEach(option => {
+                    if (option.hasAttribute(`data-${lang}`)) {
+                        option.textContent = option.getAttribute(`data-${lang}`);
+                    }
+                });
+            }
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+        }
+
+        // Form submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submit-btn');
+            const successMessage = document.getElementById('success-message');
+            
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = currentLanguage === 'da' ? 
+                '<span>Sender...</span> <span>⏳</span>' : 
+                '<span>Sending...</span> <span>⏳</span>';
+            
+            // Simulate form submission
+            setTimeout(() => {
+                // Show success message
+                successMessage.classList.add('show');
+                
+                // Reset form
+                this.reset();
+                
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = currentLanguage === 'da' ? 
+                    '<span>Send Besked</span> <span>📤</span>' : 
+                    '<span>Send Message</span> <span>📤</span>';
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    successMessage.classList.remove('show');
+                }, 5000);
+                
+                // Scroll to top of form
+                document.querySelector('.contact-form-section').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            }, 2000);
+        });
+
+        // Element SDK implementation
+        async function onConfigChange(config) {
+            // Update page title
+            const pageTitle = document.getElementById('page-title');
+            if (pageTitle) {
+                pageTitle.textContent = config.page_title || defaultConfig.page_title;
+            }
+
+            // Update hero subtitle
+            const heroSubtitle = document.getElementById('hero-subtitle');
+            if (heroSubtitle) {
+                heroSubtitle.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+            }
+
+            // Update company name
+            const companyElements = document.querySelectorAll('#company-name, #company-name-display, #footer-company-name');
+            companyElements.forEach(el => {
+                el.textContent = config.company_name || defaultConfig.company_name;
+            });
+
+            // Update contact email
+            const emailElements = document.querySelectorAll('#contact-email-link, #footer-email');
+            emailElements.forEach(el => {
+                const email = config.contact_email || defaultConfig.contact_email;
+                el.textContent = email;
+                if (el.tagName === 'A') {
+                    el.href = `mailto:${email}`;
+                }
+            });
+
+            // Update contact phone
+            const phoneElements = document.querySelectorAll('#contact-phone-link, #footer-phone');
+            phoneElements.forEach(el => {
+                const phone = config.contact_phone || defaultConfig.contact_phone;
+                el.textContent = phone;
+                if (el.tagName === 'A') {
+                    el.href = `tel:${phone.replace(/[^\d+]/g, '')}`;
+                }
+            });
+
+            // Update company address
+            const addressElements = document.querySelectorAll('#company-address-display, #footer-address');
+            addressElements.forEach(el => {
+                const address = config.company_address || defaultConfig.company_address;
+                el.innerHTML = address.replace(/\n/g, '<br>');
+            });
+
+            // Update CVR number
+            const cvrElements = document.querySelectorAll('#cvr-number-display, #footer-cvr');
+            cvrElements.forEach(el => {
+                el.textContent = config.cvr_number || defaultConfig.cvr_number;
+            });
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Element SDK
+            if (window.elementSdk) {
+                window.elementSdk.init({
+                    defaultConfig: defaultConfig,
+                    onConfigChange: onConfigChange,
+                    mapToCapabilities: (config) => ({
+                        recolorables: [],
+                        borderables: [],
+                        fontEditable: undefined,
+                        fontSizeable: undefined
+                    }),
+                    mapToEditPanelValues: (config) => new Map([
+                        ["page_title", config.page_title || defaultConfig.page_title],
+                        ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+                        ["company_name", config.company_name || defaultConfig.company_name],
+                        ["contact_email", config.contact_email || defaultConfig.contact_email],
+                        ["contact_phone", config.contact_phone || defaultConfig.contact_phone],
+                        ["company_address", config.company_address || defaultConfig.company_address],
+                        ["cvr_number", config.cvr_number || defaultConfig.cvr_number]
+                    ])
+                });
+            }
+
+            // Mobile dropdown functionality
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(event) {
+                    if (window.innerWidth <= 768) {
+                        event.preventDefault();
+                        const dropdown = event.target.closest('.dropdown');
+                        const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+                        const arrow = dropdown.querySelector('.dropdown-arrow');
+                        
+                        dropdown.classList.toggle('mobile-active');
+                        arrow.style.transform = dropdown.classList.contains('mobile-active') ? 'rotate(180deg)' : 'rotate(0deg)';
+                    }
+                });
+            });
+
+            // Close dropdowns when window is resized to desktop
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    document.querySelectorAll('.dropdown').forEach(dropdown => {
+                        dropdown.classList.remove('mobile-active');
+                        const arrow = dropdown.querySelector('.dropdown-arrow');
+                        if (arrow) arrow.style.transform = 'rotate(0deg)';
+                    });
+                }
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('nav-menu');
+            const mobileToggle = document.querySelector('.mobile-toggle');
+            
+            if (!navMenu.contains(event.target) && !mobileToggle.contains(event.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e78f280665b195',t:'MTc2MzEzNDMyMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
