@@ -842,6 +842,232 @@
             scroll-behavior: smooth;
         }
 
+        /* Image Gallery */
+        .image-gallery {
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .image-gallery h2 {
+            color: #0d4f3c;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .gallery-subtitle {
+            color: #4b5563;
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            cursor: pointer;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(13, 79, 60, 0.1);
+            background: white;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(13, 79, 60, 0.15);
+            border-color: rgba(13, 79, 60, 0.3);
+        }
+
+        .image-placeholder {
+            height: 250px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(13, 79, 60, 0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .image-placeholder::before {
+            opacity: 1;
+        }
+
+        .placeholder-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover .placeholder-icon {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        .placeholder-text h4 {
+            color: #0d4f3c;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .placeholder-text p {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Image Modal */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .image-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 90%;
+            max-height: 90%;
+            width: 800px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            color: #6b7280;
+            cursor: pointer;
+            z-index: 2001;
+            background: rgba(255, 255, 255, 0.9);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+
+        .modal-image-container {
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .modal-placeholder {
+            height: 100%;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .modal-placeholder-icon {
+            font-size: 6rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+
+        .modal-placeholder-text h3 {
+            color: #0d4f3c;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .modal-placeholder-text p {
+            color: #4b5563;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 500px;
+        }
+
+        .modal-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: #f8f9fa;
+            border-top: 1px solid rgba(13, 79, 60, 0.1);
+        }
+
+        .modal-nav-btn {
+            background: #0d4f3c;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .modal-nav-btn:hover {
+            background: #1a5f4a;
+            transform: translateY(-2px);
+        }
+
+        .modal-nav-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .modal-counter {
+            color: #4b5563;
+            font-weight: 600;
+        }
+
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
@@ -1092,6 +1318,73 @@
       </div>
      </div>
     </div>
+   </div><!-- Image Gallery -->
+   <section class="image-gallery" data-aos="fade-up">
+    <h2 data-da="TTEM i Aktion" data-en="TTEM in Action">TTEM i Aktion</h2>
+    <p class="gallery-subtitle" data-da="Se vores TTEM udstyr og feltoperationer i forskellige miljøer - fra ørkenhede til polarkold." data-en="See our TTEM equipment and field operations in various environments - from desert heat to polar cold.">Se vores TTEM udstyr og feltoperationer i forskellige miljøer - fra ørkenhede til polarkold.</p>
+    <div class="gallery-grid">
+     <div class="gallery-item" onclick="openImageModal(0)">
+      <div class="image-placeholder">
+       <div class="placeholder-icon">
+        🚁
+       </div>
+       <div class="placeholder-text">
+        <h4 data-da="TTEM Helikopter Undersøgelse" data-en="TTEM Helicopter Survey">TTEM Helikopter Undersøgelse</h4>
+        <p data-da="Luftbåren TTEM over stort område" data-en="Airborne TTEM over large area">Luftbåren TTEM over stort område</p>
+       </div>
+      </div>
+     </div>
+     <div class="gallery-item" onclick="openImageModal(1)">
+      <div class="image-placeholder">
+       <div class="placeholder-icon">
+        🏍️
+       </div>
+       <div class="placeholder-text">
+        <h4 data-da="ATV TTEM Opsætning" data-en="ATV TTEM Setup">ATV TTEM Opsætning</h4>
+        <p data-da="Quad bike trækker TTEM udstyr" data-en="Quad bike towing TTEM equipment">Quad bike trækker TTEM udstyr</p>
+       </div>
+      </div>
+     </div>
+     <div class="gallery-item" onclick="openImageModal(2)">
+      <div class="image-placeholder">
+       <div class="placeholder-icon">
+        🛥️
+       </div>
+       <div class="placeholder-text">
+        <h4 data-da="FloaTEM på Vand" data-en="FloaTEM on Water">FloaTEM på Vand</h4>
+        <p data-da="Båd med FloaTEM system" data-en="Boat with FloaTEM system">Båd med FloaTEM system</p>
+       </div>
+      </div>
+     </div>
+     <div class="gallery-item" onclick="openImageModal(3)">
+      <div class="image-placeholder">
+       <div class="placeholder-icon">
+        📊
+       </div>
+       <div class="placeholder-text">
+        <h4 data-da="TEM Data Resultater" data-en="TEM Data Results">TEM Data Resultater</h4>
+        <p data-da="Ledningsevne profiler og tolkninger" data-en="Conductivity profiles and interpretations">Ledningsevne profiler og tolkninger</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Image Modal -->
+   <div id="imageModal" class="image-modal" onclick="closeImageModal()">
+    <div class="modal-content" onclick="event.stopPropagation()"><span class="modal-close" onclick="closeImageModal()">×</span>
+     <div class="modal-image-container">
+      <div class="modal-placeholder">
+       <div class="modal-placeholder-icon" id="modalIcon">
+        🚁
+       </div>
+       <div class="modal-placeholder-text">
+        <h3 id="modalTitle">TTEM Helikopter Undersøgelse</h3>
+        <p id="modalDescription">Luftbåren TTEM over stort område med høj opløsning og effektiv dækning.</p>
+       </div>
+      </div>
+     </div>
+     <div class="modal-nav"><button class="modal-nav-btn" onclick="previousImage()">‹ <span data-da="Forrige" data-en="Previous">Forrige</span></button> <span class="modal-counter"><span id="currentImage">1</span> / 4</span> <button class="modal-nav-btn" onclick="nextImage()"><span data-da="Næste" data-en="Next">Næste</span> ›</button>
+     </div>
+    </div>
    </div>
   </main><!-- Footer -->
   <footer class="footer">
@@ -1264,6 +1557,118 @@
             }, 1500);
         }
 
+        // Image Gallery Functions
+        let currentImageIndex = 0;
+        const galleryImages = [
+            {
+                icon: '🚁',
+                title: {
+                    da: 'TTEM Helikopter Undersøgelse',
+                    en: 'TTEM Helicopter Survey'
+                },
+                description: {
+                    da: 'Luftbåren TTEM over stort område med høj opløsning og effektiv dækning. Helikopteren giver mulighed for hurtig dataindsamling over utilgængelige områder.',
+                    en: 'Airborne TTEM over large area with high resolution and efficient coverage. Helicopter enables rapid data collection over inaccessible areas.'
+                }
+            },
+            {
+                icon: '🏍️',
+                title: {
+                    da: 'ATV TTEM Opsætning',
+                    en: 'ATV TTEM Setup'
+                },
+                description: {
+                    da: 'Quad bike trækker TTEM udstyr over terrænet for detaljeret kortlægning af subsurface-strukturer. Perfekt til mindre områder med høj opløsning.',
+                    en: 'Quad bike towing TTEM equipment across terrain for detailed subsurface structure mapping. Perfect for smaller areas with high resolution.'
+                }
+            },
+            {
+                icon: '🛥️',
+                title: {
+                    da: 'FloaTEM på Vand',
+                    en: 'FloaTEM on Water'
+                },
+                description: {
+                    da: 'Båd med FloaTEM system til marine undersøgelser. Ideelt til kortlægning af havbundsgeologi og saltvandsindtrængning i kystområder.',
+                    en: 'Boat with FloaTEM system for marine surveys. Ideal for mapping seabed geology and saltwater intrusion in coastal areas.'
+                }
+            },
+            {
+                icon: '📊',
+                title: {
+                    da: 'TEM Data Resultater',
+                    en: 'TEM Data Results'
+                },
+                description: {
+                    da: 'Ledningsevne profiler og tolkninger fra TEM data. Avanceret databehandling giver detaljerede geologiske modeller og strukturelle tolkninger.',
+                    en: 'Conductivity profiles and interpretations from TEM data. Advanced data processing provides detailed geological models and structural interpretations.'
+                }
+            }
+        ];
+
+        function openImageModal(index) {
+            currentImageIndex = index;
+            const modal = document.getElementById('imageModal');
+            const modalIcon = document.getElementById('modalIcon');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            const currentImageSpan = document.getElementById('currentImage');
+            
+            const image = galleryImages[index];
+            
+            modalIcon.textContent = image.icon;
+            modalTitle.textContent = image.title[currentLanguage];
+            modalDescription.textContent = image.description[currentLanguage];
+            currentImageSpan.textContent = index + 1;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+            updateModalContent();
+        }
+
+        function previousImage() {
+            currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+            updateModalContent();
+        }
+
+        function updateModalContent() {
+            const modalIcon = document.getElementById('modalIcon');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            const currentImageSpan = document.getElementById('currentImage');
+            
+            const image = galleryImages[currentImageIndex];
+            
+            modalIcon.textContent = image.icon;
+            modalTitle.textContent = image.title[currentLanguage];
+            modalDescription.textContent = image.description[currentLanguage];
+            currentImageSpan.textContent = currentImageIndex + 1;
+        }
+
+        // Keyboard navigation for modal
+        document.addEventListener('keydown', function(event) {
+            const modal = document.getElementById('imageModal');
+            if (modal.classList.contains('active')) {
+                if (event.key === 'Escape') {
+                    closeImageModal();
+                } else if (event.key === 'ArrowRight') {
+                    nextImage();
+                } else if (event.key === 'ArrowLeft') {
+                    previousImage();
+                }
+            }
+        });
+
         // Initialize everything
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize Element SDK
@@ -1326,5 +1731,5 @@
             }
         });
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e67a6e118213ad',t:'MTc2MzEyMjk4Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e68c9a65beb195',t:'MTc2MzEyMzczMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
