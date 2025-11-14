@@ -1,0 +1,1260 @@
+<!doctype html>
+<html lang="da">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DC/IP Undersøgelser - Bargheer Geophysics</title>
+  <meta name="description" content="Professionelle DC/IP undersøgelser med state-of-the-art udstyr og proprietær software. Bidragyder til GERDA database og specialister i hydraulisk ledningsevne.">
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Language Toggle */
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 5px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(13, 79, 60, 0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: #0d4f3c;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .lang-btn.active {
+            background: #0d4f3c;
+            color: white;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(13, 79, 60, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0d4f3c;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: "⚡";
+            font-size: 1.5rem;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 5px #0d4f3c; }
+            to { text-shadow: 0 0 20px #0d4f3c, 0 0 30px #0d4f3c; }
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: #1a1a1a;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(13, 79, 60, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(13, 79, 60, 0.1);
+            color: #0d4f3c;
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Navigation */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #0d4f3c;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-toggle:hover {
+            background: rgba(13, 79, 60, 0.1);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 1rem 2rem;
+            margin-top: 80px;
+            border-bottom: 1px solid rgba(13, 79, 60, 0.1);
+        }
+
+        .breadcrumb-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .breadcrumb a {
+            color: #0d4f3c;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: #1a5f4a;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f8f9fa 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(13,79,60,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d4f3c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #4b5563;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-icon {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            display: block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Method Overview */
+        .method-overview {
+            padding: 6rem 2rem;
+            background: #ffffff;
+        }
+
+        .overview-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0d4f3c;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 4rem;
+            text-align: center;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .overview-card {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 2px solid rgba(13, 79, 60, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .overview-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(13, 79, 60, 0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .overview-card:hover::before {
+            opacity: 1;
+        }
+
+        .overview-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(13, 79, 60, 0.15);
+            border-color: rgba(13, 79, 60, 0.3);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .overview-card h3 {
+            color: #0d4f3c;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .overview-card p {
+            color: #4b5563;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .overview-card ul {
+            color: #4b5563;
+            padding-left: 1.5rem;
+        }
+
+        .overview-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* GERDA Link Styling */
+        .gerda-link {
+            color: #0d4f3c;
+            font-weight: 700;
+            text-decoration: none;
+            border-bottom: 2px solid #0d4f3c;
+            transition: all 0.3s ease;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        .gerda-link:hover {
+            background: #0d4f3c;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .gerda-highlight {
+            border: 2px solid rgba(13, 79, 60, 0.3);
+            background: linear-gradient(135deg, rgba(13, 79, 60, 0.05) 0%, #f8f9fa 100%);
+        }
+
+        .efficiency-highlight {
+            border: 2px solid rgba(13, 79, 60, 0.4);
+            background: linear-gradient(135deg, rgba(13, 79, 60, 0.08) 0%, #f8f9fa 100%);
+        }
+
+        .hydraulic-highlight {
+            border: 2px solid rgba(13, 79, 60, 0.5);
+            background: linear-gradient(135deg, rgba(13, 79, 60, 0.1) 0%, rgba(13, 79, 60, 0.05) 100%);
+        }
+
+        /* Technical Specifications */
+        .tech-specs {
+            padding: 6rem 2rem;
+            background: #f8f9fa;
+        }
+
+        .specs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .spec-card {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(13, 79, 60, 0.1);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .spec-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(13, 79, 60, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .spec-card h4 {
+            color: #0d4f3c;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .spec-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .spec-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(13, 79, 60, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .spec-list li:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+
+        .spec-value {
+            color: #0d4f3c;
+            font-weight: 600;
+        }
+
+        /* Applications Section */
+        .applications {
+            padding: 6rem 2rem;
+            background: #ffffff;
+        }
+
+        .applications-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .applications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .application-card {
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .application-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .application-card:hover::before {
+            opacity: 1;
+        }
+
+        .application-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(13, 79, 60, 0.3);
+        }
+
+        .application-card h4 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .application-card p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+
+        .app-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        /* Process Section */
+        .process-section {
+            padding: 6rem 2rem;
+            background: #f8f9fa;
+        }
+
+        .process-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .process-timeline {
+            position: relative;
+            margin-top: 4rem;
+        }
+
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
+            transform: translateX(-50%);
+        }
+
+        .process-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .process-step:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .process-step:nth-child(even) .step-content {
+            text-align: right;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            box-shadow: 0 4px 15px rgba(13, 79, 60, 0.3);
+        }
+
+        .step-content {
+            flex: 1;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 0 3rem;
+            border: 1px solid rgba(13, 79, 60, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .step-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-content h4 {
+            color: #0d4f3c;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-content p {
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: #0d4f3c;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-button.secondary:hover {
+            background: white;
+            color: #0d4f3c;
+        }
+
+        /* Related Services */
+        .related-services {
+            padding: 6rem 2rem;
+            background: #ffffff;
+        }
+
+        .related-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .related-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(13, 79, 60, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .related-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(13, 79, 60, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .related-card h4 {
+            color: #0d4f3c;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .related-card p {
+            color: #4b5563;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .related-link {
+            color: #0d4f3c;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .related-link:hover {
+            gap: 12px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: #e5e7eb;
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid rgba(13, 79, 60, 0.2);
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h4 {
+            color: #0d4f3c;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #9ca3af;
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #0d4f3c;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(13, 79, 60, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0d4f3c;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: #0d4f3c;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(13, 79, 60, 0.1);
+            color: #6b7280;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                padding: 2rem;
+                gap: 0;
+                border-top: 1px solid rgba(13, 79, 60, 0.1);
+                backdrop-filter: blur(20px);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .language-toggle {
+                top: 80px;
+                right: 10px;
+            }
+
+            .process-timeline::before {
+                left: 30px;
+            }
+
+            .process-step {
+                flex-direction: row !important;
+                padding-left: 4rem;
+            }
+
+            .process-step:nth-child(even) .step-content {
+                text-align: left;
+            }
+
+            .step-number {
+                left: 30px;
+                transform: translateX(-50%);
+            }
+
+            .step-content {
+                margin: 0 0 0 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f8f9fa;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #1a5f4a 0%, #0d4f3c 100%);
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body><!-- Language Toggle -->
+  <div class="language-toggle"><button class="lang-btn active" onclick="setLanguage('da')" id="lang-da">DA</button> <button class="lang-btn" onclick="setLanguage('en')" id="lang-en">EN</button>
+  </div><!-- Navigation -->
+  <nav class="navbar" id="navbar">
+   <div class="nav-container"><a href="index.html" class="logo" id="company-name">Bargheer Geophysics</a> <button class="mobile-toggle" onclick="toggleMobileMenu()">☰</button>
+    <ul class="nav-menu" id="nav-menu">
+     <li class="nav-item"><a href="index.html" class="nav-link" data-da="Hjem" data-en="Home">Hjem</a></li>
+     <li class="nav-item"><a href="about.html" class="nav-link" data-da="Om Os" data-en="About">Om Os</a></li>
+     <li class="nav-item"><a href="surveys.html" class="nav-link active" data-da="Geofysiske Undersøgelser" data-en="Geophysical Surveys">Geofysiske Undersøgelser</a></li>
+     <li class="nav-item"><a href="software.html" class="nav-link" data-da="Geofysik Software" data-en="Geophysics Software">Geofysik Software</a></li>
+     <li class="nav-item"><a href="contact.html" class="nav-link" data-da="Kontakt" data-en="Contact">Kontakt</a></li>
+    </ul>
+   </div>
+  </nav><!-- Breadcrumb -->
+  <div class="breadcrumb">
+   <div class="breadcrumb-container"><a href="index.html" data-da="Hjem" data-en="Home">Hjem</a> <span>›</span> <a href="surveys.html" data-da="Geofysiske Undersøgelser" data-en="Geophysical Surveys">Geofysiske Undersøgelser</a> <span>›</span> <span data-da="DC/IP Undersøgelser" data-en="DC/IP Surveys">DC/IP Undersøgelser</span>
+   </div>
+  </div><!-- Main Content -->
+  <main><!-- Hero Section -->
+   <section class="hero">
+    <div class="hero-content" data-aos="fade-up" data-aos-duration="1000"><span class="hero-icon">⚡</span>
+     <h1 id="hero-title" data-da="DC/IP Undersøgelser" data-en="DC/IP Surveys">DC/IP Undersøgelser</h1>
+     <p id="hero-subtitle" data-da="Avancerede elektriske resistivitets- og induceret polarisationsundersøgelser med state-of-the-art udstyr og proprietær software" data-en="Advanced electrical resistivity and induced polarization surveys with state-of-the-art equipment and proprietary software">Avancerede elektriske resistivitets- og induceret polarisationsundersøgelser med state-of-the-art udstyr og proprietær software</p>
+    </div>
+   </section><!-- DC Measurements -->
+   <section class="method-overview">
+    <div class="overview-container">
+     <h2 class="section-title" data-aos="fade-up" data-da="DC Målinger" data-en="DC Measurements">DC Målinger</h2>
+     <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100" data-da="En bredt anvendt teknik med mange navne - alle baseret på den samme grundlæggende metode" data-en="A widely used technique with many names - all based on the same fundamental method">En bredt anvendt teknik med mange navne - alle baseret på den samme grundlæggende metode</p>
+     <div class="overview-grid">
+      <div class="overview-card" data-aos="fade-up" data-aos-delay="100"><span class="card-icon">📊</span>
+       <h3 data-da="Metode Navne" data-en="Method Names">Metode Navne</h3>
+       <p data-da="DC målinger har en lang liste af navne, hvoraf nogle er:" data-en="DC measurements have a long list of names, some of which are:">DC målinger har en lang liste af navne, hvoraf nogle er:</p>
+       <ul>
+        <li><strong>CVES</strong> - Continued Vertical Electrical Sounding</li>
+        <li><strong>ERT</strong> - Electrical Resistivity Tomography</li>
+        <li><strong>MEP</strong> - Multi Electrode Profiling</li>
+       </ul>
+       <p data-da="Alle er den samme grundlæggende metode med elektroder (normalt metalstænger presset ned i jorden), der udsender strøm og måler potentialeforskel." data-en="All are the same basic method using electrodes (usually metal stakes pushed into the ground), emitting current and measuring potential difference.">Alle er den samme grundlæggende metode med elektroder (normalt metalstænger presset ned i jorden), der udsender strøm og måler potentialeforskel.</p>
+      </div>
+      <div class="overview-card" data-aos="fade-up" data-aos-delay="200"><span class="card-icon">🗺️</span>
+       <h3 data-da="Resistivitetskortlægning" data-en="Resistivity Mapping">Resistivitetskortlægning</h3>
+       <p data-da="Med disse målinger er det muligt at kortlægge jordens elektriske resistivitet - en parameter der kan bruges til geologisk tolkning af undergrunden." data-en="With these measurements it is possible to map the electric resistivity of the ground, a parameter that can be used to make geological interpretation of the underground.">Med disse målinger er det muligt at kortlægge jordens elektriske resistivitet - en parameter der kan bruges til geologisk tolkning af undergrunden.</p>
+       <ul>
+        <li data-da="State-of-the-art DC målinger" data-en="State-of-the-art DC measurements">State-of-the-art DC målinger</li>
+        <li data-da="2D og/eller 3D opsætninger" data-en="2D and/or 3D setups">2D og/eller 3D opsætninger</li>
+        <li data-da="Nyeste metoder og software" data-en="Newest methods and software">Nyeste metoder og software</li>
+        <li data-da="Sofistikeret in-house software" data-en="Sophisticated in-house software">Sofistikeret in-house software</li>
+       </ul>
+      </div>
+      <div class="overview-card gerda-highlight" data-aos="fade-up" data-aos-delay="300"><span class="card-icon">🏆</span>
+       <h3 data-da="GERDA Database Bidrag" data-en="GERDA Database Contribution">GERDA Database Bidrag</h3>
+       <p data-da="Vi har været involveret (helt eller delvist) i indsamlingen af cirka en tredjedel af MEP-dataene i den open source nationale geofysiske database, " data-en="We have been involved (in whole or part) in the collection of approximately a third of the MEP data in the open source national geophysics database, ">Vi har været involveret (helt eller delvist) i indsamlingen af cirka en tredjedel af MEP-dataene i den open source nationale geofysiske database, <a href="https://www.geus.dk/produkter-ydelser-og-faciliteter/data-og-kort/national-geofysisk-database-gerda/" target="_blank" rel="noopener noreferrer" class="gerda-link">GERDA</a>.</p>
+       <ul>
+        <li data-da="⅓ af alle MEP data i Danmark" data-en="⅓ of all MEP data in Denmark">⅓ af alle MEP data i Danmark</li>
+        <li data-da="Nationalt anerkendt ekspertise" data-en="Nationally recognized expertise">Nationalt anerkendt ekspertise</li>
+        <li data-da="Open source databidrag" data-en="Open source data contribution">Open source databidrag</li>
+       </ul>
+      </div>
+     </div>
+    </div>
+   </section><!-- IP Data -->
+   <section class="tech-specs">
+    <div class="specs-container">
+     <h2 class="section-title" data-aos="fade-up" data-da="IP Data" data-en="IP Data">IP Data</h2>
+     <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100" data-da="Bargheer Geophysics specialiserer sig i IP data - en avanceret teknik der giver fuld beskrivelse af jordens elektriske egenskaber" data-en="Bargheer Geophysics specializes in IP data - an advanced technique that provides full description of the ground's electrical properties">Bargheer Geophysics specialiserer sig i IP data - en avanceret teknik der giver fuld beskrivelse af jordens elektriske egenskaber</p>
+     <div class="specs-grid">
+      <div class="spec-card" data-aos="zoom-in" data-aos-delay="100">
+       <h4><span>⚡</span> <span data-da="Begrænsninger ved kun DC" data-en="Limitations of DC Only">Begrænsninger ved kun DC</span></h4>
+       <p data-da="Med DC målinger måles kun resistiviteten af jorden, men flere parametre er nødvendige for at give en fuld beskrivelse af undergrundens elektriske egenskaber." data-en="With DC measurements only the resistivity of the ground is measured, but more parameters are needed to give a full description of the electrical properties of the subsoil.">Med DC målinger måles kun resistiviteten af jorden, men flere parametre er nødvendige for at give en fuld beskrivelse af undergrundens elektriske egenskaber.</p>
+       <ul class="spec-list">
+        <li><span class="spec-label" data-da="DC alene" data-en="DC alone">DC alene</span> <span class="spec-value" data-da="Kun resistivitet" data-en="Resistivity only">Kun resistivitet</span></li>
+        <li><span class="spec-label" data-da="DC + IP" data-en="DC + IP">DC + IP</span> <span class="spec-value" data-da="Fuld beskrivelse" data-en="Full description">Fuld beskrivelse</span></li>
+       </ul>
+      </div>
+      <div class="spec-card efficiency-highlight" data-aos="zoom-in" data-aos-delay="200">
+       <h4><span>🚀</span> <span data-da="100% Duty Cycle Effektivitet" data-en="100% Duty Cycle Efficiency">100% Duty Cycle Effektivitet</span></h4>
+       <p data-da="Det er muligt at udtrække IP data ved hjælp af 100% duty cycle med moderne instrumenter, der optager full waveform data. Dette gør dataindsamling af IP data meget effektiv i felten." data-en="It is possible to extract IP data using 100% duty cycle using modern instruments, recording full waveform data, this makes data collection of IP data very efficient in the field.">Det er muligt at udtrække IP data ved hjælp af 100% duty cycle med moderne instrumenter, der optager full waveform data. Dette gør dataindsamling af IP data meget effektiv i felten.</p>
+       <ul class="spec-list">
+        <li><span class="spec-label" data-da="Duty cycle" data-en="Duty cycle">Duty cycle</span> <span class="spec-value">100%</span></li>
+        <li><span class="spec-label" data-da="Data type" data-en="Data type">Data type</span> <span class="spec-value">Full waveform</span></li>
+        <li><span class="spec-label" data-da="Felteffektivitet" data-en="Field efficiency">Felteffektivitet</span> <span class="spec-value" data-da="Meget høj" data-en="Very high">Meget høj</span></li>
+       </ul>
+      </div>
+      <div class="spec-card" data-aos="zoom-in" data-aos-delay="300">
+       <h4><span>🎯</span> <span data-da="Forbedret Inversion" data-en="Enhanced Inversion">Forbedret Inversion</span></h4>
+       <p data-da="Ved at inkludere IP data i inversionsrutinerne forbedres opløsningen af resistivitetsstrukturer. De ekstra parametre giver sammen med resistiviteten en fuld beskrivelse af undergrundens elektriske egenskaber og muliggør forbedret geologisk tolkning." data-en="Including the IP data in the inversion routines improves the resolution of resistivity structures, plus the extra parameters, together with the resistivity, give a full description electrical properties of the subsoil allow us to make an improved geological interpretation.">Ved at inkludere IP data i inversionsrutinerne forbedres opløsningen af resistivitetsstrukturer. De ekstra parametre giver sammen med resistiviteten en fuld beskrivelse af undergrundens elektriske egenskaber og muliggør forbedret geologisk tolkning.</p>
+       <ul class="spec-list">
+        <li><span class="spec-label" data-da="Opløsning" data-en="Resolution">Opløsning</span> <span class="spec-value" data-da="Forbedret" data-en="Enhanced">Forbedret</span></li>
+        <li><span class="spec-label" data-da="Tolkning" data-en="Interpretation">Tolkning</span> <span class="spec-value" data-da="Forbedret geologisk" data-en="Enhanced geological">Forbedret geologisk</span></li>
+       </ul>
+      </div>
+     </div>
+    </div>
+   </section><!-- What DCIP Can Do -->
+   <section class="applications">
+    <div class="applications-container">
+     <h2 class="section-title" data-aos="fade-up" data-da="Hvad DC/IP Kan Gøre" data-en="What DCIP Can Do">Hvad DC/IP Kan Gøre</h2>
+     <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100" data-da="DC/IP data er blandt andet stærkt forbundet med strukturen af porerum i et medium og korrelerer for sedimentære miljøer med kornstørrelsesfordelinger" data-en="DCIP data is among other things highly linked to the structure of pore space in a medium and for a sedimentary environment this correlates with grain size distributions">DC/IP data er blandt andet stærkt forbundet med strukturen af porerum i et medium og korrelerer for sedimentære miljøer med kornstørrelsesfordelinger</p>
+     <div class="applications-grid">
+      <div class="application-card hydraulic-highlight" data-aos="zoom-in" data-aos-delay="100"><span class="app-icon">💧</span>
+       <h4 data-da="Hydraulisk Ledningsevne" data-en="Hydraulic Conductivity">Hydraulisk Ledningsevne</h4>
+       <p data-da="Bargheer Geophysics bruger DC/IP data til direkte at måle den hydrauliske ledningsevne - en parameter der ellers er svær at måle selv med boringer. At kende den hydrauliske ledningsevne gør det muligt at lave stærkt forbedrede hydrauliske modeller." data-en="Bargheer Geophysics use DCIP data to directly measure the hydraulic conductivity which is a parameter that is otherwise difficult to measure even with drillholes. Knowing the hydraulic conductivity allows for making highly improved hydraulics models.">Bargheer Geophysics bruger DC/IP data til direkte at måle den hydrauliske ledningsevne - en parameter der ellers er svær at måle selv med boringer. At kende den hydrauliske ledningsevne gør det muligt at lave stærkt forbedrede hydrauliske modeller.</p>
+      </div>
+      <div class="application-card" data-aos="zoom-in" data-aos-delay="200"><span class="app-icon">🏔️</span>
+       <h4 data-da="Grusaflejringer" data-en="Gravel Deposits">Grusaflejringer</h4>
+       <p data-da="Karakterisering af værdien af grusaflejringer meget præcist gennem detaljeret analyse af kornstørrelsesfordelinger og porøsitet." data-en="Characterizing value of gravel deposits very accurately through detailed analysis of grain size distributions and porosity.">Karakterisering af værdien af grusaflejringer meget præcist gennem detaljeret analyse af kornstørrelsesfordelinger og porøsitet.</p>
+      </div>
+      <div class="application-card" data-aos="zoom-in" data-aos-delay="300"><span class="app-icon">⛏️</span>
+       <h4 data-da="Mineralmål Modellering" data-en="Mineral Target Modeling">Mineralmål Modellering</h4>
+       <p data-da="Præcis modellering af mineralmål til fremtidig minedrift gennem avanceret IP-analyse og geologisk tolkning." data-en="Accurately modelling mineral targets for future mining through advanced IP analysis and geological interpretation.">Præcis modellering af mineralmål til fremtidig minedrift gennem avanceret IP-analyse og geologisk tolkning.</p>
+      </div>
+      <div class="application-card" data-aos="zoom-in" data-aos-delay="400"><span class="app-icon">🔍</span>
+       <h4 data-da="Geologisk Skelnen" data-en="Geological Distinction">Geologisk Skelnen</h4>
+       <p data-da="Skelnen mellem forskellige typer geologi, som ellers er umuligt at skelne med anden geofysik, gennem kombineret resistivitets- og IP-analyse." data-en="Distinguishing different types of geology, that otherwise is impossible to distinguish with other geophysics, through combined resistivity and IP analysis.">Skelnen mellem forskellige typer geologi, som ellers er umuligt at skelne med anden geofysik, gennem kombineret resistivitets- og IP-analyse.</p>
+      </div>
+      <div class="application-card" data-aos="zoom-in" data-aos-delay="500"><span class="app-icon">🌍</span>
+       <h4 data-da="Forureningskortlægning" data-en="Contamination Mapping">Forureningskortlægning</h4>
+       <p data-da="Præcis kortlægning af forureningsfaner og andre stoffer i undergrunden gennem detaljeret resistivitets- og IP-analyse." data-en="Accurately mapping contamination fans and other substances in the subsoil through detailed resistivity and IP analysis.">Præcis kortlægning af forureningsfaner og andre stoffer i undergrunden gennem detaljeret resistivitets- og IP-analyse.</p>
+      </div>
+      <div class="application-card" data-aos="zoom-in" data-aos-delay="600"><span class="app-icon">📊</span>
+       <h4 data-da="Avanceret Modellering" data-en="Advanced Modeling">Avanceret Modellering</h4>
+       <p data-da="State-of-the-art geofysisk modellering med de nyeste metoder og software, inklusive sofistikeret in-house software til specialiserede applikationer." data-en="State-of-the-art geophysical modeling with the newest methods and software, including sophisticated in-house software for specialized applications.">State-of-the-art geofysisk modellering med de nyeste metoder og software, inklusive sofistikeret in-house software til specialiserede applikationer.</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Process Section -->
+   <section class="process-section">
+    <div class="process-container">
+     <h2 class="section-title" data-aos="fade-up" data-da="Vores DC/IP Proces" data-en="Our DC/IP Process">Vores DC/IP Proces</h2>
+     <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100" data-da="Fra planlægning til levering - en systematisk tilgang til DC/IP undersøgelser" data-en="From planning to delivery - a systematic approach to DC/IP surveys">Fra planlægning til levering - en systematisk tilgang til DC/IP undersøgelser</p>
+     <div class="process-timeline">
+      <div class="process-step" data-aos="fade-right" data-aos-delay="100">
+       <div class="step-number">
+        1
+       </div>
+       <div class="step-content">
+        <h4 data-da="Projektplanlægning" data-en="Project Planning">Projektplanlægning</h4>
+        <p data-da="Detaljeret planlægning af undersøgelsen baseret på geologiske mål, terrænforhold og projektspecifikationer. Vi vælger optimal elektrodekonfiguration og måledesign for både DC og IP data." data-en="Detailed survey planning based on geological objectives, terrain conditions, and project specifications. We select optimal electrode configuration and measurement design for both DC and IP data.">Detaljeret planlægning af undersøgelsen baseret på geologiske mål, terrænforhold og projektspecifikationer. Vi vælger optimal elektrodekonfiguration og måledesign for både DC og IP data.</p>
+       </div>
+      </div>
+      <div class="process-step" data-aos="fade-left" data-aos-delay="200">
+       <div class="step-number">
+        2
+       </div>
+       <div class="step-content">
+        <h4 data-da="Feltarbejde" data-en="Field Work">Feltarbejde</h4>
+        <p data-da="Professionel dataindsamling med state-of-the-art DC/IP udstyr. 100% duty cycle og full waveform data optagelse for maksimal effektivitet og datakvalitet i felten." data-en="Professional data acquisition with state-of-the-art DC/IP equipment. 100% duty cycle and full waveform data recording for maximum efficiency and data quality in the field.">Professionel dataindsamling med state-of-the-art DC/IP udstyr. 100% duty cycle og full waveform data optagelse for maksimal effektivitet og datakvalitet i felten.</p>
+       </div>
+      </div>
+      <div class="process-step" data-aos="fade-right" data-aos-delay="300">
+       <div class="step-number">
+        3
+       </div>
+       <div class="step-content">
+        <h4 data-da="Databehandling &amp; Modellering" data-en="Data Processing &amp; Modeling">Databehandling &amp; Modellering</h4>
+        <p data-da="Avanceret databehandling med de nyeste metoder og software, inklusive sofistikeret in-house software. Geofysisk modellering der inkluderer IP data for forbedret opløsning og geologisk tolkning." data-en="Advanced data processing with the newest methods and software, including sophisticated in-house software. Geophysical modeling that includes IP data for enhanced resolution and geological interpretation.">Avanceret databehandling med de nyeste metoder og software, inklusive sofistikeret in-house software. Geofysisk modellering der inkluderer IP data for forbedret opløsning og geologisk tolkning.</p>
+       </div>
+      </div>
+      <div class="process-step" data-aos="fade-left" data-aos-delay="400">
+       <div class="step-number">
+        4
+       </div>
+       <div class="step-content">
+        <h4 data-da="Specialiseret Tolkning &amp; Rapportering" data-en="Specialized Interpretation &amp; Reporting">Specialiseret Tolkning &amp; Rapportering</h4>
+        <p data-da="Geologisk tolkning med fokus på hydraulisk ledningsevne, kornstørrelsesfordelinger og andre specialiserede parametre. Omfattende rapport med anbefalinger og integration med eksisterende data." data-en="Geological interpretation focusing on hydraulic conductivity, grain size distributions, and other specialized parameters. Comprehensive report with recommendations and integration with existing data.">Geologisk tolkning med fokus på hydraulisk ledningsevne, kornstørrelsesfordelinger og andre specialiserede parametre. Omfattende rapport med anbefalinger og integration med eksisterende data.</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- CTA Section -->
+   <section class="cta-section">
+    <div class="cta-container" data-aos="fade-up">
+     <h2 data-da="Klar til at starte dit DC/IP projekt?" data-en="Ready to start your DC/IP project?">Klar til at starte dit DC/IP projekt?</h2>
+     <p data-da="Kontakt os i dag for en gratis konsultation og tilbud på dine DC/IP undersøgelsesbehov. Få adgang til vores specialiserede ekspertise og avancerede metoder." data-en="Contact us today for a free consultation and quote for your DC/IP survey requirements. Get access to our specialized expertise and advanced methods.">Kontakt os i dag for en gratis konsultation og tilbud på dine DC/IP undersøgelsesbehov. Få adgang til vores specialiserede ekspertise og avancerede metoder.</p>
+     <div class="cta-buttons"><a href="contact.html" class="cta-button" data-da="Få et Tilbud" data-en="Get a Quote"> <span>Få et Tilbud</span> <span>→</span> </a> <a href="tel:+4527136222" class="cta-button secondary" data-da="Ring Nu" data-en="Call Now"> <span>Ring Nu</span> <span>📞</span> </a>
+     </div>
+    </div>
+   </section><!-- Related Services -->
+   <section class="related-services">
+    <div class="related-container">
+     <h2 class="section-title" data-aos="fade-up" data-da="Relaterede Tjenester" data-en="Related Services">Relaterede Tjenester</h2>
+     <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100" data-da="Udforsk vores andre geofysiske undersøgelsesmetoder" data-en="Explore our other geophysical survey methods">Udforsk vores andre geofysiske undersøgelsesmetoder</p>
+     <div class="related-grid">
+      <div class="related-card" data-aos="zoom-in" data-aos-delay="100"><span class="card-icon">📡</span>
+       <h4 data-da="TEM Undersøgelser" data-en="TEM Surveys">TEM Undersøgelser</h4>
+       <p data-da="Tidsdomæne elektromagnetiske undersøgelser til dyb subsurface-udforskning og ledningsevnekortlægning." data-en="Time-domain electromagnetic surveys for deep subsurface exploration and conductivity mapping.">Tidsdomæne elektromagnetiske undersøgelser til dyb subsurface-udforskning og ledningsevnekortlægning.</p><a href="tem.html" class="related-link" data-da="Læs Mere" data-en="Learn More">Læs Mere →</a>
+      </div>
+      <div class="related-card" data-aos="zoom-in" data-aos-delay="200"><span class="card-icon">💧</span>
+       <h4 data-da="MRS Undersøgelser" data-en="MRS Surveys">MRS Undersøgelser</h4>
+       <p data-da="Magnetisk resonanssondring til direkte grundvandsdetektion og karakterisering." data-en="Magnetic Resonance Sounding for direct groundwater detection and characterization.">Magnetisk resonanssondring til direkte grundvandsdetektion og karakterisering.</p><a href="mrs.html" class="related-link" data-da="Læs Mere" data-en="Learn More">Læs Mere →</a>
+      </div>
+      <div class="related-card" data-aos="zoom-in" data-aos-delay="300"><span class="card-icon">🌊</span>
+       <h4 data-da="Seismiske Undersøgelser" data-en="Seismic Surveys">Seismiske Undersøgelser</h4>
+       <p data-da="Refleksions- og refraktionsseismologi til strukturel geologi og ingeniørapplikationer." data-en="Reflection and refraction seismology for structural geology and engineering applications.">Refleksions- og refraktionsseismologi til strukturel geologi og ingeniørapplikationer.</p><a href="seismics.html" class="related-link" data-da="Læs Mere" data-en="Learn More">Læs Mere →</a>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main><!-- Footer -->
+  <footer class="footer">
+   <div class="footer-container">
+    <div class="footer-section">
+     <h4 data-da="Kontakt Information" data-en="Contact Information">Kontakt Information</h4>
+     <p><strong data-da="Telefon" data-en="Phone">Telefon:</strong> <span id="contact-phone">(+45) 27 13 62 22</span></p>
+     <p><strong data-da="Email" data-en="Email">Email:</strong> <span id="contact-email">ab@bgeo.dk</span></p>
+     <p><strong data-da="Adresse" data-en="Address">Adresse:</strong><br>
+      Klemstrupvej 5<br>
+      8550 Ryomgård<br>
+      Danmark</p><a href="https://maps.app.goo.gl/W54qM8MDPJqyr2Xw8?g_st=awb" target="_blank" rel="noopener noreferrer" data-da="Se på kort" data-en="View on map">Se på kort →</a>
+    </div>
+    <div class="footer-section">
+     <h4 data-da="Tjenester" data-en="Services">Tjenester</h4>
+     <p><a href="dcip.html" data-da="DC/IP Undersøgelser" data-en="DC/IP Surveys">DC/IP Undersøgelser</a></p>
+     <p><a href="tem.html" data-da="TEM Undersøgelser" data-en="TEM Surveys">TEM Undersøgelser</a></p>
+     <p><a href="seismics.html" data-da="Seismiske Undersøgelser" data-en="Seismic Surveys">Seismiske Undersøgelser</a></p>
+     <p><a href="gravimetrics.html" data-da="Gravimetriske Undersøgelser" data-en="Gravimetric Surveys">Gravimetriske Undersøgelser</a></p>
+    </div>
+    <div class="footer-section">
+     <h4 data-da="Virksomhed" data-en="Company">Virksomhed</h4>
+     <p><a href="about.html" data-da="Om Os" data-en="About Us">Om Os</a></p>
+     <p><a href="software.html" data-da="Software" data-en="Software">Software</a></p>
+     <p><a href="contact.html" data-da="Kontakt" data-en="Contact">Kontakt</a></p>
+    </div>
+    <div class="footer-section">
+     <h4 data-da="Følg Os" data-en="Follow Us">Følg Os</h4>
+     <div class="social-links"><a href="https://www.instagram.com/arne_bargheer?igsh=MW0wcmc2dWZudDhhNQ==" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram">📷</a> <a href="mailto:ab@bgeo.dk" class="social-link" title="Email">✉️</a> <a href="tel:+4527136222" class="social-link" title="Telefon">📞</a>
+     </div>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>© 2024 <span id="footer-company">Bargheer Geophysics</span>. <span data-da="Alle rettigheder forbeholdes" data-en="All rights reserved">Alle rettigheder forbeholdes</span>.</p>
+   </div>
+  </footer><!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+        // Configuration
+        const defaultConfig = {
+            company_name: "Bargheer Geophysics",
+            hero_title_da: "DC/IP Undersøgelser",
+            hero_title_en: "DC/IP Surveys",
+            hero_subtitle_da: "Avancerede elektriske resistivitets- og induceret polarisationsundersøgelser med state-of-the-art udstyr og proprietær software",
+            hero_subtitle_en: "Advanced electrical resistivity and induced polarization surveys with state-of-the-art equipment and proprietary software",
+            contact_email: "ab@bgeo.dk",
+            contact_phone: "(+45) 27 13 62 22"
+        };
+
+        let currentLanguage = 'da';
+
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Language switching
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`lang-${lang}`).classList.add('active');
+            
+            // Update all elements with language attributes
+            document.querySelectorAll('[data-da][data-en]').forEach(element => {
+                element.textContent = element.getAttribute(`data-${lang}`);
+            });
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+        }
+
+        // Element SDK implementation
+        async function onConfigChange(config) {
+            // Update company name
+            const companyElements = document.querySelectorAll('#company-name, #footer-company');
+            companyElements.forEach(el => {
+                el.textContent = config.company_name || defaultConfig.company_name;
+            });
+
+            // Update hero content based on current language
+            const heroTitle = document.getElementById('hero-title');
+            const heroSubtitle = document.getElementById('hero-subtitle');
+            
+            if (heroTitle) {
+                const titleKey = `hero_title_${currentLanguage}`;
+                heroTitle.textContent = config[titleKey] || defaultConfig[titleKey];
+                heroTitle.setAttribute(`data-${currentLanguage}`, config[titleKey] || defaultConfig[titleKey]);
+            }
+            
+            if (heroSubtitle) {
+                const subtitleKey = `hero_subtitle_${currentLanguage}`;
+                heroSubtitle.textContent = config[subtitleKey] || defaultConfig[subtitleKey];
+                heroSubtitle.setAttribute(`data-${currentLanguage}`, config[subtitleKey] || defaultConfig[subtitleKey]);
+            }
+
+            // Update contact information
+            const contactEmail = document.getElementById('contact-email');
+            const contactPhone = document.getElementById('contact-phone');
+            
+            if (contactEmail) {
+                contactEmail.textContent = config.contact_email || defaultConfig.contact_email;
+            }
+            if (contactPhone) {
+                contactPhone.textContent = config.contact_phone || defaultConfig.contact_phone;
+            }
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Element SDK
+            if (window.elementSdk) {
+                window.elementSdk.init({
+                    defaultConfig: defaultConfig,
+                    onConfigChange: onConfigChange,
+                    mapToCapabilities: (config) => ({
+                        recolorables: [],
+                        borderables: [],
+                        fontEditable: undefined,
+                        fontSizeable: undefined
+                    }),
+                    mapToEditPanelValues: (config) => new Map([
+                        ["company_name", config.company_name || defaultConfig.company_name],
+                        ["hero_title_da", config.hero_title_da || defaultConfig.hero_title_da],
+                        ["hero_title_en", config.hero_title_en || defaultConfig.hero_title_en],
+                        ["hero_subtitle_da", config.hero_subtitle_da || defaultConfig.hero_subtitle_da],
+                        ["hero_subtitle_en", config.hero_subtitle_en || defaultConfig.hero_subtitle_en],
+                        ["contact_email", config.contact_email || defaultConfig.contact_email],
+                        ["contact_phone", config.contact_phone || defaultConfig.contact_phone]
+                    ])
+                });
+            }
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('nav-menu');
+            const mobileToggle = document.querySelector('.mobile-toggle');
+            
+            if (!navMenu.contains(event.target) && !mobileToggle.contains(event.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e5f9f3b50f8a6a',t:'MTc2MzExNzcyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
