@@ -1,0 +1,860 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bargheer Geophysics - Professional Geophysical Services</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        /* Dropdown for Geophysical Surveys */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 250px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            padding: 1rem 0;
+            z-index: 1001;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-item {
+            color: #333;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Mobile menu toggle */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Main content */
+        .main-content {
+            min-height: calc(100% - 80px);
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Hero sections */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Video placeholder for homepage */
+        .video-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .video-placeholder {
+            background: #e9ecef;
+            border: 2px dashed #6c757d;
+            border-radius: 10px;
+            padding: 3rem 2rem;
+            text-align: center;
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+
+        /* Content sections */
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #2a5298;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .section-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* Survey grid */
+        .survey-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .survey-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .survey-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .survey-card h3 {
+            color: #2a5298;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Survey detail page */
+        .survey-detail {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .back-button {
+            background: #2a5298;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 2rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #1e3c72;
+        }
+
+        /* Contact form */
+        .contact-form {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            max-width: 600px;
+            margin: 2rem auto;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: #2a5298;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #1e3c72;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #1e3c72;
+                padding: 1rem;
+                gap: 0;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .video-container {
+                grid-template-columns: 1fr;
+            }
+
+            .dropdown-content {
+                position: static;
+                display: block;
+                box-shadow: none;
+                background: rgba(255,255,255,0.1);
+                margin-left: 1rem;
+            }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <nav class="navbar">
+   <div class="nav-container"><a href="#" class="logo" id="company-name">Bargheer Geophysics</a> <button class="mobile-toggle" onclick="toggleMobileMenu()">☰</button>
+    <ul class="nav-menu" id="nav-menu">
+     <li class="nav-item"><a href="#" class="nav-link active" onclick="showPage('home')">Home</a></li>
+     <li class="nav-item"><a href="#" class="nav-link" onclick="showPage('about')">About</a></li>
+     <li class="nav-item dropdown"><a href="#" class="nav-link" onclick="showPage('surveys')">Geophysical Surveys</a>
+      <div class="dropdown-content"><a href="#" class="dropdown-item" onclick="showSurveyDetail('dcip')">DC/IP</a> <a href="#" class="dropdown-item" onclick="showSurveyDetail('ttem')">TTEM</a> <a href="#" class="dropdown-item" onclick="showSurveyDetail('seismics')">Seismics</a> <a href="#" class="dropdown-item" onclick="showSurveyDetail('gsm')">GSM</a> <a href="#" class="dropdown-item" onclick="showSurveyDetail('gravimetrics')">Gravimetrics</a> <a href="#" class="dropdown-item" onclick="showSurveyDetail('mrs')">MRS</a> <a href="#" class="dropdown-item" onclick="showSurveyDetail('geophysics')">Geophysics</a> <a href="#" class="dropdown-item" onclick="showSurveyDetail('methods')">Methods &amp; Techniques</a>
+      </div></li>
+     <li class="nav-item"><a href="#" class="nav-link" onclick="showPage('software')">Geophysics Software</a></li>
+     <li class="nav-item"><a href="#" class="nav-link" onclick="showPage('contact')">Contact</a></li>
+    </ul>
+   </div>
+  </nav>
+  <main class="main-content"><!-- Home Page -->
+   <div id="home" class="page active">
+    <section class="hero">
+     <div class="hero-content">
+      <h1 id="hero-title">Professional Geophysical Services</h1>
+      <p id="hero-subtitle">Advanced subsurface investigation solutions for mining, environmental, and engineering applications</p>
+     </div>
+    </section>
+    <div class="video-container">
+     <div class="video-placeholder">
+      <h3>Video 1 Placeholder</h3>
+      <p>Your first rotating video will appear here</p>
+     </div>
+     <div class="video-placeholder">
+      <h3>Video 2 Placeholder</h3>
+      <p>Your second rotating video will appear here</p>
+     </div>
+     <div class="video-placeholder">
+      <h3>Video 3 Placeholder</h3>
+      <p>Your third rotating video will appear here</p>
+     </div>
+    </div>
+    <section class="content-section">
+     <h2 class="section-title">Welcome to Bargheer Geophysics</h2>
+     <div class="section-content">
+      <p>We provide comprehensive geophysical services using state-of-the-art equipment and advanced interpretation techniques. Our experienced team delivers reliable subsurface information for various industries including mining exploration, environmental assessment, and geotechnical engineering.</p>
+     </div>
+    </section>
+   </div><!-- About Page -->
+   <div id="about" class="page">
+    <section class="hero">
+     <div class="hero-content">
+      <h1>About Bargheer Geophysics</h1>
+      <p>Leading experts in subsurface investigation and geophysical consulting</p>
+     </div>
+    </section>
+    <section class="content-section">
+     <h2 class="section-title">Our Expertise</h2>
+     <div class="section-content">
+      <p>With decades of combined experience in geophysical surveying, our team specializes in providing accurate and reliable subsurface information. We utilize cutting-edge technology and proven methodologies to deliver comprehensive solutions for our clients' exploration and investigation needs.</p>
+      <p>Our commitment to excellence and innovation has established us as a trusted partner in the geophysical industry. We work closely with clients to understand their specific requirements and provide customized solutions that meet their project objectives.</p>
+     </div>
+    </section>
+   </div><!-- Geophysical Surveys Page -->
+   <div id="surveys" class="page">
+    <section class="content-section">
+     <h2 class="section-title">Geophysical Survey Methods</h2>
+     <div class="section-content">
+      <p>We offer a comprehensive range of geophysical survey methods to meet diverse subsurface investigation requirements. Each method provides unique insights into subsurface conditions and structures.</p>
+     </div>
+     <div class="survey-grid">
+      <div class="survey-card" onclick="showSurveyDetail('dcip')">
+       <h3>DC/IP Surveys</h3>
+       <p>Direct Current and Induced Polarization methods for mineral exploration and groundwater investigations.</p>
+      </div>
+      <div class="survey-card" onclick="showSurveyDetail('ttem')">
+       <h3>TTEM Surveys</h3>
+       <p>Time-domain electromagnetic surveys for deep subsurface exploration and conductivity mapping.</p>
+      </div>
+      <div class="survey-card" onclick="showSurveyDetail('seismics')">
+       <h3>Seismic Surveys</h3>
+       <p>Reflection and refraction seismology for structural geology and engineering applications.</p>
+      </div>
+      <div class="survey-card" onclick="showSurveyDetail('gsm')">
+       <h3>GSM Surveys</h3>
+       <p>Ground-penetrating radar and magnetic surveys for shallow subsurface investigations.</p>
+      </div>
+      <div class="survey-card" onclick="showSurveyDetail('gravimetrics')">
+       <h3>Gravimetric Surveys</h3>
+       <p>Gravity measurements for density variations and geological structure mapping.</p>
+      </div>
+      <div class="survey-card" onclick="showSurveyDetail('mrs')">
+       <h3>MRS Surveys</h3>
+       <p>Magnetic Resonance Sounding for direct groundwater detection and characterization.</p>
+      </div>
+      <div class="survey-card" onclick="showSurveyDetail('geophysics')">
+       <h3>Integrated Geophysics</h3>
+       <p>Multi-method approaches combining various geophysical techniques for comprehensive analysis.</p>
+      </div>
+      <div class="survey-card" onclick="showSurveyDetail('methods')">
+       <h3>Methods &amp; Techniques Overview</h3>
+       <p>Comprehensive overview of our methodologies, equipment, and interpretation techniques.</p>
+      </div>
+     </div>
+    </section>
+   </div><!-- Survey Detail Pages -->
+   <div id="survey-detail" class="page">
+    <div class="content-section"><button class="back-button" onclick="showPage('surveys')">← Back to Surveys</button>
+     <div class="survey-detail" id="survey-content"><!-- Survey details will be loaded here -->
+     </div>
+    </div>
+   </div><!-- Software Page -->
+   <div id="software" class="page">
+    <section class="hero">
+     <div class="hero-content">
+      <h1>Geophysics Software Solutions</h1>
+      <p>Advanced software tools for data processing, modeling, and interpretation</p>
+     </div>
+    </section>
+    <section class="content-section">
+     <h2 class="section-title">Professional Software Suite</h2>
+     <div class="section-content">
+      <p>We utilize industry-leading software packages for data processing, modeling, and interpretation. Our software capabilities include advanced algorithms for noise reduction, data enhancement, and sophisticated modeling techniques.</p>
+      <p>Our team is proficient in various specialized geophysical software platforms, ensuring accurate and efficient data processing and interpretation for all survey methods.</p>
+     </div>
+    </section>
+   </div><!-- Contact Page -->
+   <div id="contact" class="page">
+    <section class="hero">
+     <div class="hero-content">
+      <h1>Contact Us</h1>
+      <p>Get in touch for your geophysical survey needs</p>
+     </div>
+    </section>
+    <section class="content-section">
+     <div class="contact-form">
+      <h3>Send us a message</h3>
+      <form onsubmit="handleContactForm(event)">
+       <div class="form-group"><label for="name">Name</label> <input type="text" id="name" name="name" required>
+       </div>
+       <div class="form-group"><label for="email">Email</label> <input type="email" id="email" name="email" required>
+       </div>
+       <div class="form-group"><label for="company">Company</label> <input type="text" id="company" name="company">
+       </div>
+       <div class="form-group"><label for="message">Message</label> <textarea id="message" name="message" required placeholder="Tell us about your project requirements..."></textarea>
+       </div><button type="submit" class="submit-btn">Send Message</button>
+      </form>
+      <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #eee;">
+       <h4>Contact Information</h4>
+       <p><strong>Email:</strong> <span id="contact-email">info@bargheergeophysics.com</span></p>
+       <p><strong>Phone:</strong> <span id="contact-phone">+1 (555) 123-4567</span></p>
+      </div>
+     </div>
+    </section>
+   </div>
+  </main>
+  <footer class="footer">
+   <p>© 2024 <span id="footer-company">Bargheer Geophysics</span>. All rights reserved.</p>
+  </footer>
+  <script>
+        // Configuration object
+        const defaultConfig = {
+            company_name: "Bargheer Geophysics",
+            hero_title: "Professional Geophysical Services",
+            hero_subtitle: "Advanced subsurface investigation solutions for mining, environmental, and engineering applications",
+            contact_email: "info@bargheergeophysics.com",
+            contact_phone: "+1 (555) 123-4567"
+        };
+
+        // Survey details data
+        const surveyDetails = {
+            dcip: {
+                title: "DC/IP Surveys",
+                content: `
+                    <h2>Direct Current and Induced Polarization</h2>
+                    <p>DC/IP surveys are among the most versatile geophysical methods for subsurface investigation. These techniques measure the electrical properties of the subsurface to identify mineral deposits, groundwater resources, and contamination plumes.</p>
+                    
+                    <h3>Applications:</h3>
+                    <ul>
+                        <li>Mineral exploration and ore body delineation</li>
+                        <li>Groundwater exploration and aquifer mapping</li>
+                        <li>Environmental contamination assessment</li>
+                        <li>Geotechnical site characterization</li>
+                    </ul>
+                    
+                    <h3>Key Benefits:</h3>
+                    <ul>
+                        <li>High resolution subsurface imaging</li>
+                        <li>Cost-effective exploration method</li>
+                        <li>Excellent depth penetration</li>
+                        <li>Proven track record in mineral discovery</li>
+                    </ul>
+                `
+            },
+            ttem: {
+                title: "TTEM Surveys",
+                content: `
+                    <h2>Time-Domain Electromagnetic Surveys</h2>
+                    <p>TTEM surveys use electromagnetic induction to map subsurface conductivity variations. This method is particularly effective for deep exploration and large-scale geological mapping.</p>
+                    
+                    <h3>Applications:</h3>
+                    <ul>
+                        <li>Deep mineral exploration</li>
+                        <li>Groundwater resource assessment</li>
+                        <li>Geological structure mapping</li>
+                        <li>Saltwater intrusion monitoring</li>
+                    </ul>
+                    
+                    <h3>Advantages:</h3>
+                    <ul>
+                        <li>Rapid data acquisition over large areas</li>
+                        <li>Excellent depth penetration capabilities</li>
+                        <li>High sensitivity to conductive targets</li>
+                        <li>Minimal environmental impact</li>
+                    </ul>
+                `
+            },
+            seismics: {
+                title: "Seismic Surveys",
+                content: `
+                    <h2>Seismic Reflection and Refraction</h2>
+                    <p>Seismic surveys utilize sound waves to image subsurface structures and determine physical properties of geological formations. These methods provide high-resolution structural information.</p>
+                    
+                    <h3>Applications:</h3>
+                    <ul>
+                        <li>Structural geology mapping</li>
+                        <li>Engineering site investigations</li>
+                        <li>Bedrock depth determination</li>
+                        <li>Fault and fracture zone identification</li>
+                    </ul>
+                    
+                    <h3>Capabilities:</h3>
+                    <ul>
+                        <li>High-resolution subsurface imaging</li>
+                        <li>Accurate depth to bedrock measurements</li>
+                        <li>Detailed structural interpretation</li>
+                        <li>Quality control through multiple survey lines</li>
+                    </ul>
+                `
+            },
+            gsm: {
+                title: "GSM Surveys",
+                content: `
+                    <h2>Ground-Penetrating Radar and Magnetic Surveys</h2>
+                    <p>GSM surveys combine ground-penetrating radar and magnetic methods for comprehensive shallow subsurface investigations. These techniques are ideal for detailed site characterization.</p>
+                    
+                    <h3>Applications:</h3>
+                    <ul>
+                        <li>Utility location and mapping</li>
+                        <li>Archaeological investigations</li>
+                        <li>Concrete and pavement assessment</li>
+                        <li>Shallow geological mapping</li>
+                    </ul>
+                    
+                    <h3>Features:</h3>
+                    <ul>
+                        <li>Real-time data visualization</li>
+                        <li>Centimeter-level resolution</li>
+                        <li>Non-invasive investigation methods</li>
+                        <li>Rapid survey completion</li>
+                    </ul>
+                `
+            },
+            gravimetrics: {
+                title: "Gravimetric Surveys",
+                content: `
+                    <h2>Gravity Measurements and Analysis</h2>
+                    <p>Gravimetric surveys measure variations in the Earth's gravitational field to detect density contrasts in the subsurface. This method is excellent for regional geological mapping and resource exploration.</p>
+                    
+                    <h3>Applications:</h3>
+                    <ul>
+                        <li>Regional geological mapping</li>
+                        <li>Mineral resource exploration</li>
+                        <li>Sedimentary basin analysis</li>
+                        <li>Geothermal resource assessment</li>
+                    </ul>
+                    
+                    <h3>Strengths:</h3>
+                    <ul>
+                        <li>Deep penetration capabilities</li>
+                        <li>Excellent for regional surveys</li>
+                        <li>Cost-effective exploration tool</li>
+                        <li>Minimal environmental disturbance</li>
+                    </ul>
+                `
+            },
+            mrs: {
+                title: "MRS Surveys",
+                content: `
+                    <h2>Magnetic Resonance Sounding</h2>
+                    <p>MRS is the only geophysical method that directly detects groundwater by measuring the magnetic resonance signal of hydrogen nuclei in water molecules. This provides unique insights into aquifer properties.</p>
+                    
+                    <h3>Applications:</h3>
+                    <ul>
+                        <li>Direct groundwater detection</li>
+                        <li>Aquifer characterization</li>
+                        <li>Water content estimation</li>
+                        <li>Hydrogeological parameter determination</li>
+                    </ul>
+                    
+                    <h3>Unique Advantages:</h3>
+                    <ul>
+                        <li>Direct water detection capability</li>
+                        <li>Quantitative water content measurements</li>
+                        <li>Aquifer property estimation</li>
+                        <li>Reduced drilling risk</li>
+                    </ul>
+                `
+            },
+            geophysics: {
+                title: "Integrated Geophysics",
+                content: `
+                    <h2>Multi-Method Geophysical Approaches</h2>
+                    <p>Integrated geophysical surveys combine multiple methods to provide comprehensive subsurface characterization. This approach reduces ambiguity and increases confidence in interpretation results.</p>
+                    
+                    <h3>Integration Benefits:</h3>
+                    <ul>
+                        <li>Reduced interpretation ambiguity</li>
+                        <li>Enhanced target resolution</li>
+                        <li>Comprehensive subsurface models</li>
+                        <li>Optimized exploration programs</li>
+                    </ul>
+                    
+                    <h3>Common Combinations:</h3>
+                    <ul>
+                        <li>DC/IP + Electromagnetic surveys</li>
+                        <li>Seismic + Gravity investigations</li>
+                        <li>GPR + Magnetic mapping</li>
+                        <li>Multi-method environmental assessments</li>
+                    </ul>
+                `
+            },
+            methods: {
+                title: "Methods & Techniques Overview",
+                content: `
+                    <h2>Comprehensive Methodological Approach</h2>
+                    <p>Our methodological framework encompasses survey design, data acquisition, processing, and interpretation. We employ industry best practices and cutting-edge techniques to ensure reliable results.</p>
+                    
+                    <h3>Survey Design:</h3>
+                    <ul>
+                        <li>Objective-based method selection</li>
+                        <li>Optimized survey parameters</li>
+                        <li>Quality control protocols</li>
+                        <li>Environmental consideration</li>
+                    </ul>
+                    
+                    <h3>Data Processing:</h3>
+                    <ul>
+                        <li>Advanced noise reduction techniques</li>
+                        <li>State-of-the-art inversion algorithms</li>
+                        <li>Comprehensive quality assessment</li>
+                        <li>Integrated interpretation workflows</li>
+                    </ul>
+                    
+                    <h3>Deliverables:</h3>
+                    <ul>
+                        <li>Detailed technical reports</li>
+                        <li>High-quality maps and sections</li>
+                        <li>3D subsurface models</li>
+                        <li>Recommendations and follow-up programs</li>
+                    </ul>
+                `
+            }
+        };
+
+        // Navigation functions
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update navigation
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Close mobile menu
+            document.getElementById('nav-menu').classList.remove('active');
+        }
+
+        function showSurveyDetail(surveyType) {
+            const surveyContent = document.getElementById('survey-content');
+            const detail = surveyDetails[surveyType];
+            
+            if (detail) {
+                surveyContent.innerHTML = `
+                    <h2>${detail.title}</h2>
+                    ${detail.content}
+                `;
+                
+                // Show survey detail page
+                const pages = document.querySelectorAll('.page');
+                pages.forEach(page => page.classList.remove('active'));
+                document.getElementById('survey-detail').classList.add('active');
+            }
+        }
+
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.classList.toggle('active');
+        }
+
+        function handleContactForm(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(event.target);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const company = formData.get('company');
+            const message = formData.get('message');
+            
+            // Show success message
+            const form = event.target;
+            form.innerHTML = `
+                <div style="text-align: center; padding: 2rem; background: #d4edda; border: 1px solid #c3e6cb; border-radius: 5px; color: #155724;">
+                    <h3>Thank you for your message!</h3>
+                    <p>We'll get back to you within 24 hours.</p>
+                    <button type="button" class="submit-btn" onclick="location.reload()">Send Another Message</button>
+                </div>
+            `;
+        }
+
+        // Element SDK implementation
+        async function onConfigChange(config) {
+            // Update company name
+            const companyElements = document.querySelectorAll('#company-name, #footer-company');
+            companyElements.forEach(el => {
+                el.textContent = config.company_name || defaultConfig.company_name;
+            });
+
+            // Update hero content
+            const heroTitle = document.getElementById('hero-title');
+            const heroSubtitle = document.getElementById('hero-subtitle');
+            
+            if (heroTitle) {
+                heroTitle.textContent = config.hero_title || defaultConfig.hero_title;
+            }
+            if (heroSubtitle) {
+                heroSubtitle.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+            }
+
+            // Update contact information
+            const contactEmail = document.getElementById('contact-email');
+            const contactPhone = document.getElementById('contact-phone');
+            
+            if (contactEmail) {
+                contactEmail.textContent = config.contact_email || defaultConfig.contact_email;
+            }
+            if (contactPhone) {
+                contactPhone.textContent = config.contact_phone || defaultConfig.contact_phone;
+            }
+        }
+
+        // Initialize Element SDK
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig: defaultConfig,
+                onConfigChange: onConfigChange,
+                mapToCapabilities: (config) => ({
+                    recolorables: [],
+                    borderables: [],
+                    fontEditable: undefined,
+                    fontSizeable: undefined
+                }),
+                mapToEditPanelValues: (config) => new Map([
+                    ["company_name", config.company_name || defaultConfig.company_name],
+                    ["hero_title", config.hero_title || defaultConfig.hero_title],
+                    ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+                    ["contact_email", config.contact_email || defaultConfig.contact_email],
+                    ["contact_phone", config.contact_phone || defaultConfig.contact_phone]
+                ])
+            });
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('nav-menu');
+            const mobileToggle = document.querySelector('.mobile-toggle');
+            
+            if (!navMenu.contains(event.target) && !mobileToggle.contains(event.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e1495b87f58a6a',t:'MTc2MzA2ODU0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
