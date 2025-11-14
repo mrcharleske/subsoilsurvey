@@ -1,0 +1,1330 @@
+<!doctype html>
+<html lang="da">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TEM Undersøgelser - Bargheer Geophysics</title>
+  <meta name="description" content="Professionelle TEM (Time-domain Electromagnetic) undersøgelser til dyb subsurface-udforskning og ledningsevnekortlægning. Avanceret elektromagnetisk teknologi.">
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Language Toggle */
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 5px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(13, 79, 60, 0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: #0d4f3c;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .lang-btn.active {
+            background: #0d4f3c;
+            color: white;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(13, 79, 60, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0d4f3c;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: "⚡";
+            font-size: 1.5rem;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 5px #0d4f3c; }
+            to { text-shadow: 0 0 20px #0d4f3c, 0 0 30px #0d4f3c; }
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: #1a1a1a;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(13, 79, 60, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(13, 79, 60, 0.1);
+            color: #0d4f3c;
+            transform: translateY(-2px);
+        }
+
+        /* Dropdown Styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dropdown-arrow {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(13, 79, 60, 0.1);
+            border-radius: 12px;
+            padding: 0.5rem 0;
+            min-width: 280px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            list-style: none;
+            margin: 0;
+            z-index: 1001;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-link {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: #1a1a1a;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            margin: 0 0.5rem;
+        }
+
+        .dropdown-link:hover {
+            background: rgba(13, 79, 60, 0.1);
+            color: #0d4f3c;
+            transform: translateX(5px);
+        }
+
+        .dropdown-link.active {
+            background: rgba(13, 79, 60, 0.15);
+            color: #0d4f3c;
+            font-weight: 600;
+        }
+
+        /* Mobile Navigation */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #0d4f3c;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-toggle:hover {
+            background: rgba(13, 79, 60, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 50%, #0d4f3c 100%);
+            color: white;
+            padding: 8rem 2rem 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-icon {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            display: block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: white;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .hero-button.primary {
+            background: white;
+            color: #0d4f3c;
+            border-color: white;
+        }
+
+        .hero-button.primary:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(13, 79, 60, 0.1);
+        }
+
+        .breadcrumb-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .breadcrumb-nav a {
+            color: #0d4f3c;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb-nav a:hover {
+            color: #1a5f4a;
+        }
+
+        .breadcrumb-separator {
+            color: #9ca3af;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .content-main h2 {
+            color: #0d4f3c;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #0d4f3c;
+            padding-bottom: 0.5rem;
+        }
+
+        .content-main h3 {
+            color: #0d4f3c;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .content-main p {
+            color: #4b5563;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-main ul {
+            color: #4b5563;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .content-main li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+
+        .sidebar h3 {
+            color: #0d4f3c;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .quick-facts {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .quick-facts li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background: white;
+            border-radius: 10px;
+            border-left: 4px solid #0d4f3c;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .fact-label {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .fact-value {
+            color: #0d4f3c;
+            font-weight: 700;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .contact-card h4 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .contact-card p {
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .contact-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            margin: 0.25rem;
+        }
+
+        .contact-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .contact-button.primary {
+            background: white;
+            color: #0d4f3c;
+            border-color: white;
+        }
+
+        .contact-button.primary:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Technical Specs */
+        .tech-specs {
+            background: #ffffff;
+            border: 2px solid rgba(13, 79, 60, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+
+        .tech-specs h3 {
+            color: #0d4f3c;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .spec-item {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid #0d4f3c;
+        }
+
+        .spec-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .spec-title {
+            font-weight: 600;
+            color: #0d4f3c;
+            margin-bottom: 0.5rem;
+        }
+
+        .spec-value {
+            color: #4b5563;
+            font-size: 0.9rem;
+        }
+
+        /* Applications Grid */
+        .applications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .application-card {
+            background: white;
+            border: 2px solid rgba(13, 79, 60, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .application-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(13, 79, 60, 0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .application-card:hover::before {
+            opacity: 1;
+        }
+
+        .application-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(13, 79, 60, 0.15);
+            border-color: rgba(13, 79, 60, 0.3);
+        }
+
+        .application-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .application-card h4 {
+            color: #0d4f3c;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .application-card p {
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        /* Process Steps */
+        .process-steps {
+            background: #f8f9fa;
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+            border-radius: 20px;
+        }
+
+        .process-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .process-title {
+            text-align: center;
+            color: #0d4f3c;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .step-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            border: 2px solid rgba(13, 79, 60, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(13, 79, 60, 0.1);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0d4f3c;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .step-icon {
+            font-size: 2.5rem;
+            margin: 1rem 0;
+            display: block;
+        }
+
+        .step-title {
+            color: #0d4f3c;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .step-description {
+            color: #4b5563;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: #e5e7eb;
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid rgba(13, 79, 60, 0.2);
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h4 {
+            color: #0d4f3c;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #9ca3af;
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #0d4f3c;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(13, 79, 60, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0d4f3c;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: #0d4f3c;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(13, 79, 60, 0.1);
+            color: #6b7280;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                padding: 2rem;
+                gap: 0;
+                border-top: 1px solid rgba(13, 79, 60, 0.1);
+                backdrop-filter: blur(20px);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                background: transparent;
+                padding: 0;
+                margin: 0;
+                min-width: auto;
+                display: none;
+            }
+
+            .dropdown.mobile-active .dropdown-menu {
+                display: block;
+            }
+
+            .hero {
+                padding: 6rem 2rem 4rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .language-toggle {
+                top: 80px;
+                right: 10px;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .applications-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f8f9fa;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #1a5f4a 0%, #0d4f3c 100%);
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body><!-- Language Toggle -->
+  <div class="language-toggle"><button class="lang-btn active" onclick="setLanguage('da')" id="lang-da">DA</button> <button class="lang-btn" onclick="setLanguage('en')" id="lang-en">EN</button>
+  </div><!-- Navigation -->
+  <nav class="navbar" id="navbar">
+   <div class="nav-container"><a href="index.html" class="logo" id="company-name">Bargheer Geophysics</a> <button class="mobile-toggle" onclick="toggleMobileMenu()">☰</button>
+    <ul class="nav-menu" id="nav-menu">
+     <li class="nav-item"><a href="index.html" class="nav-link" data-da="Hjem" data-en="Home">Hjem</a></li>
+     <li class="nav-item"><a href="about.html" class="nav-link" data-da="Om Os" data-en="About">Om Os</a></li>
+     <li class="nav-item dropdown">
+      <div class="nav-link dropdown-toggle" data-da="Geofysiske Undersøgelser" data-en="Geophysical Surveys"><span>Geofysiske Undersøgelser</span> <span class="dropdown-arrow">▼</span>
+      </div>
+      <ul class="dropdown-menu">
+       <li><a href="dcip.html" class="dropdown-link" data-da="DC/IP Undersøgelser" data-en="DC/IP Surveys">DC/IP Undersøgelser</a></li>
+       <li><a href="tem.html" class="dropdown-link active" data-da="TEM Undersøgelser" data-en="TEM Surveys">TEM Undersøgelser</a></li>
+       <li><a href="mrs.html" class="dropdown-link" data-da="MRS Undersøgelser" data-en="MRS Surveys">MRS Undersøgelser</a></li>
+       <li><a href="seismics.html" class="dropdown-link" data-da="Seismiske Undersøgelser" data-en="Seismic Surveys">Seismiske Undersøgelser</a></li>
+       <li><a href="gravimetrics.html" class="dropdown-link" data-da="Gravimetriske Undersøgelser" data-en="Gravimetric Surveys">Gravimetriske Undersøgelser</a></li>
+       <li><a href="magnetics.html" class="dropdown-link" data-da="Magnetiske Undersøgelser" data-en="Magnetic Surveys">Magnetiske Undersøgelser</a></li>
+       <li><a href="radiometrics.html" class="dropdown-link" data-da="Radiometriske Undersøgelser" data-en="Radiometric Surveys">Radiometriske Undersøgelser</a></li>
+      </ul></li>
+     <li class="nav-item"><a href="software.html" class="nav-link" data-da="Geofysik Software" data-en="Geophysics Software">Geofysik Software</a></li>
+     <li class="nav-item"><a href="contact.html" class="nav-link" data-da="Kontakt" data-en="Contact">Kontakt</a></li>
+    </ul>
+   </div>
+  </nav><!-- Hero Section -->
+  <section class="hero">
+   <div class="hero-content" data-aos="fade-up" data-aos-duration="1000"><span class="hero-icon">📡</span>
+    <h1 id="page-title" data-da="TTEM Undersøgelser" data-en="TTEM Surveys">TTEM Undersøgelser</h1>
+    <p id="hero-subtitle" data-da="Bargheer Geophysics udfører onshore og offshore TTEM undersøgelser til konkurrencedygtige priser uden udlæg for udstyr eller processoftware fra leverandør." data-en="Bargheer Geophysics conducts onshore and offshore TTEM surveys at competitive prices with no outlay for equipment or processing software from a supplier.">Bargheer Geophysics udfører onshore og offshore TTEM undersøgelser til konkurrencedygtige priser uden udlæg for udstyr eller processoftware fra leverandør.</p>
+    <div class="hero-buttons"><a href="contact.html" class="hero-button primary" data-da="Få et Tilbud" data-en="Get a Quote"> <span>Få et Tilbud</span> <span>→</span> </a> <a href="#overview" class="hero-button" data-da="Læs Mere" data-en="Learn More"> <span>Læs Mere</span> <span>📖</span> </a>
+    </div>
+   </div>
+  </section><!-- Breadcrumb -->
+  <section class="breadcrumb">
+   <div class="breadcrumb-container">
+    <nav class="breadcrumb-nav"><a href="index.html" data-da="Hjem" data-en="Home">Hjem</a> <span class="breadcrumb-separator">›</span> <a href="index.html#services" data-da="Tjenester" data-en="Services">Tjenester</a> <span class="breadcrumb-separator">›</span> <span data-da="TEM Undersøgelser" data-en="TEM Surveys">TEM Undersøgelser</span>
+    </nav>
+   </div>
+  </section><!-- Main Content -->
+  <main class="main-content">
+   <div class="content-grid">
+    <div class="content-main">
+     <section id="overview">
+      <h2 id="overview-title" data-da="TTEM Undersøgelser" data-en="TTEM Surveys">TTEM Undersøgelser</h2>
+      <p id="overview-description" data-da="Vi er højt erfarne i hele TEM-metodefamilien: på land (TTEM), på vand (FloaTEM) og deres drift under alle forhold: fra ørkens brændende hede til polarområdernes bidende kulde – og alt derimellem." data-en="We are highly experienced in the full range TEM family of methods: on land (TTEM), water (FloaTEM) and their operation in all conditions: from the searing heat of the desert to the biting cold of the Polar regions – and everything in between.">Vi er højt erfarne i hele TEM-metodefamilien: på land (TTEM), på vand (FloaTEM) og deres drift under alle forhold: fra ørkens brændende hede til polarområdernes bidende kulde – og alt derimellem.</p>
+      <p data-da="Vi er glade for at rådgive om den bedste vej fremad for at sikre brugen af den mest passende konfiguration til dine specifikke krav, da det store udvalg af produkter og tjenester, der tilbydes andre steder, kan virke overvældende for ikke-specialisten. Vi hjælper med at skille klinten fra hveden, så du kan træffe den rigtige beslutning for din undersøgelse." data-en="We are happy to advise on the best way forward to ensure the use of the most appropriate configuration for your specific requirements, as the vast array of products and services offered elsewhere can seem overwhelming to the non-specialist. We help to separate the wheat from the chaff, allowing you to make the right decision for your survey.">Vi er glade for at rådgive om den bedste vej fremad for at sikre brugen af den mest passende konfiguration til dine specifikke krav, da det store udvalg af produkter og tjenester, der tilbydes andre steder, kan virke overvældende for ikke-specialisten. Vi hjælper med at skille klinten fra hveden, så du kan træffe den rigtige beslutning for din undersøgelse.</p>
+     </section>
+     <section>
+      <h3 data-da="Grundlæggende Principper" data-en="Basic Principles">Grundlæggende Principper</h3>
+      <p data-da="TEM (Transient electromagnetics) måler undergrundensrespons på pulser af elektrisk strøm. Forskellige konfigurationer kan bruges afhængigt af interesseobjekterne, deres dybde under jordoverfladen og situationen i marken." data-en="TEM (Transient electromagnetics) measures the response of the underground to pulses of electric current. Various configurations can be used according to the objects of interest, their depth below the ground surface, and the situation in the field.">TEM (Transient electromagnetics) måler undergrundensrespons på pulser af elektrisk strøm. Forskellige konfigurationer kan bruges afhængigt af interesseobjekterne, deres dybde under jordoverfladen og situationen i marken.</p>
+     </section>
+     <section>
+      <h3 data-da="I Marken" data-en="In the Field">I Marken</h3>
+      <p data-da="Ofte trækkes instrumentet over et område, deraf akronymet TTEM, eller towed TEM. På land kan en ATV (quad bike) bruges til at trække instrumentet over undersøgelsesområdet for hurtigt at indsamle store mængder data pr. feltdag." data-en="Frequently, the instrument is towed over an area, hence the acronym TTEM, or towed TEM. On land, an ATV (quad bike) can be used to tow the instrument over the survey area in order to rapidly capture large amounts of data per field day.">Ofte trækkes instrumentet over et område, deraf akronymet TTEM, eller towed TEM. På land kan en ATV (quad bike) bruges til at trække instrumentet over undersøgelsesområdet for hurtigt at indsamle store mængder data pr. feltdag.</p>
+      <p data-da="På vand er proceduren lignende, bortset fra at instrumentet trækkes over vandoverfladen på en båd eller flåde. De kontinuerlige data, der genereres, behandles for at skabe en række profiler, der giver et overblik over, hvad der ligger nedenunder." data-en="On water the procedure is similar, except that the instrument is towed over the surface of the water on a boat or raft. The continuous data generated is processed to create a series of profiles, providing an overview of what lies below.">På vand er proceduren lignende, bortset fra at instrumentet trækkes over vandoverfladen på en båd eller flåde. De kontinuerlige data, der genereres, behandles for at skabe en række profiler, der giver et overblik over, hvad der ligger nedenunder.</p>
+      <p data-da="Dybden af undersøgelser kan målrettes mod undergrunden (1-2m) ned til omkring 200m. Generelt kommer dybere undersøgelser på bekostning af opløsningen i de øvre lag." data-en="Depth of surveys can be targeted at the subsurface (1-2m) down to around 200m. Generally speaking, deeper surveys come at the cost of resolution in the upper layers.">Dybden af undersøgelser kan målrettes mod undergrunden (1-2m) ned til omkring 200m. Generelt kommer dybere undersøgelser på bekostning af opløsningen i de øvre lag.</p>
+     </section>
+     <section>
+      <h3 data-da="Vil du høre mere?" data-en="Want to hear more?">Vil du høre mere?</h3>
+      <p data-da="Udfyld kontaktformularen, så ringer vi til dig så hurtigt som muligt." data-en="Fill out the contact form, and we will call you up as soon as possible.">Udfyld kontaktformularen, så ringer vi til dig så hurtigt som muligt.</p>
+      <div style="background: #f8f9fa; padding: 2rem; border-radius: 15px; margin: 2rem 0; border-left: 4px solid #0d4f3c;">
+       <form id="contact-form" style="display: grid; gap: 1rem; max-width: 400px;" onsubmit="handleFormSubmit(event)">
+        <div><label for="contact-name" style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #0d4f3c;" data-da="Navn" data-en="Name">Navn</label> <input type="text" id="contact-name" style="width: 100%; padding: 0.75rem; border: 2px solid rgba(13, 79, 60, 0.2); border-radius: 8px; font-size: 1rem;" required>
+        </div>
+        <div><label for="contact-phone-form" style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #0d4f3c;" data-da="Telefon" data-en="Phone">Telefon</label> <input type="tel" id="contact-phone-form" style="width: 100%; padding: 0.75rem; border: 2px solid rgba(13, 79, 60, 0.2); border-radius: 8px; font-size: 1rem;" required>
+        </div><button type="submit" id="submit-btn" style="background: #0d4f3c; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='#1a5f4a'" onmouseout="this.style.background='#0d4f3c'" data-da="Ring mig op" data-en="Call me up">Ring mig op</button>
+        <div id="form-message" style="display: none; padding: 1rem; border-radius: 8px; text-align: center; font-weight: 600;"></div>
+       </form>
+      </div>
+     </section>
+    </div>
+    <div class="sidebar">
+     <h3 data-da="Hurtige Fakta" data-en="Quick Facts">Hurtige Fakta</h3>
+     <ul class="quick-facts">
+      <li><span class="fact-label" data-da="Dybdeområde" data-en="Depth Range">Dybdeområde</span> <span class="fact-value">1-200m</span></li>
+      <li><span class="fact-label" data-da="Metode" data-en="Method">Metode</span> <span class="fact-value">TTEM/FloaTEM</span></li>
+      <li><span class="fact-label" data-da="Anvendelse" data-en="Application">Anvendelse</span> <span class="fact-value" data-da="Land &amp; Vand" data-en="Land &amp; Water">Land &amp; Vand</span></li>
+      <li><span class="fact-label" data-da="Udstyr" data-en="Equipment">Udstyr</span> <span class="fact-value" data-da="Inkluderet" data-en="Included">Inkluderet</span></li>
+      <li><span class="fact-label" data-da="Erfaring" data-en="Experience">Erfaring</span> <span class="fact-value" data-da="Alle Klimaer" data-en="All Climates">Alle Klimaer</span></li>
+     </ul>
+     <div class="contact-card">
+      <h4 data-da="Har du brug for TTEM?" data-en="Need TTEM Surveys?">Har du brug for TTEM?</h4>
+      <p data-da="Konkurrencedygtige priser uden udlæg for udstyr eller software. Kontakt os for en gratis konsultation." data-en="Competitive prices with no outlay for equipment or software. Contact us for a free consultation.">Konkurrencedygtige priser uden udlæg for udstyr eller software. Kontakt os for en gratis konsultation.</p><a href="contact.html" class="contact-button primary" data-da="Få Tilbud" data-en="Get Quote">Få Tilbud</a> <a href="tel:+4527136222" class="contact-button" id="contact-phone-link">Ring Nu</a>
+     </div>
+    </div>
+   </div><!-- Technical Specifications -->
+   <div class="tech-specs" data-aos="fade-up">
+    <h3 data-da="Tekniske Specifikationer" data-en="Technical Specifications">Tekniske Specifikationer</h3>
+    <div class="specs-grid">
+     <div class="spec-item"><span class="spec-icon">⚡</span>
+      <div class="spec-title" data-da="Transmitter Effekt" data-en="Transmitter Power">
+       Transmitter Effekt
+      </div>
+      <div class="spec-value">
+       Op til 2500W
+      </div>
+     </div>
+     <div class="spec-item"><span class="spec-icon">🔄</span>
+      <div class="spec-title" data-da="Frekvensområde" data-en="Frequency Range">
+       Frekvensområde
+      </div>
+      <div class="spec-value">
+       0.1 Hz - 8 kHz
+      </div>
+     </div>
+     <div class="spec-item"><span class="spec-icon">📏</span>
+      <div class="spec-title" data-da="Loop Størrelse" data-en="Loop Size">
+       Loop Størrelse
+      </div>
+      <div class="spec-value">
+       10m x 10m - 200m x 200m
+      </div>
+     </div>
+     <div class="spec-item"><span class="spec-icon">⏱️</span>
+      <div class="spec-title" data-da="Tidsvindue" data-en="Time Window">
+       Tidsvindue
+      </div>
+      <div class="spec-value">
+       10 μs - 100 ms
+      </div>
+     </div>
+     <div class="spec-item"><span class="spec-icon">🎯</span>
+      <div class="spec-title" data-da="Nøjagtighed" data-en="Accuracy">
+       Nøjagtighed
+      </div>
+      <div class="spec-value">
+       ±2% ledningsevne
+      </div>
+     </div>
+     <div class="spec-item"><span class="spec-icon">📊</span>
+      <div class="spec-title" data-da="Dataopløsning" data-en="Data Resolution">
+       Dataopløsning
+      </div>
+      <div class="spec-value">
+       24-bit ADC
+      </div>
+     </div>
+    </div>
+   </div><!-- Applications -->
+   <section data-aos="fade-up">
+    <h2 data-da="Anvendelsesområder" data-en="Applications">Anvendelsesområder</h2>
+    <div class="applications-grid">
+     <div class="application-card"><span class="application-icon">💧</span>
+      <h4 data-da="Grundvandsundersøgelser" data-en="Groundwater Surveys">Grundvandsundersøgelser</h4>
+      <p data-da="Vurdering af tilgængelighed og kvalitet af drikkevand." data-en="Assessing the availability and quality of drinking water.">Vurdering af tilgængelighed og kvalitet af drikkevand.</p>
+     </div>
+     <div class="application-card"><span class="application-icon">🛡️</span>
+      <h4 data-da="Lerlagskortlægning" data-en="Clay Layer Mapping">Lerlagskortlægning</h4>
+      <p data-da="Kortlægning af omfang og udstrækning af overliggende lerlag, der beskytter akviferer." data-en="Mapping the volume and extent of overlying clay layers protecting aquifers.">Kortlægning af omfang og udstrækning af overliggende lerlag, der beskytter akviferer.</p>
+     </div>
+     <div class="application-card"><span class="application-icon">🏭</span>
+      <h4 data-da="Forureningskortlægning" data-en="Pollution Mapping">Forureningskortlægning</h4>
+      <p data-da="Kortlægning af mulig spredning af forurening i undergrunden." data-en="Mapping the possible spread of pollution in the underground.">Kortlægning af mulig spredning af forurening i undergrunden.</p>
+     </div>
+     <div class="application-card"><span class="application-icon">🌊</span>
+      <h4 data-da="Saltvandsindtrængning" data-en="Saltwater Intrusion">Saltvandsindtrængning</h4>
+      <p data-da="Bestemmelse af saltvandsindtrængning i kystområder." data-en="Determining saltwater intrusion in coastal areas.">Bestemmelse af saltvandsindtrængning i kystområder.</p>
+     </div>
+     <div class="application-card"><span class="application-icon">🗻</span>
+      <h4 data-da="Frakturzoner" data-en="Fracture Zones">Frakturzoner</h4>
+      <p data-da="Detektion af frakturzoner i det underliggende grundfjeld. Vigtige at forstå for at bestemme, hvordan vand trænger ned i undergrunden." data-en="Detection of fracture zones within the underlying bedrock. Important to understand to determine how water permeates underground.">Detektion af frakturzoner i det underliggende grundfjeld. Vigtige at forstå for at bestemme, hvordan vand trænger ned i undergrunden.</p>
+     </div>
+     <div class="application-card"><span class="application-icon">🏗️</span>
+      <h4 data-da="Byggeprojekter" data-en="Construction Projects">Byggeprojekter</h4>
+      <p data-da="Forud for større byggeprojekter (f.eks. store veje, store bygninger) for at bestemme materialer og metoder, der skal bruges." data-en="Prior to major construction works (e.g. major roads, large buildings) to determine materials and methods to be used.">Forud for større byggeprojekter (f.eks. store veje, store bygninger) for at bestemme materialer og metoder, der skal bruges.</p>
+     </div>
+     <div class="application-card"><span class="application-icon">⛏️</span>
+      <h4 data-da="Mineralefterforskning" data-en="Mineral Exploration">Mineralefterforskning</h4>
+      <p data-da="Til mineralefterforskning og lokalisering af malmforekomster." data-en="For mineral exploration and locating ore deposits.">Til mineralefterforskning og lokalisering af malmforekomster.</p>
+     </div>
+     <div class="application-card"><span class="application-icon">🧊</span>
+      <h4 data-da="Permafrostkortlægning" data-en="Permafrost Mapping">Permafrostkortlægning</h4>
+      <p data-da="Permafrostkortlægning (som supplement til Ground Penetrating Radar – GPR)." data-en="Permafrost mapping (as a supplement to Ground Penetrating Radar – GPR).">Permafrostkortlægning (som supplement til Ground Penetrating Radar – GPR).</p>
+     </div>
+     <div class="application-card"><span class="application-icon">🔄</span>
+      <h4 data-da="Supplement til Andre Metoder" data-en="Supplement to Other Methods">Supplement til Andre Metoder</h4>
+      <p data-da="At supplere eller erstatte andre typer geofysik, når dette er det rigtige værktøj til jobbet." data-en="To supplement or replace other types of geophysics when this is the right tool for the job.">At supplere eller erstatte andre typer geofysik, når dette er det rigtige værktøj til jobbet.</p>
+     </div>
+    </div>
+   </section><!-- Process Steps -->
+   <div class="process-steps" data-aos="fade-up">
+    <div class="process-container">
+     <h2 class="process-title" data-da="Vores TEM Proces" data-en="Our TEM Process">Vores TEM Proces</h2>
+     <div class="steps-grid">
+      <div class="step-card">
+       <div class="step-number">
+        1
+       </div><span class="step-icon">📋</span>
+       <h4 class="step-title" data-da="Planlægning" data-en="Planning">Planlægning</h4>
+       <p class="step-description" data-da="Detaljeret projektplanlægning, områderekognoscering og optimering af måleopsætning." data-en="Detailed project planning, site reconnaissance and measurement setup optimization.">Detaljeret projektplanlægning, områderekognoscering og optimering af måleopsætning.</p>
+      </div>
+      <div class="step-card">
+       <div class="step-number">
+        2
+       </div><span class="step-icon">🔧</span>
+       <h4 class="step-title" data-da="Opsætning" data-en="Setup">Opsætning</h4>
+       <p class="step-description" data-da="Installation af transmitter-loops, receiver-coils og kalibrering af udstyr." data-en="Installation of transmitter loops, receiver coils and equipment calibration.">Installation af transmitter-loops, receiver-coils og kalibrering af udstyr.</p>
+      </div>
+      <div class="step-card">
+       <div class="step-number">
+        3
+       </div><span class="step-icon">📡</span>
+       <h4 class="step-title" data-da="Dataindsamling" data-en="Data Acquisition">Dataindsamling</h4>
+       <p class="step-description" data-da="Systematisk måling af elektromagnetiske henfaldskurver med høj præcision." data-en="Systematic measurement of electromagnetic decay curves with high precision.">Systematisk måling af elektromagnetiske henfaldskurver med høj præcision.</p>
+      </div>
+      <div class="step-card">
+       <div class="step-number">
+        4
+       </div><span class="step-icon">💻</span>
+       <h4 class="step-title" data-da="Databehandling" data-en="Data Processing">Databehandling</h4>
+       <p class="step-description" data-da="Avanceret databehandling, støjreduktion og inversion til ledningsevnemodeller." data-en="Advanced data processing, noise reduction and inversion to conductivity models.">Avanceret databehandling, støjreduktion og inversion til ledningsevnemodeller.</p>
+      </div>
+      <div class="step-card">
+       <div class="step-number">
+        5
+       </div><span class="step-icon">📊</span>
+       <h4 class="step-title" data-da="Tolkning" data-en="Interpretation">Tolkning</h4>
+       <p class="step-description" data-da="Geologisk tolkning af resultater og integration med andre geofysiske data." data-en="Geological interpretation of results and integration with other geophysical data.">Geologisk tolkning af resultater og integration med andre geofysiske data.</p>
+      </div>
+      <div class="step-card">
+       <div class="step-number">
+        6
+       </div><span class="step-icon">📄</span>
+       <h4 class="step-title" data-da="Rapportering" data-en="Reporting">Rapportering</h4>
+       <p class="step-description" data-da="Omfattende rapport med resultater, tolkninger og anbefalinger." data-en="Comprehensive report with results, interpretations and recommendations.">Omfattende rapport med resultater, tolkninger og anbefalinger.</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </main><!-- Footer -->
+  <footer class="footer">
+   <div class="footer-container">
+    <div class="footer-section">
+     <h4 data-da="Kontakt Information" data-en="Contact Information">Kontakt Information</h4>
+     <p><strong data-da="Telefon" data-en="Phone">Telefon:</strong> <span id="contact-phone">(+45) 27 13 62 22</span></p>
+     <p><strong data-da="Email" data-en="Email">Email:</strong> <span id="contact-email">ab@bgeo.dk</span></p>
+     <p><strong data-da="Adresse" data-en="Address">Adresse:</strong><br>
+      Klemstrupvej 5<br>
+      8550 Ryomgård<br>
+      Danmark</p><a href="https://maps.app.goo.gl/W54qM8MDPJqyr2Xw8?g_st=awb" target="_blank" rel="noopener noreferrer" data-da="Se på kort" data-en="View on map">Se på kort →</a>
+    </div>
+    <div class="footer-section">
+     <h4 data-da="TEM Tjenester" data-en="TEM Services">TEM Tjenester</h4>
+     <p><a href="#overview" data-da="TEM Oversigt" data-en="TEM Overview">TEM Oversigt</a></p>
+     <p><a href="contact.html" data-da="Få Tilbud" data-en="Get Quote">Få Tilbud</a></p>
+     <p><a href="index.html" data-da="Andre Tjenester" data-en="Other Services">Andre Tjenester</a></p>
+    </div>
+    <div class="footer-section">
+     <h4 data-da="Virksomhed" data-en="Company">Virksomhed</h4>
+     <p><a href="about.html" data-da="Om Os" data-en="About Us">Om Os</a></p>
+     <p><a href="software.html" data-da="Software" data-en="Software">Software</a></p>
+     <p><a href="contact.html" data-da="Kontakt" data-en="Contact">Kontakt</a></p>
+    </div>
+    <div class="footer-section">
+     <h4 data-da="Følg Os" data-en="Follow Us">Følg Os</h4>
+     <div class="social-links"><a href="https://www.instagram.com/arne_bargheer?igsh=MW0wcmc2dWZudDhhNQ==" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram">📷</a> <a href="mailto:ab@bgeo.dk" class="social-link" title="Email">✉️</a> <a href="tel:+4527136222" class="social-link" title="Telefon">📞</a>
+     </div>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>© 2024 <span id="footer-company">Bargheer Geophysics</span>. <span data-da="Alle rettigheder forbeholdes" data-en="All rights reserved">Alle rettigheder forbeholdes</span>.</p>
+   </div>
+  </footer><!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+        // Configuration
+        const defaultConfig = {
+            company_name: "Bargheer Geophysics",
+            page_title: "TEM Undersøgelser",
+            hero_subtitle: "Avancerede tidsdomæne elektromagnetiske undersøgelser til dyb subsurface-udforskning og præcis ledningsevnekortlægning med state-of-the-art udstyr.",
+            overview_title: "Hvad er TEM Undersøgelser?",
+            overview_description: "TEM (Time-domain Electromagnetic) undersøgelser er en avanceret geofysisk metode, der bruger elektromagnetiske felter til at kortlægge subsurface-strukturer og ledningsevnefordelinger.",
+            contact_email: "ab@bgeo.dk",
+            contact_phone: "(+45) 27 13 62 22"
+        };
+
+        let currentLanguage = 'da';
+
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Language switching
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`lang-${lang}`).classList.add('active');
+            
+            // Update all elements with language attributes
+            document.querySelectorAll('[data-da][data-en]').forEach(element => {
+                element.textContent = element.getAttribute(`data-${lang}`);
+            });
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+        }
+
+        // Element SDK implementation
+        async function onConfigChange(config) {
+            // Update company name
+            const companyElements = document.querySelectorAll('#company-name, #footer-company');
+            companyElements.forEach(el => {
+                el.textContent = config.company_name || defaultConfig.company_name;
+            });
+
+            // Update page content
+            const pageTitle = document.getElementById('page-title');
+            const heroSubtitle = document.getElementById('hero-subtitle');
+            const overviewTitle = document.getElementById('overview-title');
+            const overviewDescription = document.getElementById('overview-description');
+            
+            if (pageTitle) {
+                pageTitle.textContent = config.page_title || defaultConfig.page_title;
+            }
+            if (heroSubtitle) {
+                heroSubtitle.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+            }
+            if (overviewTitle) {
+                overviewTitle.textContent = config.overview_title || defaultConfig.overview_title;
+            }
+            if (overviewDescription) {
+                overviewDescription.textContent = config.overview_description || defaultConfig.overview_description;
+            }
+
+            // Update contact information
+            const contactEmail = document.getElementById('contact-email');
+            const contactPhone = document.getElementById('contact-phone');
+            const contactPhoneLink = document.getElementById('contact-phone-link');
+            
+            if (contactEmail) {
+                contactEmail.textContent = config.contact_email || defaultConfig.contact_email;
+            }
+            if (contactPhone) {
+                contactPhone.textContent = config.contact_phone || defaultConfig.contact_phone;
+            }
+            if (contactPhoneLink) {
+                contactPhoneLink.href = `tel:${(config.contact_phone || defaultConfig.contact_phone).replace(/[^\d+]/g, '')}`;
+            }
+        }
+
+        // Form handling
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('contact-name').value;
+            const phone = document.getElementById('contact-phone-form').value;
+            const submitBtn = document.getElementById('submit-btn');
+            const messageDiv = document.getElementById('form-message');
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = currentLanguage === 'da' ? 'Sender...' : 'Sending...';
+            
+            // Simulate form submission
+            setTimeout(() => {
+                // Show success message
+                messageDiv.style.display = 'block';
+                messageDiv.style.background = 'rgba(34, 197, 94, 0.1)';
+                messageDiv.style.color = '#16a34a';
+                messageDiv.style.border = '2px solid rgba(34, 197, 94, 0.2)';
+                messageDiv.textContent = currentLanguage === 'da' 
+                    ? `Tak ${name}! Vi ringer til dig på ${phone} så snart som muligt.`
+                    : `Thank you ${name}! We will call you at ${phone} as soon as possible.`;
+                
+                // Reset form
+                document.getElementById('contact-form').reset();
+                
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.textContent = currentLanguage === 'da' ? 'Ring mig op' : 'Call me up';
+                
+                // Hide message after 5 seconds
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                }, 5000);
+            }, 1500);
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Element SDK
+            if (window.elementSdk) {
+                window.elementSdk.init({
+                    defaultConfig: defaultConfig,
+                    onConfigChange: onConfigChange,
+                    mapToCapabilities: (config) => ({
+                        recolorables: [],
+                        borderables: [],
+                        fontEditable: undefined,
+                        fontSizeable: undefined
+                    }),
+                    mapToEditPanelValues: (config) => new Map([
+                        ["page_title", config.page_title || defaultConfig.page_title],
+                        ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+                        ["overview_title", config.overview_title || defaultConfig.overview_title],
+                        ["overview_description", config.overview_description || defaultConfig.overview_description],
+                        ["contact_email", config.contact_email || defaultConfig.contact_email],
+                        ["contact_phone", config.contact_phone || defaultConfig.contact_phone]
+                    ])
+                });
+            }
+
+            // Mobile dropdown functionality
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(event) {
+                    if (window.innerWidth <= 768) {
+                        event.preventDefault();
+                        const dropdown = event.target.closest('.dropdown');
+                        const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+                        const arrow = dropdown.querySelector('.dropdown-arrow');
+                        
+                        dropdown.classList.toggle('mobile-active');
+                        arrow.style.transform = dropdown.classList.contains('mobile-active') ? 'rotate(180deg)' : 'rotate(0deg)';
+                    }
+                });
+            });
+
+            // Close dropdowns when window is resized to desktop
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    document.querySelectorAll('.dropdown').forEach(dropdown => {
+                        dropdown.classList.remove('mobile-active');
+                        const arrow = dropdown.querySelector('.dropdown-arrow');
+                        if (arrow) arrow.style.transform = 'rotate(0deg)';
+                    });
+                }
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('nav-menu');
+            const mobileToggle = document.querySelector('.mobile-toggle');
+            
+            if (!navMenu.contains(event.target) && !mobileToggle.contains(event.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e67a6e118213ad',t:'MTc2MzEyMjk4Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
