@@ -1,0 +1,1235 @@
+<!doctype html>
+<html lang="da">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geophysics AI - Bargheer Geophysics</title>
+  <meta name="description" content="Kunstig intelligens og maskinlæring til automatisk detektion af underjordiske strukturer fra geofysiske data. Millioner af datapunkter analyseret med præcision.">
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Language Toggle */
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 5px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(13, 79, 60, 0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: #0d4f3c;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .lang-btn.active {
+            background: #0d4f3c;
+            color: white;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(13, 79, 60, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0d4f3c;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: "🤖";
+            font-size: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: #1a1a1a;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(13, 79, 60, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(13, 79, 60, 0.1);
+            color: #0d4f3c;
+            transform: translateY(-2px);
+        }
+
+        /* Dropdown Styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dropdown-arrow {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(13, 79, 60, 0.1);
+            border-radius: 12px;
+            padding: 0.5rem 0;
+            min-width: 280px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            list-style: none;
+            margin: 0;
+            z-index: 1001;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-link {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: #1a1a1a;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            margin: 0 0.5rem;
+        }
+
+        .dropdown-link:hover {
+            background: rgba(13, 79, 60, 0.1);
+            color: #0d4f3c;
+            transform: translateX(5px);
+        }
+
+        /* Mobile Navigation */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #0d4f3c;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-toggle:hover {
+            background: rgba(13, 79, 60, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 50%, #0d4f3c 100%);
+            color: white;
+            padding: 8rem 2rem 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="circuit" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/><path d="M0,10 L20,10 M10,0 L10,20" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23circuit)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-icon {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            display: block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: white;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .hero-button.primary {
+            background: white;
+            color: #0d4f3c;
+            border-color: white;
+        }
+
+        .hero-button.primary:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .content-main h2 {
+            color: #0d4f3c;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #0d4f3c;
+            padding-bottom: 0.5rem;
+        }
+
+        .content-main h3 {
+            color: #0d4f3c;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .content-main p {
+            color: #4b5563;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* AI Data Flow Diagram */
+        .ai-diagram {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid rgba(13, 79, 60, 0.1);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            margin: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-diagram::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="0.5" fill="rgba(13,79,60,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .ai-diagram-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .ai-diagram svg {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        .diagram-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0d4f3c;
+            margin-bottom: 1rem;
+        }
+
+        .diagram-caption {
+            font-size: 0.95rem;
+            color: #6b7280;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        /* Data Stats */
+        .data-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            border: 2px solid rgba(13, 79, 60, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(13, 79, 60, 0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(13, 79, 60, 0.15);
+            border-color: rgba(13, 79, 60, 0.3);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #0d4f3c;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-description {
+            color: #6b7280;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* ML Features Grid */
+        .ml-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            border: 2px solid rgba(13, 79, 60, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(13, 79, 60, 0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(13, 79, 60, 0.15);
+            border-color: rgba(13, 79, 60, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-card h4 {
+            color: #0d4f3c;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+
+
+        /* Sidebar */
+        .sidebar {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+
+        .sidebar h3 {
+            color: #0d4f3c;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .quick-facts {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .quick-facts li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background: white;
+            border-radius: 10px;
+            border-left: 4px solid #0d4f3c;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .fact-label {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .fact-value {
+            color: #0d4f3c;
+            font-weight: 700;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .contact-card h4 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .contact-card p {
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .contact-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            margin: 0.25rem;
+        }
+
+        .contact-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .contact-button.primary {
+            background: white;
+            color: #0d4f3c;
+            border-color: white;
+        }
+
+        .contact-button.primary:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: #e5e7eb;
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid rgba(13, 79, 60, 0.2);
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h4 {
+            color: #0d4f3c;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #9ca3af;
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #0d4f3c;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(13, 79, 60, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0d4f3c;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: #0d4f3c;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(13, 79, 60, 0.1);
+            color: #6b7280;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                padding: 2rem;
+                gap: 0;
+                border-top: 1px solid rgba(13, 79, 60, 0.1);
+                backdrop-filter: blur(20px);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                background: transparent;
+                padding: 0;
+                margin: 0;
+                min-width: auto;
+                display: none;
+            }
+
+            .dropdown.mobile-active .dropdown-menu {
+                display: block;
+            }
+
+            .hero {
+                padding: 6rem 2rem 4rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .language-toggle {
+                top: 80px;
+                right: 10px;
+            }
+
+            .data-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .ml-features {
+                grid-template-columns: 1fr;
+            }
+
+
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f8f9fa;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #1a5f4a 0%, #0d4f3c 100%);
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body><!-- Language Toggle -->
+  <div class="language-toggle"><button class="lang-btn active" onclick="setLanguage('da')" id="lang-da">DA</button> <button class="lang-btn" onclick="setLanguage('en')" id="lang-en">EN</button>
+  </div><!-- Navigation -->
+  <nav class="navbar" id="navbar">
+   <div class="nav-container"><a href="index.html" class="logo" id="company-name">Bargheer Geophysics</a> <button class="mobile-toggle" onclick="toggleMobileMenu()">☰</button>
+    <ul class="nav-menu" id="nav-menu">
+     <li class="nav-item"><a href="index.html" class="nav-link" data-da="Hjem" data-en="Home">Hjem</a></li>
+     <li class="nav-item"><a href="about.html" class="nav-link" data-da="Om Os" data-en="About">Om Os</a></li>
+     <li class="nav-item dropdown">
+      <div class="nav-link dropdown-toggle" data-da="Geofysiske Undersøgelser" data-en="Geophysical Surveys"><span>Geofysiske Undersøgelser</span> <span class="dropdown-arrow">▼</span>
+      </div>
+      <ul class="dropdown-menu">
+       <li><a href="dcip.html" class="dropdown-link" data-da="DC/IP Undersøgelser" data-en="DC/IP Surveys">DC/IP Undersøgelser</a></li>
+       <li><a href="tem.html" class="dropdown-link" data-da="TEM Undersøgelser" data-en="TEM Surveys">TEM Undersøgelser</a></li>
+       <li><a href="mrs.html" class="dropdown-link" data-da="MRS Undersøgelser" data-en="MRS Surveys">MRS Undersøgelser</a></li>
+       <li><a href="seismics.html" class="dropdown-link" data-da="Seismiske Undersøgelser" data-en="Seismic Surveys">Seismiske Undersøgelser</a></li>
+       <li><a href="gravimetrics.html" class="dropdown-link" data-da="Gravimetriske Undersøgelser" data-en="Gravimetric Surveys">Gravimetriske Undersøgelser</a></li>
+       <li><a href="magnetics.html" class="dropdown-link" data-da="Ground Conductivity Meter" data-en="Ground Conductivity Meter">Ground Conductivity Meter</a></li>
+       <li><a href="radiometrics.html" class="dropdown-link" data-da="Radiometriske Undersøgelser" data-en="Radiometric Surveys">Radiometriske Undersøgelser</a></li>
+      </ul></li>
+     <li class="nav-item"><a href="ai.html" class="nav-link active" data-da="Geophysics AI" data-en="Geophysics AI">Geophysics AI</a></li>
+     <li class="nav-item"><a href="software.html" class="nav-link" data-da="Geofysik Software" data-en="Geophysics Software">Geofysik Software</a></li>
+     <li class="nav-item"><a href="contact.html" class="nav-link" data-da="Kontakt" data-en="Contact">Kontakt</a></li>
+    </ul>
+   </div>
+  </nav><!-- Hero Section -->
+  <section class="hero">
+   <div class="hero-content" data-aos="fade-up" data-aos-duration="1000"><span class="hero-icon">🤖</span>
+    <h1 id="page-title" data-da="Geophysics AI" data-en="Geophysics AI">Geophysics AI</h1>
+    <p id="hero-subtitle" data-da="Kunstig intelligens og maskinlæring til automatisk detektion af underjordiske strukturer fra millioner af geofysiske datapunkter med høj præcision." data-en="Artificial intelligence and machine learning for automatic detection of underground structures from millions of geophysical data points with high precision.">Kunstig intelligens og maskinlæring til automatisk detektion af underjordiske strukturer fra millioner af geofysiske datapunkter med høj præcision.</p>
+    <div class="hero-buttons"><a href="contact.html" class="hero-button primary" data-da="Få en Demo" data-en="Get a Demo"> <span>Få en Demo</span> <span>🚀</span> </a> <a href="#overview" class="hero-button" data-da="Læs Mere" data-en="Learn More"> <span>Læs Mere</span> <span>📊</span> </a>
+    </div>
+   </div>
+  </section><!-- Main Content -->
+  <main class="main-content">
+   <div class="content-grid">
+    <div class="content-main">
+     <section id="overview">
+      <h2 id="overview-title" data-da="Millioner af Datapunkter, Automatisk Analyse" data-en="Millions of Data Points, Automatic Analysis">Millioner af Datapunkter, Automatisk Analyse</h2>
+      <p id="overview-description" data-da="En daglig session af GCM-målinger indsamler nemt millioner af datapunkter. Ved hjælp af feedback fra arkæologer og vores kunder har vi lavet en specialbygget maskinlæringsalgoritme. Dette gør det muligt for os automatisk at detektere forskellige typer underjordiske strukturer – lige fra historiske nedbrudte ruiner og bosættelser til præcisionspositionering af moderne begravede rør og kabler." data-en="A daily session of GCM measurements easily collects millions of datapoints. Using feedback from archaeologists and our customers, we have made a custom-built Machine Learning algorithm. This enables us to automatically detect different types of underground features – ranging from historical decomposed ruins and settlements, to precision positioning of modern buried pipes and cables.">En daglig session af GCM-målinger indsamler nemt millioner af datapunkter. Ved hjælp af feedback fra arkæologer og vores kunder har vi lavet en specialbygget maskinlæringsalgoritme. Dette gør det muligt for os automatisk at detektere forskellige typer underjordiske strukturer – lige fra historiske nedbrudte ruiner og bosættelser til præcisionspositionering af moderne begravede rør og kabler.</p>
+      <div class="ai-diagram">
+       <div class="ai-diagram-content">
+        <div class="diagram-title" data-da="AI-Drevet Dataanalyse Workflow" data-en="AI-Driven Data Analysis Workflow">
+         AI-Drevet Dataanalyse Workflow
+        </div>
+        <svg width="600" height="400" viewbox="0 0 600 400"><!-- Data Collection --> <rect x="20" y="50" width="120" height="60" fill="#0d4f3c" rx="10" /> <text x="80" y="75" text-anchor="middle" fill="white" font-size="12" font-weight="bold">
+          GCM Data
+         </text> <text x="80" y="90" text-anchor="middle" fill="white" font-size="10">
+          Millioner af
+         </text> <text x="80" y="102" text-anchor="middle" fill="white" font-size="10">
+          datapunkter
+         </text> <!-- Arrow 1 --> <path d="M 150 80 L 180 80" stroke="#0d4f3c" stroke-width="3" marker-end="url(#arrowgreen)" /> <text x="165" y="75" text-anchor="middle" font-size="8" fill="#0d4f3c">
+          Real-time
+         </text> <!-- Preprocessing --> <rect x="190" y="50" width="120" height="60" fill="#1a5f4a" rx="10" /> <text x="250" y="75" text-anchor="middle" fill="white" font-size="12" font-weight="bold">
+          Forbehandling
+         </text> <text x="250" y="90" text-anchor="middle" fill="white" font-size="10">
+          Filtrering &amp;
+         </text> <text x="250" y="102" text-anchor="middle" fill="white" font-size="10">
+          Normalisering
+         </text> <!-- Arrow 2 --> <path d="M 320 80 L 350 80" stroke="#0d4f3c" stroke-width="3" marker-end="url(#arrowgreen)" /> <!-- AI Analysis --> <rect x="360" y="30" width="140" height="100" fill="#ff6b35" rx="15" /> <text x="430" y="55" text-anchor="middle" fill="white" font-size="14" font-weight="bold">
+          🤖 AI Analyse
+         </text> <text x="430" y="75" text-anchor="middle" fill="white" font-size="11">
+          Machine Learning
+         </text> <text x="430" y="90" text-anchor="middle" fill="white" font-size="11">
+          Algoritme
+         </text> <text x="430" y="105" text-anchor="middle" fill="white" font-size="10">
+          Pattern Recognition
+         </text> <text x="430" y="118" text-anchor="middle" fill="white" font-size="10">
+          Feature Detection
+         </text> <!-- Training Data Input --> <rect x="360" y="150" width="140" height="50" fill="#6c757d" rx="10" /> <text x="430" y="170" text-anchor="middle" fill="white" font-size="11" font-weight="bold">
+          Træningsdata
+         </text> <text x="430" y="185" text-anchor="middle" fill="white" font-size="10">
+          Arkæolog feedback
+         </text> <text x="430" y="195" text-anchor="middle" fill="white" font-size="10">
+          Kendte strukturer
+         </text> <!-- Arrow from training to AI --> <path d="M 430 150 L 430 130" stroke="#6c757d" stroke-width="2" marker-end="url(#arrowgray)" /> <!-- Detection Results --> <rect x="50" y="250" width="100" height="80" fill="#28a745" rx="10" /> <text x="100" y="270" text-anchor="middle" fill="white" font-size="10" font-weight="bold">
+          🏺 Arkæologi
+         </text> <text x="100" y="285" text-anchor="middle" fill="white" font-size="9">
+          Ruiner
+         </text> <text x="100" y="295" text-anchor="middle" fill="white" font-size="9">
+          Bosættelser
+         </text> <text x="100" y="305" text-anchor="middle" fill="white" font-size="9">
+          Grave
+         </text> <text x="100" y="315" text-anchor="middle" fill="white" font-size="9">
+          Fundamenter
+         </text> <rect x="170" y="250" width="100" height="80" fill="#007bff" rx="10" /> <text x="220" y="270" text-anchor="middle" fill="white" font-size="10" font-weight="bold">
+          🔧 Infrastruktur
+         </text> <text x="220" y="285" text-anchor="middle" fill="white" font-size="9">
+          Rør
+         </text> <text x="220" y="295" text-anchor="middle" fill="white" font-size="9">
+          Kabler
+         </text> <text x="220" y="305" text-anchor="middle" fill="white" font-size="9">
+          Ledninger
+         </text> <text x="220" y="315" text-anchor="middle" fill="white" font-size="9">
+          Tanke
+         </text> <rect x="290" y="250" width="100" height="80" fill="#6f42c1" rx="10" /> <text x="340" y="270" text-anchor="middle" fill="white" font-size="10" font-weight="bold">
+          🌍 Geologi
+         </text> <text x="340" y="285" text-anchor="middle" fill="white" font-size="9">
+          Jordlag
+         </text> <text x="340" y="295" text-anchor="middle" fill="white" font-size="9">
+          Grundvand
+         </text> <text x="340" y="305" text-anchor="middle" fill="white" font-size="9">
+          Anomalier
+         </text> <text x="340" y="315" text-anchor="middle" fill="white" font-size="9">
+          Kontakter
+         </text> <rect x="410" y="250" width="100" height="80" fill="#dc3545" rx="10" /> <text x="460" y="270" text-anchor="middle" fill="white" font-size="10" font-weight="bold">
+          ⚠️ Miljø
+         </text> <text x="460" y="285" text-anchor="middle" fill="white" font-size="9">
+          Forurening
+         </text> <text x="460" y="295" text-anchor="middle" fill="white" font-size="9">
+          Lossepladser
+         </text> <text x="460" y="305" text-anchor="middle" fill="white" font-size="9">
+          Lækager
+         </text> <text x="460" y="315" text-anchor="middle" fill="white" font-size="9">
+          Hotspots
+         </text> <!-- Arrows from AI to results --> <path d="M 400 130 Q 350 180 100 250" stroke="#0d4f3c" stroke-width="2" marker-end="url(#arrowgreen)" fill="none" /> <path d="M 420 130 Q 350 180 220 250" stroke="#0d4f3c" stroke-width="2" marker-end="url(#arrowgreen)" fill="none" /> <path d="M 440 130 Q 380 180 340 250" stroke="#0d4f3c" stroke-width="2" marker-end="url(#arrowgreen)" fill="none" /> <path d="M 460 130 Q 450 180 460 250" stroke="#0d4f3c" stroke-width="2" marker-end="url(#arrowgreen)" fill="none" /> <!-- Confidence indicators --> <circle cx="130" cy="240" r="8" fill="#28a745" /> <text x="130" y="245" text-anchor="middle" fill="white" font-size="8" font-weight="bold">
+          95%
+         </text> <circle cx="250" cy="240" r="8" fill="#007bff" /> <text x="250" y="245" text-anchor="middle" fill="white" font-size="8" font-weight="bold">
+          92%
+         </text> <circle cx="370" cy="240" r="8" fill="#6f42c1" /> <text x="370" y="245" text-anchor="middle" fill="white" font-size="8" font-weight="bold">
+          88%
+         </text> <circle cx="490" cy="240" r="8" fill="#dc3545" /> <text x="490" y="245" text-anchor="middle" fill="white" font-size="8" font-weight="bold">
+          91%
+         </text> <!-- Legend --> <text x="30" y="370" font-size="10" fill="#666">
+          Tillidsgrad:
+         </text> <circle cx="90" cy="367" r="4" fill="#28a745" /> <text x="100" y="371" font-size="8" fill="#666">
+          Høj (&gt;90%)
+         </text> <circle cx="160" cy="367" r="4" fill="#ffc107" /> <text x="170" y="371" font-size="8" fill="#666">
+          Medium (70-90%)
+         </text> <circle cx="240" cy="367" r="4" fill="#dc3545" /> <text x="250" y="371" font-size="8" fill="#666">
+          Lav (&lt;70%)
+         </text> <!-- Arrow markers --> <defs>
+          <marker id="arrowgreen" markerwidth="10" markerheight="7" refx="9" refy="3.5" orient="auto">
+           <polygon points="0 0, 10 3.5, 0 7" fill="#0d4f3c" />
+          </marker>
+          <marker id="arrowgray" markerwidth="10" markerheight="7" refx="9" refy="3.5" orient="auto">
+           <polygon points="0 0, 10 3.5, 0 7" fill="#6c757d" />
+          </marker>
+         </defs>
+        </svg>
+        <div class="diagram-caption" data-da="Vores AI-system analyserer millioner af datapunkter i realtid og klassificerer automatisk forskellige typer underjordiske strukturer med høj præcision" data-en="Our AI system analyzes millions of data points in real-time and automatically classifies different types of underground structures with high precision">
+         Vores AI-system analyserer millioner af datapunkter i realtid og klassificerer automatisk forskellige typer underjordiske strukturer med høj præcision
+        </div>
+       </div>
+      </div>
+     </section><!-- Data Statistics -->
+     <section>
+      <h3 data-da="Imponerende Datakapacitet" data-en="Impressive Data Capacity">Imponerende Datakapacitet</h3>
+      <div class="data-stats">
+       <div class="stat-card"><span class="stat-number">1M+</span>
+        <div class="stat-label" data-da="Datapunkter/dag" data-en="Data points/day">
+         Datapunkter/dag
+        </div>
+        <div class="stat-description" data-da="Indsamlet fra GCM-målinger" data-en="Collected from GCM measurements">
+         Indsamlet fra GCM-målinger
+        </div>
+       </div>
+       <div class="stat-card"><span class="stat-number">95%</span>
+        <div class="stat-label" data-da="Nøjagtighed" data-en="Accuracy">
+         Nøjagtighed
+        </div>
+        <div class="stat-description" data-da="For arkæologisk detektion" data-en="For archaeological detection">
+         For arkæologisk detektion
+        </div>
+       </div>
+       <div class="stat-card"><span class="stat-number">50+</span>
+        <div class="stat-label" data-da="Strukturtyper" data-en="Structure types">
+         Strukturtyper
+        </div>
+        <div class="stat-description" data-da="Automatisk klassificeret" data-en="Automatically classified">
+         Automatisk klassificeret
+        </div>
+       </div>
+       <div class="stat-card"><span class="stat-number">10x</span>
+        <div class="stat-label" data-da="Hurtigere analyse" data-en="Faster analysis">
+         Hurtigere analyse
+        </div>
+        <div class="stat-description" data-da="Sammenlignet med manuel tolkning" data-en="Compared to manual interpretation">
+         Sammenlignet med manuel tolkning
+        </div>
+       </div>
+      </div>
+     </section>
+     <section>
+      <h3 data-da="Mere Værdi fra Data" data-en="More Value from Data">Mere Værdi fra Data</h3>
+      <p data-da="Jo flere geofysiske data vi kan kombinere med præcisionsmålinger af kendte underjordiske strukturer, jo højere præcision får vores forudsigelser. Vi søger aktivt at udvide samarbejdet med arkæologiske museer, forskningsinstitutioner og iværksættere." data-en="The more geophysics data we can combine with precision measurements of known underground structures, the higher the precision of our predictions. We are actively seeking to expand collaborations with archaeological museums, research institutions and entrepreneurs.">Jo flere geofysiske data vi kan kombinere med præcisionsmålinger af kendte underjordiske strukturer, jo højere præcision får vores forudsigelser. Vi søger aktivt at udvide samarbejdet med arkæologiske museer, forskningsinstitutioner og iværksættere.</p>
+      <p data-da="Ved brug af GCM-undersøgelser med arkæologi som hovedfokus ville vi ofte kombinere GCM-undersøgelsen med andre typer geofysik. Hovedideen bag softwaren er at udtrække ekstra information og værdi fra en undersøgelse, der i sig selv allerede giver en masse information om geologi og geotekniske forhold." data-en="Using GCM surveys with archaeology as the main focus we would often combine the GCM survey with other types of geophysics, the main idea behind the software is to extract extra information and value from a survey that in itself already gives a lot of information about geology and geotechnical conditions.">Ved brug af GCM-undersøgelser med arkæologi som hovedfokus ville vi ofte kombinere GCM-undersøgelsen med andre typer geofysik. Hovedideen bag softwaren er at udtrække ekstra information og værdi fra en undersøgelse, der i sig selv allerede giver en masse information om geologi og geotekniske forhold.</p>
+     </section><!-- ML Features -->
+     <section>
+      <h3 data-da="AI-funktioner" data-en="AI Features">AI-funktioner</h3>
+      <div class="ml-features">
+       <div class="feature-card"><span class="feature-icon">🎯</span>
+        <h4 data-da="Automatisk Detektion" data-en="Automatic Detection">Automatisk Detektion</h4>
+        <p data-da="Identificerer automatisk arkæologiske strukturer, moderne infrastruktur og geologiske anomalier med høj præcision." data-en="Automatically identifies archaeological structures, modern infrastructure and geological anomalies with high precision.">Identificerer automatisk arkæologiske strukturer, moderne infrastruktur og geologiske anomalier med høj præcision.</p>
+       </div>
+       <div class="feature-card"><span class="feature-icon">📊</span>
+        <h4 data-da="Realtidsanalyse" data-en="Real-time Analysis">Realtidsanalyse</h4>
+        <p data-da="Behandler millioner af datapunkter i realtid under feltarbejde for øjeblikkelig feedback og kvalitetskontrol." data-en="Processes millions of data points in real-time during fieldwork for immediate feedback and quality control.">Behandler millioner af datapunkter i realtid under feltarbejde for øjeblikkelig feedback og kvalitetskontrol.</p>
+       </div>
+       <div class="feature-card"><span class="feature-icon">🧠</span>
+        <h4 data-da="Kontinuerlig Læring" data-en="Continuous Learning">Kontinuerlig Læring</h4>
+        <p data-da="Algoritmen forbedres konstant med feedback fra arkæologer og nye opdagelser for øget nøjagtighed." data-en="The algorithm constantly improves with feedback from archaeologists and new discoveries for increased accuracy.">Algoritmen forbedres konstant med feedback fra arkæologer og nye opdagelser for øget nøjagtighed.</p>
+       </div>
+       <div class="feature-card"><span class="feature-icon">🔍</span>
+        <h4 data-da="Præcisionspositionering" data-en="Precision Positioning">Præcisionspositionering</h4>
+        <p data-da="Leverer centimeter-præcis lokalisering af begravede rør, kabler og andre moderne infrastrukturelementer." data-en="Provides centimeter-precise localization of buried pipes, cables and other modern infrastructure elements.">Leverer centimeter-præcis lokalisering af begravede rør, kabler og andre moderne infrastrukturelementer.</p>
+       </div>
+       <div class="feature-card"><span class="feature-icon">📈</span>
+        <h4 data-da="Tillidsscoring" data-en="Confidence Scoring">Tillidsscoring</h4>
+        <p data-da="Hver detektion kommer med en tillidsgrad, så du ved hvor sikre resultaterne er." data-en="Each detection comes with a confidence score, so you know how reliable the results are.">Hver detektion kommer med en tillidsgrad, så du ved hvor sikre resultaterne er.</p>
+       </div>
+       <div class="feature-card"><span class="feature-icon">🎨</span>
+        <h4 data-da="Intelligent Visualisering" data-en="Intelligent Visualization">Intelligent Visualisering</h4>
+        <p data-da="Automatisk generering af detaljerede kort og 3D-visualiseringer af detekterede strukturer." data-en="Automatic generation of detailed maps and 3D visualizations of detected structures.">Automatisk generering af detaljerede kort og 3D-visualiseringer af detekterede strukturer.</p>
+       </div>
+      </div>
+     </section>
+    </div>
+    <div class="sidebar">
+     <h3 data-da="AI Specifikationer" data-en="AI Specifications">AI Specifikationer</h3>
+     <ul class="quick-facts">
+      <li><span class="fact-label" data-da="Datakapacitet" data-en="Data Capacity">Datakapacitet</span> <span class="fact-value">1M+ punkter/dag</span></li>
+      <li><span class="fact-label" data-da="Behandlingstid" data-en="Processing Time">Behandlingstid</span> <span class="fact-value" data-da="Realtid" data-en="Real-time">Realtid</span></li>
+      <li><span class="fact-label" data-da="Nøjagtighed" data-en="Accuracy">Nøjagtighed</span> <span class="fact-value">95%+</span></li>
+      <li><span class="fact-label" data-da="Strukturtyper" data-en="Structure Types">Strukturtyper</span> <span class="fact-value">50+</span></li>
+      <li><span class="fact-label" data-da="Algoritme" data-en="Algorithm">Algoritme</span> <span class="fact-value" data-da="Specialbygget ML" data-en="Custom-built ML">Specialbygget ML</span></li>
+     </ul>
+     <div class="contact-card">
+      <h4 data-da="Interesseret i AI-analyse?" data-en="Interested in AI Analysis?">Interesseret i AI-analyse?</h4>
+      <p data-da="Få automatisk detektion og analyse af dine geofysiske data med vores avancerede AI-system. Kontakt os for en demonstration." data-en="Get automatic detection and analysis of your geophysical data with our advanced AI system. Contact us for a demonstration.">Få automatisk detektion og analyse af dine geofysiske data med vores avancerede AI-system. Kontakt os for en demonstration.</p><a href="contact.html" class="contact-button primary" data-da="Book Demo" data-en="Book Demo">Book Demo</a> <a href="tel:+4527136222" class="contact-button" id="contact-phone-link">Ring Nu</a>
+     </div>
+    </div>
+   </div>
+  </main><!-- Footer -->
+  <footer class="footer">
+   <div class="footer-container">
+    <div class="footer-section">
+     <h4 data-da="Kontakt Information" data-en="Contact Information">Kontakt Information</h4>
+     <p><strong data-da="Telefon" data-en="Phone">Telefon:</strong> <span id="contact-phone">(+45) 27 13 62 22</span></p>
+     <p><strong data-da="Email" data-en="Email">Email:</strong> <span id="contact-email">ab@bgeo.dk</span></p>
+     <p><strong data-da="Adresse" data-en="Address">Adresse:</strong><br>
+      Klemstrupvej 5<br>
+      8550 Ryomgård<br>
+      Danmark</p><a href="https://maps.app.goo.gl/W54qM8MDPJqyr2Xw8?g_st=awb" target="_blank" rel="noopener noreferrer" data-da="Se på kort" data-en="View on map">Se på kort →</a>
+    </div>
+    <div class="footer-section">
+     <h4 data-da="AI Tjenester" data-en="AI Services">AI Tjenester</h4>
+     <p><a href="#overview" data-da="AI Oversigt" data-en="AI Overview">AI Oversigt</a></p>
+     <p><a href="contact.html" data-da="Book Demo" data-en="Book Demo">Book Demo</a></p>
+     <p><a href="magnetics.html" data-da="GCM Undersøgelser" data-en="GCM Surveys">GCM Undersøgelser</a></p>
+    </div>
+    <div class="footer-section">
+     <h4 data-da="Virksomhed" data-en="Company">Virksomhed</h4>
+     <p><a href="about.html" data-da="Om Os" data-en="About Us">Om Os</a></p>
+     <p><a href="software.html" data-da="Software" data-en="Software">Software</a></p>
+     <p><a href="contact.html" data-da="Kontakt" data-en="Contact">Kontakt</a></p>
+    </div>
+    <div class="footer-section">
+     <h4 data-da="Følg Os" data-en="Follow Us">Følg Os</h4>
+     <div class="social-links"><a href="https://www.instagram.com/arne_bargheer?igsh=MW0wcmc2dWZudDhhNQ==" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram">📷</a> <a href="mailto:ab@bgeo.dk" class="social-link" title="Email">✉️</a> <a href="tel:+4527136222" class="social-link" title="Telefon">📞</a>
+     </div>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>© 2024 <span id="footer-company">Bargheer Geophysics</span>. <span data-da="Alle rettigheder forbeholdes" data-en="All rights reserved">Alle rettigheder forbeholdes</span>.</p>
+   </div>
+  </footer><!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+        // Configuration
+        const defaultConfig = {
+            company_name: "Bargheer Geophysics",
+            page_title: "Geophysics AI",
+            hero_subtitle: "Kunstig intelligens og maskinlæring til automatisk detektion af underjordiske strukturer fra millioner af geofysiske datapunkter med høj præcision.",
+            overview_title: "Millioner af Datapunkter, Automatisk Analyse",
+            overview_description: "En daglig session af GCM-målinger indsamler nemt millioner af datapunkter. Ved hjælp af feedback fra arkæologer og vores kunder har vi lavet en specialbygget maskinlæringsalgoritme. Dette gør det muligt for os automatisk at detektere forskellige typer underjordiske strukturer – lige fra historiske nedbrudte ruiner og bosættelser til præcisionspositionering af moderne begravede rør og kabler.",
+            contact_email: "ab@bgeo.dk",
+            contact_phone: "(+45) 27 13 62 22"
+        };
+
+        let currentLanguage = 'da';
+
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Language switching
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`lang-${lang}`).classList.add('active');
+            
+            // Update all elements with language attributes
+            document.querySelectorAll('[data-da][data-en]').forEach(element => {
+                element.textContent = element.getAttribute(`data-${lang}`);
+            });
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+        }
+
+        // Element SDK implementation
+        async function onConfigChange(config) {
+            // Update company name
+            const companyElements = document.querySelectorAll('#company-name, #footer-company');
+            companyElements.forEach(el => {
+                el.textContent = config.company_name || defaultConfig.company_name;
+            });
+
+            // Update page content
+            const pageTitle = document.getElementById('page-title');
+            const heroSubtitle = document.getElementById('hero-subtitle');
+            const overviewTitle = document.getElementById('overview-title');
+            const overviewDescription = document.getElementById('overview-description');
+            
+            if (pageTitle) {
+                pageTitle.textContent = config.page_title || defaultConfig.page_title;
+            }
+            if (heroSubtitle) {
+                heroSubtitle.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+            }
+            if (overviewTitle) {
+                overviewTitle.textContent = config.overview_title || defaultConfig.overview_title;
+            }
+            if (overviewDescription) {
+                overviewDescription.textContent = config.overview_description || defaultConfig.overview_description;
+            }
+
+            // Update contact information
+            const contactEmail = document.getElementById('contact-email');
+            const contactPhone = document.getElementById('contact-phone');
+            const contactPhoneLink = document.getElementById('contact-phone-link');
+            
+            if (contactEmail) {
+                contactEmail.textContent = config.contact_email || defaultConfig.contact_email;
+            }
+            if (contactPhone) {
+                contactPhone.textContent = config.contact_phone || defaultConfig.contact_phone;
+            }
+            if (contactPhoneLink) {
+                contactPhoneLink.href = `tel:${(config.contact_phone || defaultConfig.contact_phone).replace(/[^\d+]/g, '')}`;
+            }
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Element SDK
+            if (window.elementSdk) {
+                window.elementSdk.init({
+                    defaultConfig: defaultConfig,
+                    onConfigChange: onConfigChange,
+                    mapToCapabilities: (config) => ({
+                        recolorables: [],
+                        borderables: [],
+                        fontEditable: undefined,
+                        fontSizeable: undefined
+                    }),
+                    mapToEditPanelValues: (config) => new Map([
+                        ["page_title", config.page_title || defaultConfig.page_title],
+                        ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+                        ["overview_title", config.overview_title || defaultConfig.overview_title],
+                        ["overview_description", config.overview_description || defaultConfig.overview_description],
+                        ["contact_email", config.contact_email || defaultConfig.contact_email],
+                        ["contact_phone", config.contact_phone || defaultConfig.contact_phone]
+                    ])
+                });
+            }
+
+            // Mobile dropdown functionality
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(event) {
+                    if (window.innerWidth <= 768) {
+                        event.preventDefault();
+                        const dropdown = event.target.closest('.dropdown');
+                        const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+                        const arrow = dropdown.querySelector('.dropdown-arrow');
+                        
+                        dropdown.classList.toggle('mobile-active');
+                        arrow.style.transform = dropdown.classList.contains('mobile-active') ? 'rotate(180deg)' : 'rotate(0deg)';
+                    }
+                });
+            });
+
+            // Close dropdowns when window is resized to desktop
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    document.querySelectorAll('.dropdown').forEach(dropdown => {
+                        dropdown.classList.remove('mobile-active');
+                        const arrow = dropdown.querySelector('.dropdown-arrow');
+                        if (arrow) arrow.style.transform = 'rotate(0deg)';
+                    });
+                }
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('nav-menu');
+            const mobileToggle = document.querySelector('.mobile-toggle');
+            
+            if (!navMenu.contains(event.target) && !mobileToggle.contains(event.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e75ec2867d8a6a',t:'MTc2MzEzMjM0MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
