@@ -1,0 +1,1209 @@
+<!doctype html>
+<html lang="da">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IP Processing - Bargheer Geophysics</title>
+  <meta name="description" content="Automatiseret behandling af geoelektriske DCIP-data med avancerede matematiske metoder og datascience for hurtigere og bedre resultater.">
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Language Toggle */
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 5px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(13, 79, 60, 0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: #0d4f3c;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .lang-btn.active {
+            background: #0d4f3c;
+            color: white;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(13, 79, 60, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0d4f3c;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: "⚡";
+            font-size: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: #1a1a1a;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(13, 79, 60, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(13, 79, 60, 0.1);
+            color: #0d4f3c;
+            transform: translateY(-2px);
+        }
+
+        /* Dropdown Styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dropdown-arrow {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(13, 79, 60, 0.1);
+            border-radius: 12px;
+            padding: 0.5rem 0;
+            min-width: 280px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            list-style: none;
+            margin: 0;
+            z-index: 1001;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-link {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: #1a1a1a;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            margin: 0 0.5rem;
+        }
+
+        .dropdown-link:hover {
+            background: rgba(13, 79, 60, 0.1);
+            color: #0d4f3c;
+            transform: translateX(5px);
+        }
+
+        /* Mobile Navigation */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #0d4f3c;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-toggle:hover {
+            background: rgba(13, 79, 60, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 50%, #0d4f3c 100%);
+            color: white;
+            padding: 8rem 2rem 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="circuit" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/><path d="M0,10 L20,10 M10,0 L10,20" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23circuit)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-icon {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            display: block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: white;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .hero-button.primary {
+            background: white;
+            color: #0d4f3c;
+            border-color: white;
+        }
+
+        .hero-button.primary:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .content-main h2 {
+            color: #0d4f3c;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #0d4f3c;
+            padding-bottom: 0.5rem;
+        }
+
+        .content-main h3 {
+            color: #0d4f3c;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .content-main p {
+            color: #4b5563;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Processing Workflow Diagram */
+        .processing-diagram {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid rgba(13, 79, 60, 0.1);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            margin: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .processing-diagram::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="0.5" fill="rgba(13,79,60,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .processing-diagram-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .processing-diagram svg {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        .diagram-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0d4f3c;
+            margin-bottom: 1rem;
+        }
+
+        .diagram-caption {
+            font-size: 0.95rem;
+            color: #6b7280;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        /* Processing Stats */
+        .processing-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            border: 2px solid rgba(13, 79, 60, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(13, 79, 60, 0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(13, 79, 60, 0.15);
+            border-color: rgba(13, 79, 60, 0.3);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #0d4f3c;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-description {
+            color: #6b7280;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Benefits Grid */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .benefit-card {
+            background: white;
+            border: 2px solid rgba(13, 79, 60, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(13, 79, 60, 0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .benefit-card:hover::before {
+            opacity: 1;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(13, 79, 60, 0.15);
+            border-color: rgba(13, 79, 60, 0.3);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .benefit-card h4 {
+            color: #0d4f3c;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-card p {
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+
+        .sidebar h3 {
+            color: #0d4f3c;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .quick-facts {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .quick-facts li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background: white;
+            border-radius: 10px;
+            border-left: 4px solid #0d4f3c;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .fact-label {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .fact-value {
+            color: #0d4f3c;
+            font-weight: 700;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .contact-card h4 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .contact-card p {
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .contact-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            margin: 0.25rem;
+        }
+
+        .contact-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .contact-button.primary {
+            background: white;
+            color: #0d4f3c;
+            border-color: white;
+        }
+
+        .contact-button.primary:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: #e5e7eb;
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid rgba(13, 79, 60, 0.2);
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h4 {
+            color: #0d4f3c;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #9ca3af;
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #0d4f3c;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(13, 79, 60, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0d4f3c;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: #0d4f3c;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(13, 79, 60, 0.1);
+            color: #6b7280;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                padding: 2rem;
+                gap: 0;
+                border-top: 1px solid rgba(13, 79, 60, 0.1);
+                backdrop-filter: blur(20px);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                background: transparent;
+                padding: 0;
+                margin: 0;
+                min-width: auto;
+                display: none;
+            }
+
+            .dropdown.mobile-active .dropdown-menu {
+                display: block;
+            }
+
+            .hero {
+                padding: 6rem 2rem 4rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .language-toggle {
+                top: 80px;
+                right: 10px;
+            }
+
+            .processing-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f8f9fa;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #1a5f4a 0%, #0d4f3c 100%);
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body><!-- Language Toggle -->
+  <div class="language-toggle"><button class="lang-btn active" onclick="setLanguage('da')" id="lang-da">DA</button> <button class="lang-btn" onclick="setLanguage('en')" id="lang-en">EN</button>
+  </div><!-- Navigation -->
+  <nav class="navbar" id="navbar">
+   <div class="nav-container"><a href="index.html" class="logo" id="company-name">Bargheer Geophysics</a> <button class="mobile-toggle" onclick="toggleMobileMenu()">☰</button>
+    <ul class="nav-menu" id="nav-menu">
+     <li class="nav-item"><a href="index.html" class="nav-link" data-da="Hjem" data-en="Home">Hjem</a></li>
+     <li class="nav-item"><a href="about.html" class="nav-link" data-da="Om Os" data-en="About">Om Os</a></li>
+     <li class="nav-item dropdown">
+      <div class="nav-link dropdown-toggle" data-da="Geofysiske Undersøgelser" data-en="Geophysical Surveys"><span>Geofysiske Undersøgelser</span> <span class="dropdown-arrow">▼</span>
+      </div>
+      <ul class="dropdown-menu">
+       <li><a href="dcip.html" class="dropdown-link" data-da="DC/IP Undersøgelser" data-en="DC/IP Surveys">DC/IP Undersøgelser</a></li>
+       <li><a href="tem.html" class="dropdown-link" data-da="TEM Undersøgelser" data-en="TEM Surveys">TEM Undersøgelser</a></li>
+       <li><a href="mrs.html" class="dropdown-link" data-da="MRS Undersøgelser" data-en="MRS Surveys">MRS Undersøgelser</a></li>
+       <li><a href="seismics.html" class="dropdown-link" data-da="Seismiske Undersøgelser" data-en="Seismic Surveys">Seismiske Undersøgelser</a></li>
+       <li><a href="gravimetrics.html" class="dropdown-link" data-da="Gravimetriske Undersøgelser" data-en="Gravimetric Surveys">Gravimetriske Undersøgelser</a></li>
+       <li><a href="magnetics.html" class="dropdown-link" data-da="Ground Conductivity Meter" data-en="Ground Conductivity Meter">Ground Conductivity Meter</a></li>
+       <li><a href="radiometrics.html" class="dropdown-link" data-da="Radiometriske Undersøgelser" data-en="Radiometric Surveys">Radiometriske Undersøgelser</a></li>
+      </ul></li>
+     <li class="nav-item"><a href="ai.html" class="nav-link" data-da="Geophysics AI" data-en="Geophysics AI">Geophysics AI</a></li>
+     <li class="nav-item"><a href="ip-processing.html" class="nav-link active" data-da="IP Processing" data-en="IP Processing">IP Processing</a></li>
+     <li class="nav-item"><a href="software.html" class="nav-link" data-da="Geofysik Software" data-en="Geophysics Software">Geofysik Software</a></li>
+     <li class="nav-item"><a href="contact.html" class="nav-link" data-da="Kontakt" data-en="Contact">Kontakt</a></li>
+    </ul>
+   </div>
+  </nav><!-- Hero Section -->
+  <section class="hero">
+   <div class="hero-content" data-aos="fade-up" data-aos-duration="1000"><span class="hero-icon">⚡</span>
+    <h1 id="page-title" data-da="IP Processing" data-en="IP Processing">IP Processing</h1>
+    <p id="hero-subtitle" data-da="Automatiseret behandling af geoelektriske DCIP-data med avancerede matematiske metoder og datascience for hurtigere og bedre resultater." data-en="Automated processing of geoelectric DCIP data with advanced mathematical methods and data science for faster and better results.">Automatiseret behandling af geoelektriske DCIP-data med avancerede matematiske metoder og datascience for hurtigere og bedre resultater.</p>
+    <div class="hero-buttons"><a href="contact.html" class="hero-button primary" data-da="Få en Demo" data-en="Get a Demo"> <span>Få en Demo</span> <span>🚀</span> </a> <a href="#overview" class="hero-button" data-da="Læs Mere" data-en="Learn More"> <span>Læs Mere</span> <span>📊</span> </a>
+    </div>
+   </div>
+  </section><!-- Main Content -->
+  <main class="main-content">
+   <div class="content-grid">
+    <div class="content-main">
+     <section id="overview">
+      <h2 id="overview-title" data-da="Hurtigere DCIP-behandling gennem Automatisering" data-en="Speeding up DCIP Processing through Automation">Hurtigere DCIP-behandling gennem Automatisering</h2>
+      <p id="overview-description" data-da="Geofysiske data vil altid indeholde støj. Selvom mange forholdsregler kan tages i felten for at begrænse støj og fejl, skal data stadig vurderes af en ekspert for at inspicere og rense dataene, før et ordentligt billede af undergrunden kan skabes." data-en="Geophysical data will always contain noise. While many precautions can be taken in the field to limit the noise and errors, data still needs to be assessed by an expert to inspect and clean the data before a proper image of the underground can be made.">Geofysiske data vil altid indeholde støj. Selvom mange forholdsregler kan tages i felten for at begrænse støj og fejl, skal data stadig vurderes af en ekspert for at inspicere og rense dataene, før et ordentligt billede af undergrunden kan skabes.</p>
+      <p data-da="Ved at kombinere avancerede matematiske metoder og datascience med banebrydende videnskabelige fremskridt inden for geofysik, er vores interne software i stand til at automatisere store dele af den manuelle databehandling for geoelektriske DCIP-data." data-en="Combining advanced mathematical methods and data science with cutting edge scientific progress within geophysics, our in-house software is capable of automating major parts of the manual data processing for geoelectric DCIP data.">Ved at kombinere avancerede matematiske metoder og datascience med banebrydende videnskabelige fremskridt inden for geofysik, er vores interne software i stand til at automatisere store dele af den manuelle databehandling for geoelektriske DCIP-data.</p>
+      <p data-da="Kort sagt giver vores software mulighed for at få bedre resultater hurtigere, langt ud over den tidligere norm for geoelektriske undersøgelser." data-en="In short, our software allows to get better results faster, well beyond the previous norm for geoelectric surveys.">Kort sagt giver vores software mulighed for at få bedre resultater hurtigere, langt ud over den tidligere norm for geoelektriske undersøgelser.</p>
+      <div class="processing-diagram">
+       <div class="processing-diagram-content">
+        <div class="diagram-title" data-da="Automatiseret DCIP Databehandling Workflow" data-en="Automated DCIP Data Processing Workflow">
+         Automatiseret DCIP Databehandling Workflow
+        </div>
+        <svg width="600" height="350" viewbox="0 0 600 350"><!-- Raw Data Input --> <rect x="20" y="50" width="120" height="60" fill="#dc3545" rx="10" /> <text x="80" y="75" text-anchor="middle" fill="white" font-size="12" font-weight="bold">
+          Rå DCIP Data
+         </text> <text x="80" y="90" text-anchor="middle" fill="white" font-size="10">
+          Støj &amp; Fejl
+         </text> <text x="80" y="102" text-anchor="middle" fill="white" font-size="10">
+          Inkluderet
+         </text> <!-- Arrow 1 --> <path d="M 150 80 L 180 80" stroke="#0d4f3c" stroke-width="3" marker-end="url(#arrowgreen)" /> <text x="165" y="75" text-anchor="middle" font-size="8" fill="#0d4f3c">
+          Automatisk
+         </text> <!-- Automated Processing --> <rect x="190" y="30" width="140" height="100" fill="#0d4f3c" rx="15" /> <text x="260" y="55" text-anchor="middle" fill="white" font-size="14" font-weight="bold">
+          🤖 Automatiseret
+         </text> <text x="260" y="70" text-anchor="middle" fill="white" font-size="14" font-weight="bold">
+          Behandling
+         </text> <text x="260" y="90" text-anchor="middle" fill="white" font-size="10">
+          Støjreduktion
+         </text> <text x="260" y="102" text-anchor="middle" fill="white" font-size="10">
+          Fejldetektion
+         </text> <text x="260" y="114" text-anchor="middle" fill="white" font-size="10">
+          Datarensning
+         </text> <!-- Arrow 2 --> <path d="M 340 80 L 370 80" stroke="#0d4f3c" stroke-width="3" marker-end="url(#arrowgreen)" /> <text x="355" y="75" text-anchor="middle" font-size="8" fill="#0d4f3c">
+          Hurtig
+         </text> <!-- Clean Data Output --> <rect x="380" y="50" width="120" height="60" fill="#28a745" rx="10" /> <text x="440" y="75" text-anchor="middle" fill="white" font-size="12" font-weight="bold">
+          Rensede Data
+         </text> <text x="440" y="90" text-anchor="middle" fill="white" font-size="10">
+          Klar til
+         </text> <text x="440" y="102" text-anchor="middle" fill="white" font-size="10">
+          Inversion
+         </text> <!-- Processing Steps --> <rect x="50" y="180" width="100" height="70" fill="#6c757d" rx="10" /> <text x="100" y="200" text-anchor="middle" fill="white" font-size="11" font-weight="bold">
+          📊 Støjanalyse
+         </text> <text x="100" y="215" text-anchor="middle" fill="white" font-size="9">
+          Statistisk
+         </text> <text x="100" y="225" text-anchor="middle" fill="white" font-size="9">
+          Filtrering
+         </text> <text x="100" y="235" text-anchor="middle" fill="white" font-size="9">
+          Outlier Detection
+         </text> <rect x="170" y="180" width="100" height="70" fill="#007bff" rx="10" /> <text x="220" y="200" text-anchor="middle" fill="white" font-size="11" font-weight="bold">
+          🔍 Kvalitetskontrol
+         </text> <text x="220" y="215" text-anchor="middle" fill="white" font-size="9">
+          Automatisk
+         </text> <text x="220" y="225" text-anchor="middle" fill="white" font-size="9">
+          Validering
+         </text> <text x="220" y="235" text-anchor="middle" fill="white" font-size="9">
+          Konsistenscheck
+         </text> <rect x="290" y="180" width="100" height="70" fill="#6f42c1" rx="10" /> <text x="340" y="200" text-anchor="middle" fill="white" font-size="11" font-weight="bold">
+          ⚡ Optimering
+         </text> <text x="340" y="215" text-anchor="middle" fill="white" font-size="9">
+          Parameter
+         </text> <text x="340" y="225" text-anchor="middle" fill="white" font-size="9">
+          Tuning
+         </text> <text x="340" y="235" text-anchor="middle" fill="white" font-size="9">
+          Præstationsboost
+         </text> <rect x="410" y="180" width="100" height="70" fill="#ff6b35" rx="10" /> <text x="460" y="200" text-anchor="middle" fill="white" font-size="11" font-weight="bold">
+          📈 Inversion
+         </text> <text x="460" y="215" text-anchor="middle" fill="white" font-size="9">
+          Hurtig
+         </text> <text x="460" y="225" text-anchor="middle" fill="white" font-size="9">
+          Beregning
+         </text> <text x="460" y="235" text-anchor="middle" fill="white" font-size="9">
+          Høj Kvalitet
+         </text> <!-- Arrows from main flow to processing steps --> <path d="M 260 130 Q 200 150 100 180" stroke="#0d4f3c" stroke-width="2" marker-end="url(#arrowgreen)" fill="none" /> <path d="M 260 130 Q 240 150 220 180" stroke="#0d4f3c" stroke-width="2" marker-end="url(#arrowgreen)" fill="none" /> <path d="M 260 130 Q 280 150 340 180" stroke="#0d4f3c" stroke-width="2" marker-end="url(#arrowgreen)" fill="none" /> <path d="M 440 110 Q 450 140 460 180" stroke="#0d4f3c" stroke-width="2" marker-end="url(#arrowgreen)" fill="none" /> <!-- Time indicators --> <circle cx="80" cy="40" r="12" fill="#dc3545" /> <text x="80" y="45" text-anchor="middle" fill="white" font-size="8" font-weight="bold">
+          Dage
+         </text> <circle cx="260" cy="20" r="12" fill="#0d4f3c" /> <text x="260" y="25" text-anchor="middle" fill="white" font-size="8" font-weight="bold">
+          Timer
+         </text> <circle cx="440" cy="40" r="12" fill="#28a745" /> <text x="440" y="45" text-anchor="middle" fill="white" font-size="8" font-weight="bold">
+          Min
+         </text> <!-- Performance indicators --> <text x="30" y="320" font-size="10" fill="#666">
+          Traditionel behandling:
+         </text> <rect x="140" y="312" width="60" height="8" fill="#dc3545" rx="4" /> <text x="210" y="320" font-size="8" fill="#666">
+          3-5 dage
+         </text> <text x="30" y="335" font-size="10" fill="#666">
+          Automatiseret behandling:
+         </text> <rect x="140" y="327" width="15" height="8" fill="#28a745" rx="4" /> <text x="165" y="335" font-size="8" fill="#666">
+          2-4 timer
+         </text> <!-- Arrow markers --> <defs>
+          <marker id="arrowgreen" markerwidth="10" markerheight="7" refx="9" refy="3.5" orient="auto">
+           <polygon points="0 0, 10 3.5, 0 7" fill="#0d4f3c" />
+          </marker>
+         </defs>
+        </svg>
+        <div class="diagram-caption" data-da="Vores automatiserede system reducerer behandlingstiden fra dage til timer, samtidig med at kvaliteten forbedres betydeligt" data-en="Our automated system reduces processing time from days to hours while significantly improving quality">
+         Vores automatiserede system reducerer behandlingstiden fra dage til timer, samtidig med at kvaliteten forbedres betydeligt
+        </div>
+       </div>
+      </div>
+     </section><!-- Processing Statistics -->
+     <section>
+      <h3 data-da="Imponerende Behandlingsresultater" data-en="Impressive Processing Results">Imponerende Behandlingsresultater</h3>
+      <div class="processing-stats">
+       <div class="stat-card"><span class="stat-number">10x</span>
+        <div class="stat-label" data-da="Hurtigere" data-en="Faster">
+         Hurtigere
+        </div>
+        <div class="stat-description" data-da="End traditionel manuel behandling" data-en="Than traditional manual processing">
+         End traditionel manuel behandling
+        </div>
+       </div>
+       <div class="stat-card"><span class="stat-number">95%</span>
+        <div class="stat-label" data-da="Automatisering" data-en="Automation">
+         Automatisering
+        </div>
+        <div class="stat-description" data-da="Af databehandlingsprocessen" data-en="Of data processing workflow">
+         Af databehandlingsprocessen
+        </div>
+       </div>
+       <div class="stat-card"><span class="stat-number">2-4</span>
+        <div class="stat-label" data-da="Timer" data-en="Hours">
+         Timer
+        </div>
+        <div class="stat-description" data-da="Fra rå data til inversion" data-en="From raw data to inversion">
+         Fra rå data til inversion
+        </div>
+       </div>
+       <div class="stat-card"><span class="stat-number">50%</span>
+        <div class="stat-label" data-da="Bedre kvalitet" data-en="Better quality">
+         Bedre kvalitet
+        </div>
+        <div class="stat-description" data-da="Sammenlignet med manuel behandling" data-en="Compared to manual processing">
+         Sammenlignet med manuel behandling
+        </div>
+       </div>
+      </div>
+     </section>
+     <section>
+      <h3 data-da="Yderligere Praktiske Anvendelser af DCIP" data-en="Further Practical Uses of DCIP">Yderligere Praktiske Anvendelser af DCIP</h3>
+      <p data-da="Udover at spare tid og forbedre resultater åbner vores software op for yderligere praktiske anvendelser af DCIP-målinger:" data-en="Besides saving time and improving results, our software opens up for further practical uses of DCIP measurements:">Udover at spare tid og forbedre resultater åbner vores software op for yderligere praktiske anvendelser af DCIP-målinger:</p>
+      <div class="benefits-grid">
+       <div class="benefit-card"><span class="benefit-icon">📊</span>
+        <h4 data-da="Daglig Databehandling" data-en="Day-to-Day Processing">Daglig Databehandling</h4>
+        <p data-da="Når data er indsamlet i felten, kan vores software køres og inversioner på behandlede data kan udføres meget hurtigt. Dette giver mulighed for et dynamisk dataindsamlingssetup, hvor hver undersøgelseslinje placeres i den optimale position ud fra al tilgængelig information, inklusive tidligere indsamlede data." data-en="Once data has been collected in the field, our software can be run and inversions on processed data can be carried out very fast. This allows for a dynamic data collection setup, placing each survey line in the optimal position from all available information, including the data collected previously.">Når data er indsamlet i felten, kan vores software køres og inversioner på behandlede data kan udføres meget hurtigt. Dette giver mulighed for et dynamisk dataindsamlingssetup, hvor hver undersøgelseslinje placeres i den optimale position ud fra al tilgængelig information, inklusive tidligere indsamlede data.</p>
+       </div>
+       <div class="benefit-card"><span class="benefit-icon">⏱️</span>
+        <h4 data-da="Temporale Målinger" data-en="Temporal Measurements">Temporale Målinger</h4>
+        <p data-da="Traditionelt har behandling af IP-data været kostbar i forhold til menneskelig arbejdstid. Ved hjælp af vores software er det nu praktisk at indsamle en masse data og stadig holde behandlingsomkostningerne rimelige. Eksempler på brug af temporale målinger er kortlægning af ændringer i en forureningsfane over tid og overvågning af saltvandsindtrængning under ferskvandsspejlet i en kystzone." data-en="Traditionally processing IP data has been costly in terms of human labor time. Using our software, it is now practical to collect a lot of data and still keep the processing cost reasonable. Examples of use of temporal measurements is mapping the changes in a contamination fan over time and monitoring salt water intrusion under the fresh water table in a coastal zone.">Traditionelt har behandling af IP-data været kostbar i forhold til menneskelig arbejdstid. Ved hjælp af vores software er det nu praktisk at indsamle en masse data og stadig holde behandlingsomkostningerne rimelige. Eksempler på brug af temporale målinger er kortlægning af ændringer i en forureningsfane over tid og overvågning af saltvandsindtrængning under ferskvandsspejlet i en kystzone.</p>
+       </div>
+       <div class="benefit-card"><span class="benefit-icon">🎯</span>
+        <h4 data-da="Dynamisk Feltarbejde" data-en="Dynamic Fieldwork">Dynamisk Feltarbejde</h4>
+        <p data-da="Realtidsbehandling gør det muligt at justere undersøgelsesstrategien undervejs baseret på de seneste resultater, hvilket optimerer dataindsamlingen og sikrer bedre dækning af interesseområder." data-en="Real-time processing enables adjusting survey strategy on-the-go based on latest results, optimizing data collection and ensuring better coverage of areas of interest.">Realtidsbehandling gør det muligt at justere undersøgelsesstrategien undervejs baseret på de seneste resultater, hvilket optimerer dataindsamlingen og sikrer bedre dækning af interesseområder.</p>
+       </div>
+       <div class="benefit-card"><span class="benefit-icon">💰</span>
+        <h4 data-da="Omkostningseffektivitet" data-en="Cost Effectiveness">Omkostningseffektivitet</h4>
+        <p data-da="Dramatisk reduktion i manuel arbejdstid betyder lavere omkostninger og hurtigere projektgennemførelse, hvilket gør DCIP-undersøgelser mere tilgængelige for flere projekter." data-en="Dramatic reduction in manual labor time means lower costs and faster project completion, making DCIP surveys more accessible for more projects.">Dramatisk reduktion i manuel arbejdstid betyder lavere omkostninger og hurtigere projektgennemførelse, hvilket gør DCIP-undersøgelser mere tilgængelige for flere projekter.</p>
+       </div>
+      </div>
+     </section>
+     <section>
+      <p data-da="Vi er forpligtet til at forblive på forkant med udviklingen af geofysiske metoder, samtidig med at vi altid prioriterer kvaliteten af vores arbejde og vores kunders behov højest." data-en="We are committed to staying on the cutting edge of the development of geophysical methods while always putting the highest priority on the quality of our work and the needs of our clients.">Vi er forpligtet til at forblive på forkant med udviklingen af geofysiske metoder, samtidig med at vi altid prioriterer kvaliteten af vores arbejde og vores kunders behov højest.</p>
+      <p data-da="Tøv ikke med at kontakte os, hvis vores løsninger har fanget din interesse. Vi diskuterer altid gerne ethvert potentielt fremtidigt projekt eller udvikling." data-en="Don't hesitate to contact us if our solutions have caught your interest, we are always happy discuss any potential future project or development.">Tøv ikke med at kontakte os, hvis vores løsninger har fanget din interesse. Vi diskuterer altid gerne ethvert potentielt fremtidigt projekt eller udvikling.</p>
+     </section>
+    </div>
+    <div class="sidebar">
+     <h3 data-da="IP Processing Specifikationer" data-en="IP Processing Specifications">IP Processing Specifikationer</h3>
+     <ul class="quick-facts">
+      <li><span class="fact-label" data-da="Behandlingstid" data-en="Processing Time">Behandlingstid</span> <span class="fact-value">2-4 timer</span></li>
+      <li><span class="fact-label" data-da="Automatisering" data-en="Automation">Automatisering</span> <span class="fact-value">95%</span></li>
+      <li><span class="fact-label" data-da="Hastighedsforøgelse" data-en="Speed Increase">Hastighedsforøgelse</span> <span class="fact-value">10x</span></li>
+      <li><span class="fact-label" data-da="Kvalitetsforbedring" data-en="Quality Improvement">Kvalitetsforbedring</span> <span class="fact-value">50%</span></li>
+      <li><span class="fact-label" data-da="Datatyper" data-en="Data Types">Datatyper</span> <span class="fact-value">DC/IP</span></li>
+     </ul>
+     <div class="contact-card">
+      <h4 data-da="Interesseret i IP Processing?" data-en="Interested in IP Processing?">Interesseret i IP Processing?</h4>
+      <p data-da="Få hurtigere og bedre resultater med vores automatiserede DCIP-behandlingssoftware. Kontakt os for en demonstration af systemet." data-en="Get faster and better results with our automated DCIP processing software. Contact us for a demonstration of the system.">Få hurtigere og bedre resultater med vores automatiserede DCIP-behandlingssoftware. Kontakt os for en demonstration af systemet.</p><a href="contact.html" class="contact-button primary" data-da="Book Demo" data-en="Book Demo">Book Demo</a> <a href="tel:+4527136222" class="contact-button" id="contact-phone-link">Ring Nu</a>
+     </div>
+    </div>
+   </div>
+  </main><!-- Footer -->
+  <footer class="footer">
+   <div class="footer-container">
+    <div class="footer-section">
+     <h4 data-da="Kontakt Information" data-en="Contact Information">Kontakt Information</h4>
+     <p><strong data-da="Telefon" data-en="Phone">Telefon:</strong> <span id="contact-phone">(+45) 27 13 62 22</span></p>
+     <p><strong data-da="Email" data-en="Email">Email:</strong> <span id="contact-email">ab@bgeo.dk</span></p>
+     <p><strong data-da="Adresse" data-en="Address">Adresse:</strong><br>
+      Klemstrupvej 5<br>
+      8550 Ryomgård<br>
+      Danmark</p><a href="https://maps.app.goo.gl/W54qM8MDPJqyr2Xw8?g_st=awb" target="_blank" rel="noopener noreferrer" data-da="Se på kort" data-en="View on map">Se på kort →</a>
+    </div>
+    <div class="footer-section">
+     <h4 data-da="IP Processing Tjenester" data-en="IP Processing Services">IP Processing Tjenester</h4>
+     <p><a href="#overview" data-da="IP Processing Oversigt" data-en="IP Processing Overview">IP Processing Oversigt</a></p>
+     <p><a href="contact.html" data-da="Book Demo" data-en="Book Demo">Book Demo</a></p>
+     <p><a href="dcip.html" data-da="DCIP Undersøgelser" data-en="DCIP Surveys">DCIP Undersøgelser</a></p>
+    </div>
+    <div class="footer-section">
+     <h4 data-da="Virksomhed" data-en="Company">Virksomhed</h4>
+     <p><a href="about.html" data-da="Om Os" data-en="About Us">Om Os</a></p>
+     <p><a href="software.html" data-da="Software" data-en="Software">Software</a></p>
+     <p><a href="contact.html" data-da="Kontakt" data-en="Contact">Kontakt</a></p>
+    </div>
+    <div class="footer-section">
+     <h4 data-da="Følg Os" data-en="Follow Us">Følg Os</h4>
+     <div class="social-links"><a href="https://www.instagram.com/arne_bargheer?igsh=MW0wcmc2dWZudDhhNQ==" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram">📷</a> <a href="mailto:ab@bgeo.dk" class="social-link" title="Email">✉️</a> <a href="tel:+4527136222" class="social-link" title="Telefon">📞</a>
+     </div>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>© 2024 <span id="footer-company">Bargheer Geophysics</span>. <span data-da="Alle rettigheder forbeholdes" data-en="All rights reserved">Alle rettigheder forbeholdes</span>.</p>
+   </div>
+  </footer><!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+        // Configuration
+        const defaultConfig = {
+            company_name: "Bargheer Geophysics",
+            page_title: "IP Processing",
+            hero_subtitle: "Automatiseret behandling af geoelektriske DCIP-data med avancerede matematiske metoder og datascience for hurtigere og bedre resultater.",
+            overview_title: "Hurtigere DCIP-behandling gennem Automatisering",
+            overview_description: "Geofysiske data vil altid indeholde støj. Selvom mange forholdsregler kan tages i felten for at begrænse støj og fejl, skal data stadig vurderes af en ekspert for at inspicere og rense dataene, før et ordentligt billede af undergrunden kan skabes.",
+            contact_email: "ab@bgeo.dk",
+            contact_phone: "(+45) 27 13 62 22"
+        };
+
+        let currentLanguage = 'da';
+
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Language switching
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`lang-${lang}`).classList.add('active');
+            
+            // Update all elements with language attributes
+            document.querySelectorAll('[data-da][data-en]').forEach(element => {
+                element.textContent = element.getAttribute(`data-${lang}`);
+            });
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+        }
+
+        // Element SDK implementation
+        async function onConfigChange(config) {
+            // Update company name
+            const companyElements = document.querySelectorAll('#company-name, #footer-company');
+            companyElements.forEach(el => {
+                el.textContent = config.company_name || defaultConfig.company_name;
+            });
+
+            // Update page content
+            const pageTitle = document.getElementById('page-title');
+            const heroSubtitle = document.getElementById('hero-subtitle');
+            const overviewTitle = document.getElementById('overview-title');
+            const overviewDescription = document.getElementById('overview-description');
+            
+            if (pageTitle) {
+                pageTitle.textContent = config.page_title || defaultConfig.page_title;
+            }
+            if (heroSubtitle) {
+                heroSubtitle.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+            }
+            if (overviewTitle) {
+                overviewTitle.textContent = config.overview_title || defaultConfig.overview_title;
+            }
+            if (overviewDescription) {
+                overviewDescription.textContent = config.overview_description || defaultConfig.overview_description;
+            }
+
+            // Update contact information
+            const contactEmail = document.getElementById('contact-email');
+            const contactPhone = document.getElementById('contact-phone');
+            const contactPhoneLink = document.getElementById('contact-phone-link');
+            
+            if (contactEmail) {
+                contactEmail.textContent = config.contact_email || defaultConfig.contact_email;
+            }
+            if (contactPhone) {
+                contactPhone.textContent = config.contact_phone || defaultConfig.contact_phone;
+            }
+            if (contactPhoneLink) {
+                contactPhoneLink.href = `tel:${(config.contact_phone || defaultConfig.contact_phone).replace(/[^\d+]/g, '')}`;
+            }
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Element SDK
+            if (window.elementSdk) {
+                window.elementSdk.init({
+                    defaultConfig: defaultConfig,
+                    onConfigChange: onConfigChange,
+                    mapToCapabilities: (config) => ({
+                        recolorables: [],
+                        borderables: [],
+                        fontEditable: undefined,
+                        fontSizeable: undefined
+                    }),
+                    mapToEditPanelValues: (config) => new Map([
+                        ["page_title", config.page_title || defaultConfig.page_title],
+                        ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+                        ["overview_title", config.overview_title || defaultConfig.overview_title],
+                        ["overview_description", config.overview_description || defaultConfig.overview_description],
+                        ["contact_email", config.contact_email || defaultConfig.contact_email],
+                        ["contact_phone", config.contact_phone || defaultConfig.contact_phone]
+                    ])
+                });
+            }
+
+            // Mobile dropdown functionality
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(event) {
+                    if (window.innerWidth <= 768) {
+                        event.preventDefault();
+                        const dropdown = event.target.closest('.dropdown');
+                        const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+                        const arrow = dropdown.querySelector('.dropdown-arrow');
+                        
+                        dropdown.classList.toggle('mobile-active');
+                        arrow.style.transform = dropdown.classList.contains('mobile-active') ? 'rotate(180deg)' : 'rotate(0deg)';
+                    }
+                });
+            });
+
+            // Close dropdowns when window is resized to desktop
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    document.querySelectorAll('.dropdown').forEach(dropdown => {
+                        dropdown.classList.remove('mobile-active');
+                        const arrow = dropdown.querySelector('.dropdown-arrow');
+                        if (arrow) arrow.style.transform = 'rotate(0deg)';
+                    });
+                }
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('nav-menu');
+            const mobileToggle = document.querySelector('.mobile-toggle');
+            
+            if (!navMenu.contains(event.target) && !mobileToggle.contains(event.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e772eb87848a6a',t:'MTc2MzEzMzE2Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
