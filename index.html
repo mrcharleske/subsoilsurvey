@@ -3,8 +3,8 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bargheer Geophysics - Professionelle Geofysiske Tjenester</title>
-  <meta name="description" content="Bargheer Geophysics tilbyder professionelle geofysiske undersøgelser i Danmark. Specialister i DC/IP, TEM, seismik og mere.">
+  <title>Bargheer Geophysics - Professionelle Geofysiske Undersøgelser</title>
+  <meta name="description" content="Bargheer Geophysics tilbyder professionelle geofysiske undersøgelser i Danmark. Specialister i DC/IP, TEM, seismik, gravimetri og magnetiske undersøgelser.">
   <script src="/_sdk/element_sdk.js"></script>
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,66 +24,6 @@
 
         * {
             box-sizing: border-box;
-        }
-
-        /* Custom Loading Animation */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #0d4f3c 0%, #ffffff 50%, #0d4f3c 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
-
-        .loading-screen.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .drilling-animation {
-            position: relative;
-            width: 100px;
-            height: 100px;
-        }
-
-        .drill-bit {
-            width: 20px;
-            height: 60px;
-            background: linear-gradient(45deg, #0d4f3c, #1a5f4a);
-            border-radius: 10px 10px 0 0;
-            position: absolute;
-            left: 50%;
-            top: 20px;
-            transform: translateX(-50%);
-            animation: drilling 2s infinite linear;
-        }
-
-        .drill-waves {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            border: 2px solid #0d4f3c;
-            border-radius: 50%;
-            top: 10px;
-            left: 10px;
-            animation: pulse 2s infinite ease-in-out;
-        }
-
-        @keyframes drilling {
-            0% { transform: translateX(-50%) rotate(0deg) translateY(0px); }
-            50% { transform: translateX(-50%) rotate(180deg) translateY(5px); }
-            100% { transform: translateX(-50%) rotate(360deg) translateY(0px); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.5; }
         }
 
         /* Language Toggle */
@@ -128,6 +68,68 @@
             z-index: 1000;
             border-bottom: 1px solid rgba(13, 79, 60, 0.1);
             transition: all 0.3s ease;
+        }
+
+        /* Dropdown Styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dropdown-arrow {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(13, 79, 60, 0.1);
+            border-radius: 12px;
+            padding: 0.5rem 0;
+            min-width: 280px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            list-style: none;
+            margin: 0;
+            z-index: 1001;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-link {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: #1a1a1a;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            margin: 0 0.5rem;
+        }
+
+        .dropdown-link:hover {
+            background: rgba(13, 79, 60, 0.1);
+            color: #0d4f3c;
+            transform: translateX(5px);
         }
 
         .navbar.scrolled {
@@ -227,77 +229,68 @@
             background: rgba(13, 79, 60, 0.1);
         }
 
-        /* Particle Background */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
+        /* Mobile Dropdown */
+        .mobile-dropdown-toggle {
+            background: none;
+            border: none;
+            color: #0d4f3c;
+            font-size: 0.9rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            margin-left: auto;
+            transition: transform 0.3s ease;
         }
 
-        .particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: #0d4f3c;
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: float 8s infinite ease-in-out;
+        .mobile-dropdown-toggle.active {
+            transform: rotate(180deg);
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
-            50% { transform: translateY(-30px) rotate(180deg); opacity: 0.6; }
+        .mobile-dropdown-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: rgba(13, 79, 60, 0.05);
+            border-radius: 8px;
+            margin: 0.5rem 0;
+        }
+
+        .mobile-dropdown-menu.active {
+            max-height: 400px;
+        }
+
+        .mobile-dropdown-menu .dropdown-link {
+            padding: 0.75rem 1.5rem;
+            margin: 0;
+            border-radius: 0;
+            font-size: 0.9rem;
         }
 
         /* Hero Section */
         .hero {
-            position: relative;
-            height: 100%;
             background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f8f9fa 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 8rem 2rem 6rem;
+            text-align: center;
+            position: relative;
             overflow: hidden;
-            padding: 120px 2rem 60px;
-            border-bottom: 1px solid rgba(13, 79, 60, 0.1);
+            margin-top: 80px;
         }
 
-        .hero-video {
+        .hero::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            opacity: 0.1;
-            z-index: 1;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                135deg,
-                rgba(248, 249, 250, 0.8) 0%,
-                rgba(255, 255, 255, 0.9) 50%,
-                rgba(248, 249, 250, 0.8) 100%
-            );
-            z-index: 2;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(13,79,60,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
         }
 
         .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
             position: relative;
-            z-index: 3;
-            text-align: center;
-            max-width: 900px;
-            color: #1a1a1a;
+            z-index: 2;
         }
 
         .hero h1 {
@@ -313,19 +306,28 @@
 
         .hero p {
             font-size: 1.4rem;
-            margin-bottom: 3rem;
-            opacity: 0.8;
-            font-weight: 400;
             color: #4b5563;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .cta-button {
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 4rem;
+        }
+
+        .hero-button {
             display: inline-flex;
             align-items: center;
             gap: 10px;
             background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
             color: white;
-            padding: 1rem 2.5rem;
+            padding: 1.2rem 2.5rem;
             border: none;
             border-radius: 50px;
             font-size: 1.1rem;
@@ -334,68 +336,136 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(13, 79, 60, 0.3);
-            position: relative;
-            overflow: hidden;
         }
 
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
-        }
-
-        .cta-button:hover {
+        .hero-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(13, 79, 60, 0.4);
         }
 
-        /* Statistics Counter */
-        .stats-section {
-            background: #f8f9fa;
-            padding: 4rem 2rem;
-            border-bottom: 1px solid rgba(13, 79, 60, 0.1);
+        .hero-button.secondary {
+            background: transparent;
+            color: #0d4f3c;
+            border: 2px solid #0d4f3c;
         }
 
-        .stats-container {
-            max-width: 1200px;
-            margin: 0 auto;
+        .hero-button.secondary:hover {
+            background: #0d4f3c;
+            color: white;
+        }
+
+        .hero-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
         }
 
         .stat-item {
             text-align: center;
-            color: #1a1a1a;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            border: 1px solid rgba(13, 79, 60, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
         .stat-number {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 800;
             color: #0d4f3c;
             display: block;
-            margin-bottom: 0.5rem;
         }
 
         .stat-label {
+            color: #6b7280;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 6rem 2rem;
+            background: #ffffff;
+        }
+
+        .about-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0d4f3c;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
             font-size: 1.1rem;
-            opacity: 0.8;
             color: #4b5563;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .about-features {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+        }
+
+        .about-features li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #0d4f3c;
+        }
+
+        .about-features li::before {
+            content: "✓";
+            color: #0d4f3c;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .about-visual {
+            position: relative;
+            text-align: center;
+        }
+
+        .about-image {
+            width: 100%;
+            max-width: 500px;
+            height: 400px;
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            margin: 0 auto;
+            box-shadow: 0 20px 40px rgba(13, 79, 60, 0.2);
         }
 
         /* Services Preview */
         .services-preview {
             padding: 6rem 2rem;
-            background: #ffffff;
+            background: #f8f9fa;
         }
 
         .services-container {
@@ -404,18 +474,18 @@
         }
 
         .section-title {
-            text-align: center;
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 700;
             color: #0d4f3c;
             margin-bottom: 1rem;
+            text-align: center;
         }
 
         .section-subtitle {
-            text-align: center;
             font-size: 1.2rem;
             color: #6b7280;
             margin-bottom: 4rem;
+            text-align: center;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
@@ -423,7 +493,7 @@
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
@@ -432,12 +502,11 @@
             background: #ffffff;
             border-radius: 20px;
             padding: 2.5rem;
+            text-align: center;
             border: 2px solid rgba(13, 79, 60, 0.1);
             transition: all 0.4s ease;
-            cursor: pointer;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
 
         .service-card::before {
@@ -463,7 +532,7 @@
         }
 
         .service-icon {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 1.5rem;
             display: block;
         }
@@ -478,205 +547,158 @@
         .service-card p {
             color: #4b5563;
             line-height: 1.6;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .service-link {
             color: #0d4f3c;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             display: inline-flex;
             align-items: center;
             gap: 8px;
             transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
         }
 
         .service-link:hover {
             gap: 12px;
+            color: #1a5f4a;
         }
 
-        /* Methods Overview Card */
-        .methods-card {
-            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
-            color: white;
-            grid-column: 1 / -1;
-            max-width: 800px;
-            margin: 2rem auto 0;
-        }
-
-        .methods-card h3 {
-            color: white;
-        }
-
-        .methods-card p {
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .methods-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-
-        .method-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .methods-tagline {
-            font-style: italic;
-            font-size: 1.1rem;
-            margin-top: 1.5rem;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.95);
-        }
-
-        /* About Preview */
-        .about-preview {
+        /* Why Choose Us */
+        .why-choose {
             padding: 6rem 2rem;
-            background: #f8f9fa;
+            background: #ffffff;
         }
 
-        .about-container {
-            max-width: 1200px;
+        .why-container {
+            max-width: 1400px;
             margin: 0 auto;
+        }
+
+        .why-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
         }
 
-        .about-content h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #0d4f3c;
-            margin-bottom: 1.5rem;
-        }
-
-        .about-content p {
-            color: #4b5563;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-        }
-
-        .about-image {
-            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
-            border-radius: 20px;
-            height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
+        .why-card {
             text-align: center;
+            padding: 2.5rem;
+            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
+            color: white;
+            border-radius: 20px;
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .about-image::before {
+        .why-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            opacity: 0.3;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        /* Equipment Showcase */
-        .equipment-showcase {
-            padding: 6rem 2rem;
-            background: #ffffff;
+        .why-card:hover::before {
+            opacity: 1;
         }
 
-        .equipment-container {
-            max-width: 1400px;
-            margin: 0 auto;
+        .why-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(13, 79, 60, 0.3);
         }
 
-        .equipment-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+        .why-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
         }
 
-        .equipment-card {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 2rem;
-            border: 1px solid rgba(13, 79, 60, 0.1);
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .equipment-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(13, 79, 60, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .equipment-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 2rem;
-        }
-
-        .equipment-card h4 {
-            color: #0d4f3c;
-            font-size: 1.3rem;
+        .why-card h3 {
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 600;
             margin-bottom: 1rem;
         }
 
-        .equipment-card p {
-            color: #4b5563;
+        .why-card p {
+            color: rgba(255, 255, 255, 0.9);
             line-height: 1.6;
         }
 
-        /* Live Chat Widget */
-        .chat-widget {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1000;
-        }
-
-        .chat-button {
-            width: 60px;
-            height: 60px;
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 2rem;
             background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
-            border-radius: 50%;
-            border: none;
             color: white;
-            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: #0d4f3c;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
             cursor: pointer;
-            box-shadow: 0 4px 20px rgba(13, 79, 60, 0.3);
             transition: all 0.3s ease;
-            animation: pulse-chat 2s infinite;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
-        @keyframes pulse-chat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
 
-        .chat-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 25px rgba(13, 79, 60, 0.4);
+        .cta-button.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-button.secondary:hover {
+            background: white;
+            color: #0d4f3c;
         }
 
         /* Footer */
@@ -771,6 +793,43 @@
                 display: block;
             }
 
+            /* Mobile dropdown adjustments */
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                background: transparent;
+                padding: 0;
+                margin: 0;
+                min-width: auto;
+                display: none;
+            }
+
+            .dropdown.mobile-active .dropdown-menu {
+                display: block;
+            }
+
+            .dropdown-toggle {
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            .nav-item {
+                width: 100%;
+            }
+
+            .nav-link {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .hero {
+                padding: 6rem 2rem 4rem;
+            }
+
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -781,12 +840,7 @@
 
             .about-container {
                 grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .stats-container {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 2rem;
+                gap: 3rem;
             }
 
             .services-grid {
@@ -798,8 +852,9 @@
                 right: 10px;
             }
 
-            .methods-card {
-                grid-column: 1;
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
             }
         }
 
@@ -830,47 +885,67 @@
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
- <body><!-- Loading Screen -->
-  <div class="loading-screen" id="loadingScreen">
-   <div class="drilling-animation">
-    <div class="drill-bit"></div>
-    <div class="drill-waves"></div>
-   </div>
-  </div><!-- Language Toggle -->
+ <body><!-- Language Toggle -->
   <div class="language-toggle"><button class="lang-btn active" onclick="setLanguage('da')" id="lang-da">DA</button> <button class="lang-btn" onclick="setLanguage('en')" id="lang-en">EN</button>
-  </div><!-- Particle Background -->
-  <div class="particles" id="particles"></div><!-- Navigation -->
+  </div><!-- Navigation -->
   <nav class="navbar" id="navbar">
-   <div class="nav-container"><a href="#" class="logo" id="company-name">Bargheer Geophysics</a> <button class="mobile-toggle" onclick="toggleMobileMenu()">☰</button>
+   <div class="nav-container"><a href="index.html" class="logo" id="company-name">Bargheer Geophysics</a> <button class="mobile-toggle" onclick="toggleMobileMenu()">☰</button>
     <ul class="nav-menu" id="nav-menu">
-     <li class="nav-item"><a href="#" class="nav-link active" data-da="Hjem" data-en="Home">Hjem</a></li>
+     <li class="nav-item"><a href="index.html" class="nav-link active" data-da="Hjem" data-en="Home">Hjem</a></li>
      <li class="nav-item"><a href="about.html" class="nav-link" data-da="Om Os" data-en="About">Om Os</a></li>
-     <li class="nav-item"><a href="surveys.html" class="nav-link" data-da="Geofysiske Undersøgelser" data-en="Geophysical Surveys">Geofysiske Undersøgelser</a></li>
+     <li class="nav-item dropdown">
+      <div class="nav-link dropdown-toggle" data-da="Geofysiske Undersøgelser" data-en="Geophysical Surveys"><span>Geofysiske Undersøgelser</span> <span class="dropdown-arrow">▼</span>
+      </div>
+      <ul class="dropdown-menu">
+       <li><a href="dcip.html" class="dropdown-link" data-da="DC/IP Undersøgelser" data-en="DC/IP Surveys">DC/IP Undersøgelser</a></li>
+       <li><a href="tem.html" class="dropdown-link" data-da="TEM Undersøgelser" data-en="TEM Surveys">TEM Undersøgelser</a></li>
+       <li><a href="mrs.html" class="dropdown-link" data-da="MRS Undersøgelser" data-en="MRS Surveys">MRS Undersøgelser</a></li>
+       <li><a href="seismics.html" class="dropdown-link" data-da="Seismiske Undersøgelser" data-en="Seismic Surveys">Seismiske Undersøgelser</a></li>
+       <li><a href="gravimetrics.html" class="dropdown-link" data-da="Gravimetriske Undersøgelser" data-en="Gravimetric Surveys">Gravimetriske Undersøgelser</a></li>
+       <li><a href="magnetics.html" class="dropdown-link" data-da="Magnetiske Undersøgelser" data-en="Magnetic Surveys">Magnetiske Undersøgelser</a></li>
+       <li><a href="radiometrics.html" class="dropdown-link" data-da="Radiometriske Undersøgelser" data-en="Radiometric Surveys">Radiometriske Undersøgelser</a></li>
+      </ul></li>
      <li class="nav-item"><a href="software.html" class="nav-link" data-da="Geofysik Software" data-en="Geophysics Software">Geofysik Software</a></li>
      <li class="nav-item"><a href="contact.html" class="nav-link" data-da="Kontakt" data-en="Contact">Kontakt</a></li>
     </ul>
    </div>
   </nav><!-- Main Content -->
   <main><!-- Hero Section -->
-   <section class="hero" id="hero"><!-- Video Background Placeholder -->
-    <div class="hero-video" style="background: linear-gradient(45deg, #f8f9fa, #ffffff); display: flex; align-items: center; justify-content: center; color: rgba(13, 79, 60, 0.3); font-size: 1.2rem;">
-     Video Background Placeholder
-    </div>
-    <div class="hero-overlay"></div>
+   <section class="hero">
     <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-     <h1 id="hero-title" data-da="Professionelle Geofysiske Tjenester" data-en="Professional Geophysical Services">Professionelle Geofysiske Tjenester</h1>
-     <p id="hero-subtitle" data-da="Avancerede undersøgelsesløsninger under overfladen for minedrift, miljø og ingeniørapplikationer" data-en="Advanced subsurface investigation solutions for mining, environmental, and engineering applications">Avancerede undersøgelsesløsninger under overfladen for minedrift, miljø og ingeniørapplikationer</p><a href="contact.html" class="cta-button" data-da="Kontakt Os Nu" data-en="Contact Us Now"> <span>Kontakt Os Nu</span> <span>→</span> </a>
+     <h1 id="hero-title" data-da="Professionelle Geofysiske Undersøgelser" data-en="Professional Geophysical Surveys">Professionelle Geofysiske Undersøgelser</h1>
+     <p id="hero-subtitle" data-da="Avancerede geofysiske undersøgelser med state-of-the-art udstyr og proprietær software. Specialister i DC/IP, TEM, seismik og andre geofysiske metoder." data-en="Advanced geophysical surveys with state-of-the-art equipment and proprietary software. Specialists in DC/IP, TEM, seismics and other geophysical methods.">Avancerede geofysiske undersøgelser med state-of-the-art udstyr og proprietær software. Specialister i DC/IP, TEM, seismik og andre geofysiske metoder.</p>
+     <div class="hero-buttons"><a href="contact.html" class="hero-button" data-da="Få et Tilbud" data-en="Get a Quote"> <span>Få et Tilbud</span> <span>→</span> </a> <a href="about.html" class="hero-button secondary" data-da="Læs Mere" data-en="Learn More"> <span>Læs Mere</span> <span>📖</span> </a>
+     </div>
+     <div class="hero-stats" data-aos="fade-up" data-aos-delay="500">
+      <div class="stat-item"><span class="stat-number">15+</span> <span class="stat-label" data-da="År Erfaring" data-en="Years Experience">År Erfaring</span>
+      </div>
+      <div class="stat-item"><span class="stat-number">500+</span> <span class="stat-label" data-da="Projekter Gennemført" data-en="Projects Completed">Projekter Gennemført</span>
+      </div>
+      <div class="stat-item"><span class="stat-number">7</span> <span class="stat-label" data-da="Geofysiske Metoder" data-en="Geophysical Methods">Geofysiske Metoder</span>
+      </div>
+      <div class="stat-item"><span class="stat-number">100%</span> <span class="stat-label" data-da="Kundetilfredshed" data-en="Customer Satisfaction">Kundetilfredshed</span>
+      </div>
+     </div>
     </div>
-   </section><!-- Statistics Section -->
-   <section class="stats-section" data-aos="fade-up" data-aos-duration="800">
-    <div class="stats-container">
-     <div class="stat-item" data-aos="zoom-in" data-aos-delay="100"><span class="stat-number" data-count="500">0</span> <span class="stat-label" data-da="Gennemførte Projekter" data-en="Completed Projects">Gennemførte Projekter</span>
+   </section><!-- About Section -->
+   <section class="about-section">
+    <div class="about-container">
+     <div class="about-content" data-aos="fade-right">
+      <h2 id="about-title" data-da="Om Bargheer Geophysics" data-en="About Bargheer Geophysics">Om Bargheer Geophysics</h2>
+      <p id="about-description" data-da="Vi er specialister i avancerede geofysiske undersøgelser med over 15 års erfaring i branchen. Vores ekspertise spænder fra traditionelle metoder til cutting-edge teknologier." data-en="We are specialists in advanced geophysical surveys with over 15 years of experience in the industry. Our expertise spans from traditional methods to cutting-edge technologies.">Vi er specialister i avancerede geofysiske undersøgelser med over 15 års erfaring i branchen. Vores ekspertise spænder fra traditionelle metoder til cutting-edge teknologier.</p>
+      <ul class="about-features">
+       <li data-da="State-of-the-art udstyr og teknologi" data-en="State-of-the-art equipment and technology">State-of-the-art udstyr og teknologi</li>
+       <li data-da="Proprietær software til dataanalyse" data-en="Proprietary software for data analysis">Proprietær software til dataanalyse</li>
+       <li data-da="Erfarne geofysikere og geologer" data-en="Experienced geophysicists and geologists">Erfarne geofysikere og geologer</li>
+       <li data-da="Omfattende rapportering og tolkning" data-en="Comprehensive reporting and interpretation">Omfattende rapportering og tolkning</li>
+      </ul>
+      <p id="about-commitment" data-da="Vi er forpligtet til at levere præcise, pålidelige resultater der hjælper vores kunder med at træffe informerede beslutninger om deres projekter." data-en="We are committed to delivering accurate, reliable results that help our clients make informed decisions about their projects.">Vi er forpligtet til at levere præcise, pålidelige resultater der hjælper vores kunder med at træffe informerede beslutninger om deres projekter.</p>
      </div>
-     <div class="stat-item" data-aos="zoom-in" data-aos-delay="200"><span class="stat-number" data-count="15">0</span> <span class="stat-label" data-da="Års Erfaring" data-en="Years Experience">Års Erfaring</span>
-     </div>
-     <div class="stat-item" data-aos="zoom-in" data-aos-delay="300"><span class="stat-number" data-count="25">0</span> <span class="stat-label" data-da="Lande Dækket" data-en="Countries Covered">Lande Dækket</span>
-     </div>
-     <div class="stat-item" data-aos="zoom-in" data-aos-delay="400"><span class="stat-number" data-count="98">0</span> <span class="stat-label" data-da="% Kundetilfredshed" data-en="% Client Satisfaction">% Kundetilfredshed</span>
+     <div class="about-visual" data-aos="fade-left">
+      <div class="about-image">
+       🌍
+      </div>
      </div>
     </div>
    </section><!-- Services Preview -->
@@ -887,106 +962,62 @@
        <h3 data-da="TEM Undersøgelser" data-en="TEM Surveys">TEM Undersøgelser</h3>
        <p data-da="Tidsdomæne elektromagnetiske undersøgelser til dyb subsurface-udforskning og ledningsevnekortlægning." data-en="Time-domain electromagnetic surveys for deep subsurface exploration and conductivity mapping.">Tidsdomæne elektromagnetiske undersøgelser til dyb subsurface-udforskning og ledningsevnekortlægning.</p><a href="tem.html" class="service-link" data-da="Læs Mere" data-en="Learn More">Læs Mere →</a>
       </div>
-      <div class="service-card" data-aos="fade-up" data-aos-delay="300"><span class="service-icon">🌊</span>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="300"><span class="service-icon">💧</span>
+       <h3 data-da="MRS Undersøgelser" data-en="MRS Surveys">MRS Undersøgelser</h3>
+       <p data-da="Magnetisk resonanssondring til direkte grundvandsdetektion og karakterisering." data-en="Magnetic Resonance Sounding for direct groundwater detection and characterization.">Magnetisk resonanssondring til direkte grundvandsdetektion og karakterisering.</p><a href="mrs.html" class="service-link" data-da="Læs Mere" data-en="Learn More">Læs Mere →</a>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="400"><span class="service-icon">🌊</span>
        <h3 data-da="Seismiske Undersøgelser" data-en="Seismic Surveys">Seismiske Undersøgelser</h3>
        <p data-da="Refleksions- og refraktionsseismologi til strukturel geologi og ingeniørapplikationer." data-en="Reflection and refraction seismology for structural geology and engineering applications.">Refleksions- og refraktionsseismologi til strukturel geologi og ingeniørapplikationer.</p><a href="seismics.html" class="service-link" data-da="Læs Mere" data-en="Learn More">Læs Mere →</a>
-      </div>
-      <div class="service-card" data-aos="fade-up" data-aos-delay="400"><span class="service-icon">🔍</span>
-       <h3 data-da="GCM Undersøgelser" data-en="GCM Surveys">GCM Undersøgelser</h3>
-       <p data-da="Jordpenetrerende radar og magnetiske undersøgelser til overfladiske subsurface-undersøgelser." data-en="Ground-penetrating radar and magnetic surveys for shallow subsurface investigations.">Jordpenetrerende radar og magnetiske undersøgelser til overfladiske subsurface-undersøgelser.</p><a href="gcm.html" class="service-link" data-da="Læs Mere" data-en="Learn More">Læs Mere →</a>
       </div>
       <div class="service-card" data-aos="fade-up" data-aos-delay="500"><span class="service-icon">⚖️</span>
        <h3 data-da="Gravimetriske Undersøgelser" data-en="Gravimetric Surveys">Gravimetriske Undersøgelser</h3>
        <p data-da="Tyngdekraftsmålinger til tæthedsvariationer og geologisk strukturkortlægning." data-en="Gravity measurements for density variations and geological structure mapping.">Tyngdekraftsmålinger til tæthedsvariationer og geologisk strukturkortlægning.</p><a href="gravimetrics.html" class="service-link" data-da="Læs Mere" data-en="Learn More">Læs Mere →</a>
       </div>
-      <div class="service-card" data-aos="fade-up" data-aos-delay="600"><span class="service-icon">💧</span>
-       <h3 data-da="MRS Undersøgelser" data-en="MRS Surveys">MRS Undersøgelser</h3>
-       <p data-da="Magnetisk resonanssondring til direkte grundvandsdetektion og karakterisering." data-en="Magnetic Resonance Sounding for direct groundwater detection and characterization.">Magnetisk resonanssondring til direkte grundvandsdetektion og karakterisering.</p><a href="mrs.html" class="service-link" data-da="Læs Mere" data-en="Learn More">Læs Mere →</a>
-      </div><!-- Methods & Technique Overview Card -->
-      <div class="service-card methods-card" data-aos="fade-up" data-aos-delay="700"><span class="service-icon">🔬</span>
-       <h3 data-da="Metoder &amp; Teknik Oversigt" data-en="Methods &amp; Technique Overview">Metoder &amp; Teknik Oversigt</h3>
-       <p data-da="Geofysiske metoder vi anvender" data-en="Geophysical methods we use">Geofysiske metoder vi anvender</p>
-       <div class="methods-list">
-        <div class="method-item">
-         DC/IP
-        </div>
-        <div class="method-item">
-         MRS
-        </div>
-        <div class="method-item">
-         GCM
-        </div>
-        <div class="method-item">
-         TEM &amp; TTEM
-        </div>
-        <div class="method-item" data-da="Refleksionsseismik" data-en="Reflection Seismics">
-         Refleksionsseismik
-        </div>
-        <div class="method-item" data-da="Refraktionsseismik" data-en="Refraction Seismics">
-         Refraktionsseismik
-        </div>
-        <div class="method-item" data-da="Gravimetri" data-en="Gravimetrics">
-         Gravimetri
-        </div>
-        <div class="method-item" data-da="Geomagnetik" data-en="Geomagnetics">
-         Geomagnetik
-        </div>
-        <div class="method-item" data-da="Borehulslogning" data-en="Borehole Logging">
-         Borehulslogning
-        </div>
-       </div>
-       <p class="methods-tagline" data-da="Vi er ikke bange for at påtage os enhver opgave, stor eller lille, simpel eller kompliceret. Vi gør det hele, og vi gør det godt." data-en="We are not afraid to take on any job, big or small, simple or complicated. We do it all and we do it well.">Vi er ikke bange for at påtage os enhver opgave, stor eller lille, simpel eller kompliceret. Vi gør det hele, og vi gør det godt.</p><a href="methods.html" class="service-link" style="color: white;" data-da="Se Alle Metoder" data-en="View All Methods">Se Alle Metoder →</a>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="600"><span class="service-icon">🧲</span>
+       <h3 data-da="Magnetiske Undersøgelser" data-en="Magnetic Surveys">Magnetiske Undersøgelser</h3>
+       <p data-da="Magnetfeltmålinger til geologisk kortlægning og mineralefterforskning." data-en="Magnetic field measurements for geological mapping and mineral exploration.">Magnetfeltmålinger til geologisk kortlægning og mineralefterforskning.</p><a href="magnetics.html" class="service-link" data-da="Læs Mere" data-en="Learn More">Læs Mere →</a>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="700"><span class="service-icon">☢️</span>
+       <h3 data-da="Radiometriske Undersøgelser" data-en="Radiometric Surveys">Radiometriske Undersøgelser</h3>
+       <p data-da="Naturlig radioaktivitetsmåling til geologisk kortlægning og mineralefterforskning." data-en="Natural radioactivity measurements for geological mapping and mineral exploration.">Naturlig radioaktivitetsmåling til geologisk kortlægning og mineralefterforskning.</p><a href="radiometrics.html" class="service-link" data-da="Læs Mere" data-en="Learn More">Læs Mere →</a>
       </div>
      </div>
     </div>
-   </section><!-- About Preview -->
-   <section class="about-preview">
-    <div class="about-container">
-     <div class="about-content" data-aos="fade-right">
-      <h2 data-da="Hvorfor Vælge Bargheer Geophysics?" data-en="Why Choose Bargheer Geophysics?">Hvorfor Vælge Bargheer Geophysics?</h2>
-      <p data-da="Med årtiers kombineret erfaring inden for geofysisk undersøgelse specialiserer vores team sig i at levere nøjagtige og pålidelige subsurface-informationer." data-en="With decades of combined experience in geophysical surveying, our team specializes in providing accurate and reliable subsurface information.">Med årtiers kombineret erfaring inden for geofysisk undersøgelse specialiserer vores team sig i at levere nøjagtige og pålidelige subsurface-informationer.</p>
-      <p data-da="Vi bruger banebrydende teknologi og dokumenterede metoder til at levere omfattende løsninger til vores kunders efterforsknings- og undersøgelsesbehov." data-en="We utilize cutting-edge technology and proven methodologies to deliver comprehensive solutions for our clients' exploration and investigation needs.">Vi bruger banebrydende teknologi og dokumenterede metoder til at levere omfattende løsninger til vores kunders efterforsknings- og undersøgelsesbehov.</p><a href="about.html" class="cta-button" data-da="Læs Mere Om Os" data-en="Learn More About Us"> <span>Læs Mere Om Os</span> <span>→</span> </a>
-     </div>
-     <div class="about-image" data-aos="fade-left">
-      <div>
-       <h3 data-da="Professionelt Team Billede" data-en="Professional Team Image">Professionelt Team Billede</h3>
-       <p data-da="Højkvalitetsbillede af vores ekspertteam i felten" data-en="High-quality image of our expert team in the field">Højkvalitetsbillede af vores ekspertteam i felten</p>
+   </section><!-- Why Choose Us -->
+   <section class="why-choose">
+    <div class="why-container">
+     <h2 class="section-title" data-aos="fade-up" data-da="Hvorfor Vælge Os?" data-en="Why Choose Us?">Hvorfor Vælge Os?</h2>
+     <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100" data-da="Vi kombinerer erfaring, teknologi og ekspertise for at levere exceptionelle resultater" data-en="We combine experience, technology and expertise to deliver exceptional results">Vi kombinerer erfaring, teknologi og ekspertise for at levere exceptionelle resultater</p>
+     <div class="why-grid">
+      <div class="why-card" data-aos="zoom-in" data-aos-delay="100"><span class="why-icon">🎯</span>
+       <h3 data-da="Præcision &amp; Nøjagtighed" data-en="Precision &amp; Accuracy">Præcision &amp; Nøjagtighed</h3>
+       <p data-da="State-of-the-art udstyr og avancerede databehandlingsmetoder sikrer højeste kvalitet i alle vores undersøgelser." data-en="State-of-the-art equipment and advanced data processing methods ensure the highest quality in all our surveys.">State-of-the-art udstyr og avancerede databehandlingsmetoder sikrer højeste kvalitet i alle vores undersøgelser.</p>
+      </div>
+      <div class="why-card" data-aos="zoom-in" data-aos-delay="200"><span class="why-icon">⚡</span>
+       <h3 data-da="Hurtig Levering" data-en="Fast Delivery">Hurtig Levering</h3>
+       <p data-da="Effektive arbejdsprocesser og erfarne teams sikrer hurtig projektgennemførelse uden at gå på kompromis med kvaliteten." data-en="Efficient work processes and experienced teams ensure fast project completion without compromising quality.">Effektive arbejdsprocesser og erfarne teams sikrer hurtig projektgennemførelse uden at gå på kompromis med kvaliteten.</p>
+      </div>
+      <div class="why-card" data-aos="zoom-in" data-aos-delay="300"><span class="why-icon">🔬</span>
+       <h3 data-da="Avanceret Teknologi" data-en="Advanced Technology">Avanceret Teknologi</h3>
+       <p data-da="Proprietær software og cutting-edge instrumenter giver os mulighed for at løse komplekse geofysiske udfordringer." data-en="Proprietary software and cutting-edge instruments enable us to solve complex geophysical challenges.">Proprietær software og cutting-edge instrumenter giver os mulighed for at løse komplekse geofysiske udfordringer.</p>
+      </div>
+      <div class="why-card" data-aos="zoom-in" data-aos-delay="400"><span class="why-icon">👥</span>
+       <h3 data-da="Ekspert Team" data-en="Expert Team">Ekspert Team</h3>
+       <p data-da="Vores team af erfarne geofysikere og geologer bringer dybdegående viden til hvert projekt." data-en="Our team of experienced geophysicists and geologists brings in-depth knowledge to every project.">Vores team af erfarne geofysikere og geologer bringer dybdegående viden til hvert projekt.</p>
       </div>
      </div>
     </div>
-   </section><!-- Equipment Showcase -->
-   <section class="equipment-showcase">
-    <div class="equipment-container">
-     <h2 class="section-title" data-aos="fade-up" data-da="Avanceret Udstyr" data-en="Advanced Equipment">Avanceret Udstyr</h2>
-     <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100" data-da="State-of-the-art geofysisk instrumentering til præcise målinger" data-en="State-of-the-art geophysical instrumentation for precise measurements">State-of-the-art geofysisk instrumentering til præcise målinger</p>
-     <div class="equipment-grid">
-      <div class="equipment-card" data-aos="zoom-in" data-aos-delay="100">
-       <div class="equipment-icon">
-        📊
-       </div>
-       <h4 data-da="Højopløsnings Seismografer" data-en="High-Resolution Seismographs">Højopløsnings Seismografer</h4>
-       <p data-da="Præcise seismiske målinger til strukturel kortlægning" data-en="Precise seismic measurements for structural mapping">Præcise seismiske målinger til strukturel kortlægning</p>
-      </div>
-      <div class="equipment-card" data-aos="zoom-in" data-aos-delay="200">
-       <div class="equipment-icon">
-        ⚡
-       </div>
-       <h4 data-da="Elektromagnetiske Systemer" data-en="Electromagnetic Systems">Elektromagnetiske Systemer</h4>
-       <p data-da="Avancerede EM-systemer til ledningsevnekortlægning" data-en="Advanced EM systems for conductivity mapping">Avancerede EM-systemer til ledningsevnekortlægning</p>
-      </div>
-      <div class="equipment-card" data-aos="zoom-in" data-aos-delay="300">
-       <div class="equipment-icon">
-        🧭
-       </div>
-       <h4 data-da="Magnetometre" data-en="Magnetometers">Magnetometre</h4>
-       <p data-da="Højfølsomme magnetiske måleinstrumenter" data-en="High-sensitivity magnetic measurement instruments">Højfølsomme magnetiske måleinstrumenter</p>
-      </div>
+   </section><!-- CTA Section -->
+   <section class="cta-section">
+    <div class="cta-container" data-aos="fade-up">
+     <h2 data-da="Klar til at starte dit projekt?" data-en="Ready to start your project?">Klar til at starte dit projekt?</h2>
+     <p data-da="Kontakt os i dag for en gratis konsultation og tilbud på dine geofysiske undersøgelsesbehov." data-en="Contact us today for a free consultation and quote for your geophysical survey requirements.">Kontakt os i dag for en gratis konsultation og tilbud på dine geofysiske undersøgelsesbehov.</p>
+     <div class="cta-buttons"><a href="contact.html" class="cta-button" data-da="Få et Tilbud" data-en="Get a Quote"> <span>Få et Tilbud</span> <span>→</span> </a> <a href="tel:+4527136222" class="cta-button secondary" data-da="Ring Nu" data-en="Call Now"> <span>Ring Nu</span> <span>📞</span> </a>
      </div>
     </div>
    </section>
-  </main><!-- Live Chat Widget -->
-  <div class="chat-widget"><button class="chat-button" onclick="openChat()" title="Chat med os">💬</button>
-  </div><!-- Footer -->
+  </main><!-- Footer -->
   <footer class="footer">
    <div class="footer-container">
     <div class="footer-section">
@@ -1026,10 +1057,16 @@
         // Configuration
         const defaultConfig = {
             company_name: "Bargheer Geophysics",
-            hero_title_da: "Professionelle Geofysiske Tjenester",
-            hero_title_en: "Professional Geophysical Services",
-            hero_subtitle_da: "Avancerede undersøgelsesløsninger under overfladen for minedrift, miljø og ingeniørapplikationer",
-            hero_subtitle_en: "Advanced subsurface investigation solutions for mining, environmental, and engineering applications",
+            hero_title_da: "Professionelle Geofysiske Undersøgelser",
+            hero_title_en: "Professional Geophysical Surveys",
+            hero_subtitle_da: "Avancerede geofysiske undersøgelser med state-of-the-art udstyr og proprietær software. Specialister i DC/IP, TEM, seismik og andre geofysiske metoder.",
+            hero_subtitle_en: "Advanced geophysical surveys with state-of-the-art equipment and proprietary software. Specialists in DC/IP, TEM, seismics and other geophysical methods.",
+            about_title_da: "Om Bargheer Geophysics",
+            about_title_en: "About Bargheer Geophysics",
+            about_description_da: "Vi er specialister i avancerede geofysiske undersøgelser med over 15 års erfaring i branchen. Vores ekspertise spænder fra traditionelle metoder til cutting-edge teknologier.",
+            about_description_en: "We are specialists in advanced geophysical surveys with over 15 years of experience in the industry. Our expertise spans from traditional methods to cutting-edge technologies.",
+            about_commitment_da: "Vi er forpligtet til at levere præcise, pålidelige resultater der hjælper vores kunder med at træffe informerede beslutninger om deres projekter.",
+            about_commitment_en: "We are committed to delivering accurate, reliable results that help our clients make informed decisions about their projects.",
             contact_email: "ab@bgeo.dk",
             contact_phone: "(+45) 27 13 62 22"
         };
@@ -1043,29 +1080,6 @@
             once: true,
             offset: 100
         });
-
-        // Loading Screen
-        window.addEventListener('load', function() {
-            setTimeout(() => {
-                document.getElementById('loadingScreen').classList.add('hidden');
-            }, 1500);
-        });
-
-        // Particle System
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 30;
-
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 8 + 's';
-                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
 
         // Navbar scroll effect
         window.addEventListener('scroll', function() {
@@ -1083,6 +1097,42 @@
             navMenu.classList.toggle('active');
         }
 
+        // Mobile dropdown toggle
+        function toggleMobileDropdown(event) {
+            event.preventDefault();
+            const dropdown = event.target.closest('.dropdown');
+            const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+            const arrow = dropdown.querySelector('.dropdown-arrow');
+            
+            dropdown.classList.toggle('mobile-active');
+            arrow.style.transform = dropdown.classList.contains('mobile-active') ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+
+        // Initialize mobile dropdown functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click handlers for mobile dropdowns
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(event) {
+                    // Only handle clicks on mobile
+                    if (window.innerWidth <= 768) {
+                        toggleMobileDropdown(event);
+                    }
+                });
+            });
+
+            // Close dropdowns when window is resized to desktop
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    document.querySelectorAll('.dropdown').forEach(dropdown => {
+                        dropdown.classList.remove('mobile-active');
+                        const arrow = dropdown.querySelector('.dropdown-arrow');
+                        if (arrow) arrow.style.transform = 'rotate(0deg)';
+                    });
+                }
+            });
+        });
+
         // Language switching
         function setLanguage(lang) {
             currentLanguage = lang;
@@ -1098,93 +1148,6 @@
             
             // Update HTML lang attribute
             document.documentElement.lang = lang;
-        }
-
-        // Statistics counter animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.stat-number');
-            
-            counters.forEach(counter => {
-                const target = parseInt(counter.getAttribute('data-count'));
-                const duration = 2000;
-                const step = target / (duration / 16);
-                let current = 0;
-                
-                const timer = setInterval(() => {
-                    current += step;
-                    if (current >= target) {
-                        counter.textContent = target;
-                        clearInterval(timer);
-                    } else {
-                        counter.textContent = Math.floor(current);
-                    }
-                }, 16);
-            });
-        }
-
-        // Intersection Observer for counter animation
-        const observerOptions = {
-            threshold: 0.5,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && entry.target.classList.contains('stats-section')) {
-                    animateCounters();
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        // Chat functionality
-        function openChat() {
-            // Create custom modal instead of alert
-            const modal = document.createElement('div');
-            modal.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0,0,0,0.8);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 10000;
-            `;
-            
-            const content = document.createElement('div');
-            content.style.cssText = `
-                background: linear-gradient(135deg, #0d4f3c 0%, #1a5f4a 100%);
-                padding: 2rem;
-                border-radius: 15px;
-                text-align: center;
-                color: white;
-                max-width: 400px;
-                border: 1px solid rgba(255, 255, 255, 0.2);
-            `;
-            
-            content.innerHTML = `
-                <h3 style="color: white; margin-bottom: 1rem;">Chat Support</h3>
-                <p style="margin-bottom: 1.5rem;">Kontakt os direkte for øjeblikkelig assistance!</p>
-                <div style="display: flex; gap: 1rem; justify-content: center;">
-                    <a href="tel:+4527136222" style="background: white; color: #0d4f3c; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600;">Ring Nu</a>
-                    <a href="mailto:ab@bgeo.dk" style="background: rgba(255, 255, 255, 0.2); color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; border: 1px solid white;">Send Email</a>
-                </div>
-                <button onclick="this.closest('.chat-modal').remove()" style="background: none; border: none; color: rgba(255, 255, 255, 0.7); margin-top: 1rem; cursor: pointer;">Luk</button>
-            `;
-            
-            modal.className = 'chat-modal';
-            modal.appendChild(content);
-            document.body.appendChild(modal);
-            
-            // Close on backdrop click
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.remove();
-                }
-            });
         }
 
         // Element SDK implementation
@@ -1211,6 +1174,29 @@
                 heroSubtitle.setAttribute(`data-${currentLanguage}`, config[subtitleKey] || defaultConfig[subtitleKey]);
             }
 
+            // Update about section content
+            const aboutTitle = document.getElementById('about-title');
+            const aboutDescription = document.getElementById('about-description');
+            const aboutCommitment = document.getElementById('about-commitment');
+            
+            if (aboutTitle) {
+                const titleKey = `about_title_${currentLanguage}`;
+                aboutTitle.textContent = config[titleKey] || defaultConfig[titleKey];
+                aboutTitle.setAttribute(`data-${currentLanguage}`, config[titleKey] || defaultConfig[titleKey]);
+            }
+            
+            if (aboutDescription) {
+                const descKey = `about_description_${currentLanguage}`;
+                aboutDescription.textContent = config[descKey] || defaultConfig[descKey];
+                aboutDescription.setAttribute(`data-${currentLanguage}`, config[descKey] || defaultConfig[descKey]);
+            }
+            
+            if (aboutCommitment) {
+                const commitKey = `about_commitment_${currentLanguage}`;
+                aboutCommitment.textContent = config[commitKey] || defaultConfig[commitKey];
+                aboutCommitment.setAttribute(`data-${currentLanguage}`, config[commitKey] || defaultConfig[commitKey]);
+            }
+
             // Update contact information
             const contactEmail = document.getElementById('contact-email');
             const contactPhone = document.getElementById('contact-phone');
@@ -1225,14 +1211,6 @@
 
         // Initialize everything
         document.addEventListener('DOMContentLoaded', function() {
-            createParticles();
-            
-            // Observe stats section for counter animation
-            const statsSection = document.querySelector('.stats-section');
-            if (statsSection) {
-                observer.observe(statsSection);
-            }
-            
             // Initialize Element SDK
             if (window.elementSdk) {
                 window.elementSdk.init({
@@ -1250,6 +1228,12 @@
                         ["hero_title_en", config.hero_title_en || defaultConfig.hero_title_en],
                         ["hero_subtitle_da", config.hero_subtitle_da || defaultConfig.hero_subtitle_da],
                         ["hero_subtitle_en", config.hero_subtitle_en || defaultConfig.hero_subtitle_en],
+                        ["about_title_da", config.about_title_da || defaultConfig.about_title_da],
+                        ["about_title_en", config.about_title_en || defaultConfig.about_title_en],
+                        ["about_description_da", config.about_description_da || defaultConfig.about_description_da],
+                        ["about_description_en", config.about_description_en || defaultConfig.about_description_en],
+                        ["about_commitment_da", config.about_commitment_da || defaultConfig.about_commitment_da],
+                        ["about_commitment_en", config.about_commitment_en || defaultConfig.about_commitment_en],
                         ["contact_email", config.contact_email || defaultConfig.contact_email],
                         ["contact_phone", config.contact_phone || defaultConfig.contact_phone]
                     ])
@@ -1267,5 +1251,5 @@
             }
         });
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e448fe11d913ad',t:'MTc2MzA5OTk5MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99e64b9eb01513ad',t:'MTc2MzEyMTA3MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
